@@ -1,0 +1,45 @@
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div style="padding-top: 70px">
+
+                <h3 class="logo-name">Neulpum</h1>
+
+            </div>
+            <h3 style="margin-top: 50px;">메뉴 등록</h3>
+            <p>
+                새로운 메뉴를 등록해주세요
+            </p>
+            <form class="m-t" role="form" action="<%= menus_create_path %>" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="메뉴이름" name="menu_title" required="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="메뉴코드" name="menu_symbol"required="">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" step="100" placeholder="가격" name="menu_price" required="">
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" id="inlineRadio1" value="001"> 커피
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" id="inlineRadio2" value="002"> 차
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" id="inlineRadio3" value="003"> 음료
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_degree" id="inlineRadio1" value="1"> Hot
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_degree" id="inlineRadio2" value="2"> Ice
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
+            </form>
+            <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p> -->
+        </div>
+    </div>

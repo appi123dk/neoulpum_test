@@ -1,0 +1,367 @@
+<% if @pre_money.nil? || @pre_money.pre_money == 0 %>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
+            <div class="widget red-bg p-lg text-center">
+                <div class="m-b-md">
+                    <i class="fa fa-warning fa-4x"></i>
+                    <h1 class="m-xs"><strong>오픈을 먼저 해주세요</strong></h1>
+                    <a href="/orders/order_open" class="btn btn-lg btn-warning" style="width:80%; margin-top: 20px">오픈하러가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="row">
+    <!-- 음료내역 -->
+    <div class="col-md-9">
+        <div class="tabs-container">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#coffee">커피</a></li>
+                <li class=""><a data-toggle="tab" href="#tea">차</a></li>
+                <li class=""><a data-toggle="tab" href="#drink">음료</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="coffee" class="tab-pane active">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '1').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '2').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="tea" class="tab-pane">
+                     <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '1').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-warning dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '2').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-warning dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                 <div id="drink" class="tab-pane">
+                     <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "003", '1').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><% if menu.menu_degree == '1' %>H<% else %>I<% end %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "003", '2').each do |menu| %>
+                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
+                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr>
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 정산 -->
+    <div class="col-md-3">
+        <form class="form-horizontal" action="/orders/order_create" method="GET">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>유저찾기</h5>
+                </div>
+                <div class="ibox-content user-info">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <div>
+                            <label class="col-lg-4 control-label" style="text-align:left;">고객번호</label>
+                            <div class="col-lg-6" style="padding-right: 0px;">
+                                <input type="text" id="find_user" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control">
+                            </div>
+                            <div class="col-lg-2" style="padding-left: 0px;">
+                                <button class="btn btn-info find-user" type="button"><i class="fa fa-search" style="font-size:8px"></i></button>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="ibox-title">
+                    <h5>음료주문내역</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="form-group" style="margin-bottom: 0px;">
+                        <div>
+                            <label class="col-lg-7 control-label" style="text-align:left; font-size:15px">주문번호</label>
+                            <div class="col-lg-4">
+                                <input type="number" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control" name="order_number" required="">
+                            </div>
+                            <div class="col-lg-1" style="text-align:left; font-size: 20px; margin-top: 4px; margin-left: -15px">
+                                번
+                            </div>
+                        </div>
+                    </div>               
+                    <hr>
+                    <!-- 포스 input 추가 시작 -->
+                    <div class="append-menu">
+                    </div>
+                    <!-- 포스 input 끝 -->
+
+                    <hr>
+                    <span>Total</span>
+                    <div class="add-new-price">
+                        
+                    </div>  
+                    <h2 id="total_price" style="text-align:right" class="font-bold">
+                        0 원
+                    </h2>
+                    <hr>            
+                    <div class="m-t-sm">
+                        <button class="btn btn-lg btn-primary btn-block"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
+                        <a href="#" class="btn btn-white btn-sm btn-block btn-cancel"> 취소</a>
+                    </div>   
+                </div> 
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+<% end %>
+
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">  
+
+
+var menu_array = [];
+var use_point = 0;
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function append_menu(menu_arr){
+    var total_price = 0;
+    $(".append-menu").children().remove();
+    $.grep(menu_arr, function(value){
+        $(".append-menu").append(
+            '<div class="form-group">' +
+            '<div>' +
+                '<div class="col-lg-2">' +
+                    '<button class="btn btn-warning btn-circle menu-delete" type="button">' +
+                        '<i class="fa fa-minus"></i>' +
+                    '</button>' +
+                '</div>' +
+                '<input type="number" value="'+ value.id +'" readonly="readonly" style="display:none" name="menu_id[]">' +
+                '<label class="col-lg-6 control-label" style="text-align:left; font-size:15px">'+ value.name +'</label>' +
+                '<div class="col-lg-3">' +
+                    '<input type="number" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control" readonly="readonly" value="'+ value.unit +'" name="order_unit[]">' +
+                '</div>' +
+                '<div class="col-lg-1" style="text-align:left; font-size: 18px; margin-top: 4px; margin-left: -15px">' +
+                    '개' +
+                '</div>' +
+            '</div>' +
+            '</div>'
+        ); 
+        total_price += value.price * value.unit;
+    });
+    return total_price;
+    // $("#total_price").text(total_price);
+};
+
+function add_new_price(){
+    var price = append_menu(menu_array);
+    var discount_price = price - use_point;
+    $(".add-new-price").children().remove();
+    $(".add-new-price").append(
+        '<h3 style="text-align:right" class="font-bold">' +
+            numberWithCommas( price )+ '원' +
+        '</h3>' +
+        '<h4 style="text-align:right"> - ' +
+            numberWithCommas( use_point )+
+        '</h4>' +
+        '<hr>' 
+        );
+    $("#total_price").text(numberWithCommas(discount_price) + ' 원');
+};
+
+$(function(){
+    $("body").addClass("mini-navbar")
+    
+    // 메뉴 클릭시 내역에 뜨도록 하는 구문
+    $('.btn-menu').click(function(){
+        var index = $('.btn-menu').index(this);
+        var price = $('.btn-menu')[index].getAttribute('data-price');
+        var number = $('.btn-menu')[index].getAttribute('data-menu');
+        var name = $('.btn-menu')[index].getAttribute('data-title');
+
+        var id_arr = [];
+        var menu = {};
+            menu.id = number;
+            menu.name = name;
+            menu.price = price;
+            menu.unit = 1;
+
+        var result = $.grep(menu_array, function(value){
+            id_arr.push(value.id);
+            return value.id == menu.id;
+        });
+
+        if (result.length == 0) {
+            menu_array.push(menu);
+        } else {
+            var index_menu = $.inArray(menu.id, id_arr);
+            menu_array[index_menu].unit += 1;
+        };
+        var price = append_menu(menu_array);
+        $("#total_price").text(numberWithCommas(price) + ' 원');
+        if (use_point != 0) {
+            add_new_price();
+        }
+    });
+
+    // 삭제버튼 클릭 시
+    $(document).on('click', '.menu-delete', function(){
+        var index = $('.menu-delete').index(this);
+        console.log(index);
+        var menu_id = $('.menu-delete').parent().next()[index].getAttribute('value');
+        var find_menu = $.grep(menu_array, function(value){
+            return value.id == menu_id
+        });
+        if (find_menu[0].unit == 1 ) {
+            menu_array.splice($.inArray(find_menu[0], menu_array),1);
+        } else {
+            find_menu[0].unit -= 1;
+        };
+        var price = append_menu(menu_array);
+        $("#total_price").text(numberWithCommas(price) + ' 원');
+        if (use_point != 0) {
+            add_new_price();
+        }
+    });
+
+    $('.btn-cancel').click(function(){
+        menu_array = [];
+        var price = append_menu(menu_array);
+        $("#total_price").text(numberWithCommas(price) + ' 원');
+    });
+
+    $('.find-user').click(function(){
+        $.ajax({
+            data: {
+                user_number: $('#find_user').val()
+            },
+            url: "/orders/find_user",
+            success: function(data){
+                $(".user-point").remove();
+                $(".user-info").append(
+                    '<hr>' +
+                    '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                        '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
+                        '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                        '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.user_money)) + '원'+
+                        '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                    '</div>'
+                );
+            }
+        });
+    });
+
+    $(document).on('click', '.btn-point', function(){
+        swal({  title: "적립금",
+                text: "사용할 적립금을 입력하세요",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "사용할 적립금 입력" },
+                function(inputValue){
+                    if (inputValue === false)
+                        return false;
+                    if (inputValue === "") {
+                        swal.showInputError("사용할 금액을 입력해주세요!");
+                        return false
+                    }
+                    //AJAX 추가
+                    $.ajax({
+                        data: {
+                            user_id: $("#user_point").val(),
+                            user_point: inputValue
+                        },
+                        url: "/orders/user_point",
+                        success: function(data){
+                            use_point += parseInt(inputValue);
+                            $(".user-point").remove();
+                            $(".user-info").append(
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                                    '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
+                                    '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                                    '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
+                                    '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                                '</div>'
+                            );
+                            var price = append_menu(menu_array),
+                                discount_price = price - use_point;
+                            add_new_price();
+                            $("#total_price").text(numberWithCommas(discount_price) + ' 원');
+                        }
+                    });
+                    swal("적립금을 사용하였습니다", numberWithCommas( inputValue )+ "원 사용", "success");
+                });
+    });
+
+});
+
+
+
+
+
+
+</script>
+
+<% end %>

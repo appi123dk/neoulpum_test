@@ -1,0 +1,132 @@
+<% if @pre_money.nil? || @pre_money.pre_money == 0 %>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
+            <div class="widget red-bg p-lg text-center">
+                <div class="m-b-md">
+                    <i class="fa fa-warning fa-4x"></i>
+                    <h1 class="m-xs"><strong>오픈을 먼저 해주세요</strong></h1>
+                    <a href="/orders/order_open" class="btn btn-lg btn-warning" style="width:80%; margin-top: 20px">오픈하러가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+<div class="wrapper wrapper-content  animated fadeInRight">
+<div class="row">
+    <div class="col-lg-6 col-xs-6">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h4>주문내역 (개수 : <span class="total-menu"></span> )</h4>
+                <ul class="sortable-list connectList agile-list" id="todo">
+                <% index = 0 %>
+                <% total_menu = 0 %>
+                <% unless @orders.nil? %>
+                    <% @orders.each do |order| %>
+                    <% shot = 0 %>
+                        <li class="primary-element" style="padding-bottom: 0px;">
+                            <div class="panel panel-default" style="margin-bottom: 10px;">
+                                <div class="panel-heading">
+                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <% if order.users.take.nil?  %> 없음 <% else %> <%= order.users.take.user_name %> <% end %></h4>
+                                    <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shot<%= index %>"></span> 개</h4>
+                                </div>
+                                <div class="panel-body" style="padding-bottom: 0px;">
+                                    <% order.details.each do |menu| %>
+                                        <% detail_menu = Menu.find(menu.menu_id) %>
+                                        <div class="col-md-4">
+                                            <h3><% if detail_menu.menu_degree == '1' %>H<% else %>I<% end %>.<%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                        </div>
+                                        <% if detail_menu.menu_category_id == 1 %>
+                                            <% shot += menu.order_unit %>
+                                        <% end %>
+                                        <% total_menu += menu.order_unit %>
+                                    <% end %>
+                                    <div class="col-md-12 shot-unit" data-shot="<%= shot %>" style="margin-bottom: 10px;">
+                                        <a href="/orders/make_confirm/<%= order.id %>" class="btn btn-warning btn-lg" style="width:100%" type="button"><i class="fa fa-check"></i> 음료준비완료</a> 
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% index += 1 %>    
+                    <% end %>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-xs-6">
+        <div class="ibox">
+            <div class="ibox-content">
+                <h4>제조중인 음료 (개수 : <span class="total-made-menu"></span>)</h4>
+                <ul class="sortable-list connectList agile-list" id="inprogress">
+                <% index = 0 %>
+                <% total_made_menu = 0 %>
+                <% unless @make_orders.nil? %>
+                    <% @make_orders.each do |order| %>
+                    <% shot = 0 %>
+                        <li class="primary-element" style="padding-bottom: 0px;">
+                            <div class="panel panel-default" style="margin-bottom: 10px;">
+                                <div class="panel-heading">
+                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <% if order.users.take.nil?  %> 없음 <% else %> <%= order.users.take.user_name %> <% end %></h4>
+                                    <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shot<%= index %>"></span> 개</h4>
+                                </div>
+                                <div class="panel-body" style="padding-bottom: 0px;">
+                                    <% order.details.each do |menu| %>
+                                        <% detail_menu = Menu.find(menu.menu_id) %>
+                                        <div class="col-md-4">
+                                            <h3><% if detail_menu.menu_degree == '1' %>H<% else %>I<% end %>.<%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                        </div>
+                                        <% if detail_menu.menu_category_id == 1 %>
+                                            <% shot += menu.order_unit %>
+                                        <% end %>
+                                        <% total_made_menu += menu.order_unit %>
+                                    <% end %>
+                                    <div class="col-md-12 make-shot-unit" data-shot="<%= shot %>" style="margin-bottom: 10px;">
+                                        <a href="/orders/order_confirm/<%= order.id %>" class="btn btn-primary btn-lg order-success" style="width:100%" type="button"><i class="fa fa-check"></i> 콜링완료</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <% index += 1 %>    
+                    <% end %>
+                <% end %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<% end %>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+    $(function() {
+        $("body").addClass("mini-navbar")
+
+        $.each($(".shot-unit"), function(index, value){
+            var shot = value.getAttribute("data-shot");
+            $(".shot" + index).text(shot);
+        });
+
+        $.each($(".make-shot-unit"), function(index, value){
+            var shot = value.getAttribute("data-shot");
+            $(".shot" + index).text(shot);
+        });
+
+        $(".total-menu").text("<%= total_menu %>");
+        $(".total-made-menu").text("<%= total_made_menu %>");
+
+        $(".order-success").click(function(){
+            swal({  title: "성공!",
+                    timer: 1000,
+                    showConfirmButton: false,
+                    type: "success"
+                });
+        });
+    });
+
+</script>
+
+<% end %>

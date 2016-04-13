@@ -1,0 +1,87 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <% menu = Menu.find(@recipes.first.menu_id) %>
+        <h2><%= menu.menu_title %> 레시피 수정</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Recipes</a>
+        </li>
+        <li class="active">
+            <strong>레시피수정</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" style="margin-bottom:20px">
+    <form action="/menus/recipe_update/<%= menu.id %>" method="POST">
+        <div class="col-lg-12" style="margin-bottom:10px">
+            <h3><%= menu.menu_title %> 레시피 수정</h3>
+        </div>    
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재료 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.odd? %>
+                    <% unit = @recipes.where('material_id=?', material.id).take %>
+                        <% unless unit.nil? %>
+                            <li>
+                                <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
+                                <span class="m-l-xs"><%= material.material_name %></span>
+                                <span style="float:right;"><input style="text-align:right; width:50px" type="number" step="0.1" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit[]"> 개</span>
+                            </li>
+                        <% end %>
+                    <% end %>
+                <% end %>    
+                </ul>   
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재료 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.even? %>
+                    <% unit = @recipes.where('material_id=?', material.id).take %>
+                    <li>
+                        <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
+                        <span class="m-l-xs"><%= material.material_name %></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px"  step="0.1" type="number" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit2[]"> 개</span>
+                    </li>
+                    <% end %>
+                <% end %> 
+                </ul>
+            </div>
+        </div>
+    </div>
+     <button class="btn btn-primary btn-block" type="submit"><strong>레시피 수정</strong></button>
+    </form>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+ $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+});
+
+$(".menu_lists").select2();
+
+
+</script>
+
+<% end %>

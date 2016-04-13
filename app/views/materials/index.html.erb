@@ -1,0 +1,120 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>재료관리</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Materials</a>
+        </li>
+        <li class="active">
+            <strong>재료관리</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>재료정보</h5>
+                <div style="text-align:right">
+                    <a class="btn btn-xs btn-outline btn-primary" href="/materials/edit_price">단가조정</a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                       placeholder="검색">
+
+                    <table class="footable table table-stripped" data-page-size="10" data-filter=#filter>
+                    <thead>
+                    <tr>
+                        <th>재료 ID</th>
+                        <th>재료명</th>
+                        <th>구매처</th>
+                        <th>구매처 주소</th>
+                        <th>재료용량</th>
+                        <th>구매갯수</th>
+                        <th>구매시점</th>
+                        <th>재료가격</th>
+                        <th>배송일</th>
+                        <th>수정/삭제</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% @materials.each do |material| %>
+                        <tr>
+                            <td class="center"><%= material.id %></td>
+                            <td class="center"><%= material.material_name %></td>
+                            <td class="center"><%= material.material_buyer %></td>
+                            <td class="center"><%= material.material_url %></td>
+                            <td class="center"><%= number_with_delimiter( material.material_volume.to_i, delimiter: ',') %></td>
+                            <td class="center"><%= number_with_delimiter( material.material_unit, delimiter: ',') %></td>
+                            <td class="center"><%= material.material_limit %></td>
+                            <td class="center"><%= number_with_delimiter( material.material_price, delimiter: ',') %> 원</td>
+                            <td class="center"><%= material.material_shipping %> 일</td>
+                            <td class="center">
+                                <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
+                                <%= link_to 'Edit', "edit/#{material.id}", class: "btn btn-primary btn-xs" %>
+                                <button id="btn_delete" data-menu= "<%= material.id %>" class="btn btn-danger btn-xs delete_modal">Delete</button>
+                                <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
+                                <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
+                                
+                            </td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="10">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    $('.footable').footable();
+    $('.footable2').footable();
+
+
+});
+
+$(function() {
+    $('.delete_modal').click(function () {
+        var index = $('.delete_modal').index(this);
+        swal({
+            title: "삭제하시겠습니까?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "취소",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "확인",
+            closeOnConfirm: false
+        }, function () {
+            var n = $('.delete_modal')[index].getAttribute('data-menu');
+            location.href='delete/' + n;
+            // swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        });
+    });
+});
+
+</script>
+
+<% end %>

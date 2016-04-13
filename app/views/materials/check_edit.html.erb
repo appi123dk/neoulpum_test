@@ -1,0 +1,72 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>재고변경</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Materials</a>
+        </li>
+        <li class="active">
+            <strong>재고변경</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" style="margin-bottom:20px">
+    <form action="/materials/check_update" method="GET">
+        <div class="col-lg-12" id="data_1" style="margin-bottom:10px">
+            <h3>체크날짜</h3>
+            <div class="input-group date">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="<%= @storages.first.storage_date.strftime("%m/%d/%Y") %>" readonly="readonly">
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재고체크 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.odd? %>
+                    <li>
+                        <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
+                        <span class="m-l-xs"><%= material.material_name %></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"> 개</span>
+                    </li>
+                    <% end %>
+                <% end %>    
+                </ul>   
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재고체크 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.even? %>
+                    <li>
+                        <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
+                        <span class="m-l-xs"><%= material.material_name %></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit2[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"> 개</span>
+                    </li>
+                    <% end %>
+                <% end %> 
+                </ul>
+            </div>
+        </div>
+    </div>
+     <button class="btn btn-primary btn-rounded btn-block" type="submit"><strong>재고체크 완료!!</strong></button>
+    </form>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+</script>
+
+<% end %>

@@ -1,0 +1,61 @@
+    <div class="middle-box text-center loginscreen  animated fadeInDown">
+        <div>
+            <div style="padding-top: 70px">
+
+                <h3 class="logo-name">Neulpum</h1>
+
+            </div>
+            <h3 style="margin-top: 50px;">메뉴 등록</h3>
+            <p>
+                새로운 메뉴를 등록해주세요
+            </p>
+            <form class="m-t" role="form" action="../update/<%= @menu.id %>" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="메뉴이름" name="menu_title" value="<%= @menu.menu_title %>" required="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="메뉴코드" name="menu_symbol" value="<%= @menu.menu_symbol %>" required="">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" step="100" placeholder="가격" name="menu_price" value="<%= @menu.menu_price %>" required="">
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" class="menu_category" value="001"> 커피
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" class="menu_category" value="002"> 차
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_category" class="menu_category" value="003"> 음료
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_degree" class="menu_degree" id="hot_menu" value="1"> Hot
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_degree" class="menu_degree" id="ice_menu" value="2"> Ice
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
+                <%= link_to '취소', menus_index_path, class: 'btn btn-danger block full-width m-b' %>
+            </form>
+            <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p> -->
+        </div>
+    </div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+    $(".menu_category:input[value=<%= MenuCategory.find(@menu.menu_category_id).category_code %>]").prop("checked", true);
+    $(".menu_degree:input[value=<%= @menu.menu_degree %>]").prop("checked", true);
+});
+
+</script>
+
+<% end %>

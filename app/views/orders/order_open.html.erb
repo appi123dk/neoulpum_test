@@ -1,0 +1,99 @@
+<div class="middle-box text-center loginscreen  animated fadeInDown">
+    <div>
+        <div>
+
+            <h3 class="logo-name">Neulpum</h1>
+
+        </div>
+        <h2 style="margin-top: 50px;">오픈준비</h2>
+        <p>
+            오늘 하루도 화이팅~!!
+        </p>
+        <form class="m-t form-horizontal" role="form" action="/accounts/account_open" method="GET">
+            <div class="alert alert-success">
+                마감 시 선입금 : <strong><%= number_with_delimiter(@end_money, delimiter: ",") %> 원</storng>
+            </div>
+            <div class="form-group" style="margin-bottom:10px">
+                <div class="input-group date">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="<%= Date.today.strftime("%m/%d/%Y") %>" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">5,000 원 X </label>
+                <div class="col-sm-6">
+                    <input style="text-align: right;" type="number" class="form-control" value="0" id="five-thousand">
+                </div>    
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">1,000 원 X </label>
+                <div class="col-sm-6">
+                    <input style="text-align: right;" type="number" class="form-control" value="0" id="one-thousand">
+                </div>    
+            </div>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">500 원 X </label>
+                <div class="col-sm-6">
+                    <input style="text-align: right;" type="number" class="form-control" value="0" id="five-hundred">
+                </div>    
+            </div>
+            <hr>
+            <div class="form-group">
+                <label class="col-sm-6 control-label">오늘의 선 입금</label>
+                <div class="col-sm-6">
+                    <h2 style="margin-top: 3px;" class="total-money">0원</h2>
+                    <input style="text-align: right; display:none" id="total-money" type="number" class="form-control" name="pre_money" required="" readonly="readonly">
+                </div>    
+            </div>
+
+            <button type="submit" class="btn btn-primary block full-width m-b">오픈</button>
+        </form>
+        <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p> -->
+    </div>
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+
+$(function() {
+ $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
+    var five_thousand = 0,
+        one_thousand = 0,
+        five_hundred = 0,
+        total_money = five_thousand + one_thousand + five_hundred;
+
+    $("#five-thousand").change(function(){
+        five_thousand = parseInt($(this).val()) * 5000;
+        total_money = five_thousand + one_thousand + five_hundred;
+        $("#total-money").val(total_money);
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+    });
+    $("#one-thousand").change(function(){
+        one_thousand = parseInt($(this).val()) * 1000;
+        total_money = five_thousand + one_thousand + five_hundred;
+        $("#total-money").val(total_money);
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+    });
+    $("#five-hundred").change(function(){
+        five_hundred = parseInt($(this).val()) * 500;
+        total_money = five_thousand + one_thousand + five_hundred;
+        $("#total-money").val(total_money);
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+    });
+});
+
+</script>
+
+<% end %>

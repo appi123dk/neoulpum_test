@@ -1,0 +1,78 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-sm-4">
+        <h2>Recipe</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">Home</a>
+        </li>
+        <li class="active">
+            <strong>Recipe</strong>
+        </li>
+    </ol>
+</div>
+        </div>
+<div class="row">
+<div class="col-lg-12">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <% menu = Menu.find(@recipes.first.menu_id) %>
+        <div class="ibox-content forum-container">
+
+            <div class="forum-title">
+                <h3><%= menu.menu_title %> 레시피 정보</h3>
+            </div>
+            
+            <% @recipes.each do |recipe| %>
+                <% material = Material.find(recipe.material_id) %>
+                <% unless recipe.material_unit.nil? %>
+                    <div class="forum-item active">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="forum-icon">
+                                    <i class="fa fa-<%= @icon.sample %>"></i>
+                                </div>
+                                <a href="#" class="forum-item-title" style="margin-top:9px"><%= material.material_name %></a>
+                            </div>
+                            <div class="col-md-1 forum-info" >
+                                        <span class="views-number">
+                                            <%= recipe.material_unit %>
+                                        </span>
+                                <div>
+                                    <small>용량/개수</small>
+                                </div>
+                            </div>
+                            <div class="col-md-2 forum-info">
+                                        <span class="views-number">
+                                            <%= (((material.material_price / material.material_unit) / material.material_volume.to_f)*recipe.material_unit.to_f).round(1) %> 원
+                                        </span>
+                                <div>
+                                    <small>재료단가</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+             <div class="forum-item active">
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="forum-icon">
+                            <i class="fa fa-<%= @icon.sample %>"></i>
+                        </div>
+                        <a href="#" class="forum-item-title" style="margin-top:9px">Total Cost</a>
+                    </div>
+                    <div class="col-md-2 forum-info" >
+                                <span class="views-number">
+                                    <%= number_with_delimiter(menu.unit_price.round(1), delimiter: ',') %> 원
+                                </span>
+                        <div>
+                            <small>메뉴단가</small>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <a href="/menus/recipe_edit/<%= menu.id %>" class="btn btn-block btn-outline btn-info" style = "margin-top:20px">레시피 수정하기</a>
+        </div>       
+    </div>
+</div>
+
+

@@ -1,0 +1,125 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>메뉴관리</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Menus</a>
+        </li>
+        <li class="active">
+            <strong>메뉴관리</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>메뉴정보</h5>
+            </div>
+            <div class="ibox-content">
+                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                       placeholder="검색">
+
+                    <table class="footable table table-stripped" data-page-size="10" data-filter=#filter>
+                    <thead>
+                    <tr>
+                        <th>메뉴 ID</th>
+                        <th>메뉴이름</th>
+                        <th data-hide="phone,tablet">기호</th>
+                        <th data-hide="phone,tablet">가격</th>
+                        <th data-hide="phone,tablet">종류</th>
+                        <th data-hide="phone,tablet">온도</th>
+                        <th data-hide="phone,tablet">단가</th>
+                        <th data-hide="phone,tablet">레시피</th>
+                        <th data-hide="phone,tablet">수정/삭제</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% index = 0 %>
+                    <% @menus.each do |menu| %>
+                        <% index += 1 %>
+                        <tr>
+                            <td class="center"><%= menu.id %></td>
+                            <td class="center"><%= menu.menu_title %></td>
+                            <td class="center"><%= menu.menu_symbol %></td>
+                            <td class="center"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
+                            <td class="center"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
+                            <td class="center">
+                                <% if menu.menu_degree == '1' %>
+                                    Hot
+                                <% else %>
+                                    Ice
+                                <% end %>
+                            </td>
+                            <td class="center"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
+                            <td class="center">
+                                <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
+                            </td>
+                            <td class="center">
+                                <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
+                                <%= link_to 'Edit', "edit/#{menu.id}", class: "btn btn-primary btn-xs" %>
+                                <button id="btn_delete" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">Delete</button>
+                                <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
+                                <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
+                                
+                            </td>
+                        </tr>
+                    <% end %>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="9">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    $('.footable').footable();
+    $('.footable2').footable();
+
+
+});
+
+$(function() {
+    $('.delete_modal').click(function () {
+        var index = $('.delete_modal').index(this);
+        swal({
+            title: "삭제하시겠습니까?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "취소",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "확인",
+            closeOnConfirm: false
+        }, function () {
+            var n = $('.delete_modal')[index].getAttribute('data-menu');
+            location.href='delete/' + n;
+            // swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        });
+    });
+});
+
+</script>
+
+<% end %>

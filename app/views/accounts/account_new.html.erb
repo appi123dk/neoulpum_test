@@ -1,0 +1,207 @@
+<% if @pre_money.nil? || @pre_money.pre_money == 0 %>
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
+            <div class="widget red-bg p-lg text-center">
+                <div class="m-b-md">
+                    <i class="fa fa-warning fa-4x"></i>
+                    <h1 class="m-xs"><strong>오픈을 먼저 해주세요</strong></h1>
+                    <a href="/orders/order_open" class="btn btn-lg btn-warning" style="width:80%; margin-top: 20px">오픈하러가기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<% else %>
+<div class="col-md-offset-1 col-md-10">
+    <div class="text-center loginscreen  animated fadeInDown" style="width:100%">
+        <div>
+            <h3 class="logo-name">Neulpum</h1>
+        </div>
+        <h2 style="margin-top: 50px;">일간정산</h2>
+        <h4><%= Date.today() %></h4>
+        <p>
+            오늘 하루도 수고하셨습니다
+        </p>
+        <hr>
+        <div style="margin-top: 30px;">
+            <div class="col-md-5" style="border-style:solid; border-radius:10px; border-width:1px; border-color:gray;">
+                <div class="widget style1">
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <i class="fa fa-trophy fa-4x"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span> 오늘 매출액 </span>
+                            <h2 class="font-bold"><%= number_with_delimiter(@revenue,delimiter: ',') %> 원</h2>
+                        </div>
+                        <div class="col-xs-8 text-right " style="margin-top: 20px; float:right">
+                            <span> 선입금 </span>
+                            <h3 class="font-bold">+ <%= number_with_delimiter(@pre_money.pre_money,delimiter: ',') %> 원</h3>
+                        </div>
+                        <div class="col-xs-8 text-right" style="margin-top: 20px; float:right">
+                            <span> 오늘 적립금 </span>
+                            <h3 class="font-bold">+ <%= number_with_delimiter(@saving_point,delimiter: ',') %> 원</h3>
+                        </div>
+                        <div class="col-xs-8 text-right" style="margin-top: 20px; float:right">
+                            <span> 적립금 사용액 </span>
+                            <h3 class="font-bold">- <%= number_with_delimiter(@point,delimiter: ',') %> 원</h3>
+                        </div>
+                        <div class="col-xs-8 text-right" style="margin-top: 20px; float:right">
+                            <span> 기타 현금결재액 </span>
+                            <h3 class="font-bold">- <%= number_with_delimiter(@etc,delimiter: ',') %> 원</h3>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-4 text-center">
+                            <i class="fa fa-won fa-3x" style="color:#1ab394"></i>
+                        </div>
+                        <div class="col-xs-8 text-right">
+                            <span style="color:#1ab394"> <strong>잔고</strong> </span>
+                            <h2 class="font-bold" style="color:#1ab394"><%= number_with_delimiter(@saving,delimiter: ',') %> 원</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-offset-1 col-md-6" style="border-style:solid; border-radius:10px; border-width:1px; border-color:gray;">
+                <form class="m-t form-horizontal" role="form" action="/accounts/account_update" method="POST">
+                    <fieldset>
+                        <legend><h2>잔금현황</h2></legend>   
+                         <div class="form-group">
+                            <label class="col-sm-4 control-label">50,000 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" value="0" id="fifty-thousand">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">10,000 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" value="0" id="ten-thousand">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">5,000 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" value="0" id="five-thousand">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">1,000 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" value="0" id="one-thousand">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">500 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" value="0" id="five-hundred">
+                            </div>    
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="font-size:18px; color:#1ab394;">잔고</label>
+                            <div class="col-sm-6">
+                                <h2 style="margin-top: 8px; text-align:right; color:#1ab394;" class="total-money">0원</h2>
+                            </div>
+                            
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">차액 </label>
+                            <div class="col-sm-6">
+                               <input type="number" style="text-align: right;" name="cash_loss" readonly="readonly" class="form-control" required="" id="cash-loss">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">내일 선입금 </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" name="end_money" class="form-control" required="" id="end-money">
+                            </div>    
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" style="font-size:18px; color:#1ab394; font-weight:bold">통장 입금액</label>
+                            <div class="col-sm-6">
+                                <h2 style="margin-top: 8px; text-align:right; color:#1ab394; font-weight:bold" class="cash-money">0원</h2>
+                                <input type="text" id="cash-money" value="" name="cash_money" style="display:none">
+                            </div>    
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<% end %>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+
+$(function() {
+
+    var five_thousand = 0,
+        one_thousand = 0,
+        five_hundred = 0,
+        ten_thousand = 0,
+        fifty_thousand = 0,
+        cash_loss = 0,
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand,
+        cash_money = 0;
+
+    $("#fifty-thousand").change(function(){
+        fifty_thousand = parseInt($(this).val()) * 50000;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+    $("#ten-thousand").change(function(){
+        ten_thousand = parseInt($(this).val()) * 10000;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+    $("#five-thousand").change(function(){
+        five_thousand = parseInt($(this).val()) * 5000;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+    $("#one-thousand").change(function(){
+        one_thousand = parseInt($(this).val()) * 1000;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);q
+    });
+    $("#five-hundred").change(function(){
+        five_hundred = parseInt($(this).val()) * 500;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+
+    $("#end-money").change(function(){
+        cash_money = parseInt($(this).val());
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+    });
+});
+
+</script>
+
+<% end %>

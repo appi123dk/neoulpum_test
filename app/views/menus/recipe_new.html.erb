@@ -1,0 +1,100 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>레시피입력</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Recipes</a>
+        </li>
+        <li class="active">
+            <strong>레시피입력</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row" style="margin-bottom:20px">
+    <form action="/menus/recipe_create" method="GET">
+        <div class="col-lg-12" style="margin-bottom:10px">
+        <h3>메뉴선택</h3>
+            <select class="menu_lists form-control" name="menu">
+            <option>메뉴를 선택해주세요</option>
+            <optgroup label="커피">
+            <% @menus.where('menu_category_id=?',"001").each do |menu| %>
+                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+            <% end %>
+             </optgroup>
+             <optgroup label="차">
+            <% @menus.where('menu_category_id=?',"002").each do |menu| %>
+                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+            <% end %>
+             </optgroup>
+             <optgroup label="음료">
+            <% @menus.where('menu_category_id=?',"003").each do |menu| %>
+                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+            <% end %>
+             </optgroup>
+            </select>
+        </div>    
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재료 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.odd? %>
+                    <li>
+                        <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
+                        <span class="m-l-xs"><%= material.material_name %></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit[]"> 개</span>
+                    </li>
+                    <% end %>
+                <% end %>    
+                </ul>   
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox-content">
+                <h4>재료 리스트</h4>
+                <ul class="todo-list m-t">
+                <% @materials.each do |material| %>
+                    <% if material.id.even? %>
+                    <li>
+                        <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
+                        <span class="m-l-xs"><%= material.material_name %></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit2[]"> 개</span>
+                    </li>
+                    <% end %>
+                <% end %> 
+                </ul>
+            </div>
+        </div>
+    </div>
+     <button class="btn btn-primary btn-block" type="submit"><strong>레시피 등록</strong></button>
+    </form>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+ $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+});
+
+$(".menu_lists").select2();
+
+
+</script>
+
+<% end %>
