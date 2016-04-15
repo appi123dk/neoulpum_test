@@ -43,7 +43,7 @@ class AccountsController < ApplicationController
 
 		# Sales 개수
 		menus = Menu.all
-		sales = Sale.where('date_sales=?',Date.today())
+		sales = Sale.where('date_sales=?',Date.today()).take
 		menus.each do |menu|
 			if sales.nil?
 				sale = Sale.new

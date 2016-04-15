@@ -11,10 +11,11 @@
         </div>
     </div>
 <% else %>
-<div class="col-md-offset-1 col-md-10">
+<div class="wrapper wrapper-content animated fadeInRight">
+<div class="col-md-12">
     <div class="text-center loginscreen  animated fadeInDown" style="width:100%">
         <div>
-            <h3 class="logo-name">Neulpum</h1>
+            <h3 class="logo-name">Neulpum</h3>
         </div>
         <h2 style="margin-top: 50px;">일간정산</h2>
         <h4><%= Date.today() %></h4>
@@ -65,8 +66,8 @@
             <div class="col-md-offset-1 col-md-6" style="border-style:solid; border-radius:10px; border-width:1px; border-color:gray;">
                 <form class="m-t form-horizontal" role="form" action="/accounts/account_update" method="POST">
                     <fieldset>
-                        <legend><h2>잔금현황</h2></legend>   
-                         <div class="form-group">
+                        <legend><h2>잔금현황</h2></legend>
+                        <div class="form-group">
                             <label class="col-sm-4 control-label">50,000 원 X </label>
                             <div class="col-sm-6">
                                 <input style="text-align: right;" type="number" class="form-control" value="0" id="fifty-thousand">
@@ -101,8 +102,7 @@
                             <label class="col-sm-4 control-label" style="font-size:18px; color:#1ab394;">잔고</label>
                             <div class="col-sm-6">
                                 <h2 style="margin-top: 8px; text-align:right; color:#1ab394;" class="total-money">0원</h2>
-                            </div>
-                            
+                            </div>  
                         </div>
                         <div class="form-group">
                             <label class="col-sm-4 control-label">차액 </label>
@@ -130,6 +130,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <% end %>
 
