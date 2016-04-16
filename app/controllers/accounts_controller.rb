@@ -1,3 +1,4 @@
+# encoding: utf-8
 class AccountsController < ApplicationController
 	def account_open
 		account = Account.new

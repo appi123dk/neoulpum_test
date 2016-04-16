@@ -1,3 +1,4 @@
+# encoding: utf-8
 class MaterialsController < ApplicationController
 	def index
 		@materials = Material.all

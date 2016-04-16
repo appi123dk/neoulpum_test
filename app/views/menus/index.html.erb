@@ -47,7 +47,7 @@
                         <% index += 1 %>
                         <tr>
                             <td class="center"><%= menu.id %></td>
-                            <td class="center"><%= menu.menu_title %></td>
+                            <td class="center"><%= menu.menu_title.force_encoding('UTF-8') %></td>
                             <td class="center"><%= menu.menu_symbol %></td>
                             <td class="center"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
                             <td class="center"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>

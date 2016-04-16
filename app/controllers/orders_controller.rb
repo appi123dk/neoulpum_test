@@ -1,3 +1,4 @@
+# encoding 'utf-8'
 class OrdersController < ApplicationController
 	def order_index
 		@menus = Menu.all
@@ -69,6 +70,6 @@ class OrdersController < ApplicationController
 	end
 
 	def order_open
-		@end_money = Account.where('pre_money != ?', 0).last.end_money
+		@end_money = Account.where('end_money != ?', 0).last.end_money
 	end
 end

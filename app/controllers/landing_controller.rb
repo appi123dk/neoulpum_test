@@ -1,3 +1,4 @@
+# encoding: utf-8
 class LandingController < ApplicationController
   def index
   	unless session[:user_id].nil?

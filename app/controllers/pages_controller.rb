@@ -1,3 +1,4 @@
+# encoding: utf-8
 class PagesController < ApplicationController
   def search_results
   end
