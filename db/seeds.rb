@@ -15,3 +15,6 @@ User.create(user_email: 'admin@neoulpum.com', user_name: '늘품지기', passwor
 MenuCategory.create(category_code: '001', category_title: 'coffee')
 MenuCategory.create(category_code: '002', category_title: 'tea')
 MenuCategory.create(category_code: '003', category_title: 'drink')
+
+# 회계 시드데이터 초기데이터
+Account.create(end_money: 200000, account_date: '2016-04-01' )
