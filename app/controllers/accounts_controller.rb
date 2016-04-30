@@ -1,5 +1,5 @@
-# encoding: utf-8
 class AccountsController < ApplicationController
+	before_action :require_user
 	def account_open
 		account = Account.new
 		account.pre_money = params[:pre_money]

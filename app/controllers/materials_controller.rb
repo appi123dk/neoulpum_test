@@ -1,5 +1,5 @@
-# encoding: utf-8
 class MaterialsController < ApplicationController
+	before_action :require_user
 	def index
 		@materials = Material.all
 	end

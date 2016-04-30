@@ -1,4 +1,3 @@
-# encoding: utf-8
 class UsersController < ApplicationController
 
 	def create
@@ -25,6 +24,9 @@ class UsersController < ApplicationController
 			redirect_to '/'
 		else 
 			session[:user_id] = user.id
+			count = OrdersUser.where('user_id = ?', user.id).count
+			user.user_rate = count/10
+			user.save
 			redirect_to '/'
 		end
 	end
@@ -44,13 +46,17 @@ class UsersController < ApplicationController
 	end
 
 	def money
-		account = Account.last
-		account.saving_point += params[:user_money].to_i
-		account.save
-		user = User.find(params[:id])
-		user.user_money += params[:user_money].to_i
-		user.save
-		redirect_to :back
+		if admin_user
+			account = Account.last
+			account.saving_point += params[:user_money].to_i
+			account.save
+			user = User.find(params[:id])
+			user.user_money += params[:user_money].to_i
+			user.save
+			redirect_to :back
+		else
+			redirect_to '/'
+		end
 	end
 
 end

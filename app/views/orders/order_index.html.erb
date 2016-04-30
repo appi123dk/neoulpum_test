@@ -126,6 +126,7 @@
                             </div>
                         </div>
                     </div> 
+                    <!-- <hr> -->
                 </div>
 
                 <div class="ibox-title">
@@ -298,6 +299,7 @@ $(function(){
             },
             url: "/orders/find_user",
             success: function(data){
+                $(".user-info hr").remove();
                 $(".user-point").remove();
                 $(".user-info").append(
                     '<hr>' +

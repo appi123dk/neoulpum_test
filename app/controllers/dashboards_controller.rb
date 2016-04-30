@@ -1,5 +1,5 @@
-# encoding: utf-8
 class DashboardsController < ApplicationController
+  before_action :require_user
   def dashboard_1
   end
 

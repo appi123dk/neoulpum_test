@@ -1,5 +1,5 @@
-# encoding 'utf-8'
 class OrdersController < ApplicationController
+	before_action :require_user
 	def order_index
 		@menus = Menu.all
 		@pre_money = Account.where('account_date=?',Date.today()).take

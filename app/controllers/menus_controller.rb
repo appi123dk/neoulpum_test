@@ -1,5 +1,5 @@
-# encoding: utf-8
 class MenusController < ApplicationController
+	before_action :require_user
 	def new
 	end
 
