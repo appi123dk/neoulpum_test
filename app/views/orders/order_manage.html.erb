@@ -25,15 +25,15 @@
                     <% shot = 0 %>
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
-                                <div class="panel-heading">
-                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <% if order.users.take.nil?  %> 없음 <% else %> <%= order.users.take.user_name %> <% end %></h4>
+                                <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
+                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shot<%= index %>"></span> 개</h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-4">
-                                            <h3><% if detail_menu.menu_degree == '1' %>H<% else %>I<% end %>.<%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                            <h3><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
                                             <% shot += menu.order_unit %>
@@ -65,15 +65,15 @@
                     <% shot = 0 %>
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
-                                <div class="panel-heading">
-                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <% if order.users.take.nil?  %> 없음 <% else %> <%= order.users.take.user_name %> <% end %></h4>
+                                <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
+                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shot<%= index %>"></span> 개</h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-4">
-                                            <h3><% if detail_menu.menu_degree == '1' %>H<% else %>I<% end %>.<%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                            <h3><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
                                             <% shot += menu.order_unit %>
@@ -104,6 +104,29 @@
 
     $(function() {
         $("body").addClass("mini-navbar")
+
+        // 같은 번호가 있을때 표시해주는 함수
+        var order_arr = [],
+            sorted_order_arr = [],
+            duplicate_arr = [];
+
+        $.each($(".order-panel"), function(index, value){
+            var order_num = value.getAttribute("data-order");
+            order_arr.push(order_num);
+        });
+        sorted_order_arr = order_arr.slice().sort();
+        for (var i = 0; i < sorted_order_arr.length - 1; i++) {
+            if (sorted_order_arr[i + 1] == sorted_order_arr[i]) {
+                duplicate_arr.push(sorted_order_arr[i]);
+            }
+        }
+        console.log(duplicate_arr);
+        duplicate_arr = $.unique(duplicate_arr);
+        $.each(duplicate_arr, function(index, value){
+            var order_index = order_arr.indexOf(value);
+            $(".order-panel").eq(order_index).after("<span class='label label-danger'>중복</span>");
+        });
+        // 함수 끝
 
         $.each($(".shot-unit"), function(index, value){
             var shot = value.getAttribute("data-shot");

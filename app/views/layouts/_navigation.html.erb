@@ -57,10 +57,11 @@
                 </ul>
             </li>
             <li class="<%= is_active_controller('users') %>">
-                <%= link_to users_index_path do %>
-                <i class="fa fa-users"></i> <span class="nav-label">고객관리</span>
-                <!-- <span class="label label-primary pull-right">NEW</span> -->
-                <% end %>
+                <a href=""><i class="fa fa-users"></i> <span class="nav-label">고객관리</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('users') %>">
+                    <li class="<%= is_active_action('index') %>"><%= link_to "고객정보", users_index_path %></li>
+                    <li class="<%= is_active_action('user_cs') %>"><%= link_to "CS관리", users_user_cs_path %></li>
+                </ul>
             </li>
             <li class="<%= is_active_controller('materials') %>">
                 <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리</span> <span class="fa arrow"></span></a>
@@ -76,6 +77,20 @@
                 <ul class="nav nav-second-level collapse <%= is_active_controller('accounts') %>">
                     <li class="<%= is_active_action('account_new') %>"><%= link_to "일간정산", accounts_account_new_path %></li>
                     <li class="<%= is_active_action('account_index') %>"><%= link_to "정산내역", accounts_account_index_path %></li>
+                </ul>
+            </li>
+            <li class="<%= is_active_controller('files') %>">
+                <a href=""><i class="fa fa-folder-open"></i> <span class="nav-label">늘품자료</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('files') %>">
+                    <li class="<%= is_active_action('index') %>"><%= link_to "전체보기", files_index_path %></li>
+                </ul>
+            </li>
+            <li class="<%= is_active_controller('employees') %>">
+                <a href=""><i class="fa fa-user-plus"></i> <span class="nav-label">지기관리</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('employees') %>">
+                    <li class="<%= is_active_action('duty') %>"><%= link_to "연도별 지기현황", employees_duty_path %></li>
+                    <li class="<%= is_active_action('index') %>"><%= link_to "지기현황", employees_index_path %></li>
+                    <li class="<%= is_active_action('employee_new') %>"><%= link_to "지기등록", employees_employee_new_path %></li>
                 </ul>
             </li>
         </ul>

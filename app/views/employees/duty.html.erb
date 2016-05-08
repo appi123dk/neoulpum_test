@@ -1,0 +1,55 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<form class="form-horizontal" action="/employees/semester" method="GET">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>새 학기 등록</h5>
+        </div>
+        <div class="ibox-content user-info">
+            <div class="form-group" style="margin-bottom: 0px;">
+                <div>
+                    <label class="col-lg-1 control-label" style="text-align:left;">연도</label>
+                    <div class="col-lg-4" style="padding-right: 0px;">
+                        <select class="form-control m-b year" name="year">
+
+                        </select>
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:left;">학기</label>
+                    <div class="col-lg-4" style="padding-right: 0px;">
+                       <select class="form-control m-b" name="semester">
+                            <option value="1">1학기</option>
+                            <option value="2">2학기</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-info btn-block" type="submit">등록</button>
+                    </div>
+                </div>
+            </div> 
+            <!-- <hr> -->
+        </div>
+    </div>
+    </form>
+    <% @semesters.each do |semester| %>
+        <div class="col-lg-2">
+            <button class="btn btn-success dim btn-large-dim btn-menu" type="button" style="width:100%; font-size:20px">
+                <h2 class="font-bold" style="text-align:center"><%= semester.year %> - <%= semester.semester %> 학기</h2> 
+            </button>
+        </div>
+    <% end %>
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+    $(function() {
+      var myDate = new Date();
+      var year = myDate.getFullYear();
+      for(var i = year; i > 1980; i--){
+          $(".year").append('<option value="'+i+'">'+i+'</option>');
+      }
+    });
+
+</script>
+
+<% end %>

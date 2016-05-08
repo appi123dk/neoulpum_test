@@ -30,19 +30,24 @@
                 </div>
             </div>
             <div class="ibox-content" style="padding-bottom: 0px;">
-                <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                       placeholder="검색">
-
+                <div class="col-md-10">
+                    <input type="text" class="form-control input m-b-xs" id="filter" placeholder="검색">
+                </div>
+                <div class="col-md-2">
+                     <button type="button" onclick="location.href='/users/user_rate';" class="btn btn-block btn-outline btn-primary">유저 등급 최신화</button>
+                </div>
                     <table class="footable table table-stripped" data-page-size="5" data-filter=#filter>
                     <thead>
                     <tr>
                         <th>유저 ID</th>
-                        <th>이메일</th>
-                        <th data-hide="phone,tablet">이름</th>
+                        <th data-hide="phone,tablet">이메일</th>
+                        <th>이름</th>
                         <th>전화번호</th>
                         <th data-hide="phone,tablet">직업</th>
                         <th data-hide="phone,tablet">학과</th>
-                        <th data-hide="phone,tablet">적립금</th>
+                        <th>적립금</th>
+                        <th>등급</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -52,15 +57,16 @@
                             <td class="center"><%= user.user_email %></td>
                             <td class="center"><%= user.user_name %></td>
                             <td class="center"><%= user.user_number %></td>
-                            <td class="center">학생</td>
-                            <td class="center">호텔관광대학</td>
-                            <td class="center"><%= user.user_money %></td>
+                            <td class="center"><%= @jobs[:"#{user.user_job}"] %></td>
+                            <td class="center"><%= @colleges[:"#{user.user_major}"] %></td>
+                            <td class="center"><%= number_with_delimiter(user.user_money, delimiter: ',') %></td>
+                            <td class="center"><%= @grade[:"#{user.user_rate}"] %></td>
                         </tr>
                     <% end %>
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="7">
+                        <td colspan="8">
                             <ul class="pagination pull-right"></ul>
                         </td>
                     </tr>
@@ -83,6 +89,7 @@
 
 
 $(function() {
+
     $('.footable').footable();
     $('.footable2').footable();
 

@@ -1,5 +1,6 @@
 //= require chartjs/Chart.min.js
 //= require sparkline/jquery.sparkline.min.js
+//= require sweetalert/sweetalert.min.js
 
 
 var CountUp = function(target, startVal, endVal, decimals, duration, options) {

@@ -23,27 +23,26 @@
                         </div>
                         <div class="form-group">
                             <label for="user_number">Phone</label>
-                            <input type="tel" class="form-control" placeholder="'-'없이 입력(01023234545)" required="" name="user_number">
+                            <input type="tel" class="form-control" placeholder="'-'없이 입력(01023234545)" required="" name="user_number" id="user_number">
                         </div>
                         <div class="form-group">
                             <label for="user_major">Major</label>
-                            <select class="form-control m-b" name="user_major">
-                                <option value="">전공선택</option>
-                                <option value="1">호텔관광대학</option>
-                                <option value="2">법과대학</option>
-                                <option value="3">경영대학</option>
-                                <option value="4">문과대학</option>
+                            <select class="form-control m-b" required>
+                                <option value="" disabled selected>전공선택</option>과
+                                <% @colleges.each do |key, value| %>
+                                    <option value="<%= key %>"><%= value %></option>
+                                <% end %>
                             </select>
                         </div>
                         <div class="form-group" style="text-align:center">
                             <label class="radio-inline">
-                            <input type="radio" value="1" id="student" name="user_job"> 학생 </label>
+                            <input type="radio" value= '1' id="student" name="user_job" required> 학생 </label>
                 
                             <label class="radio-inline">
-                            <input type="radio" value="2" id="professor" name="user_job"> 교직원 </label>
+                            <input type="radio" value= '2' id="professor" name="user_job" required> 교직원 </label>
                         
                             <label class="radio-inline">
-                            <input type="radio" value="3" id="etc" name="user_job"> 기타 </label>
+                            <input type="radio" value= '3' id="etc" name="user_job" required> 기타 </label>
                         </div>
                         <button type="submit" class="btn btn-primary block full-width m-b">회원가입</button>
                         <a class="btn btn-sm btn-warning btn-block" href="/pages/login_2">취소</a>
@@ -90,8 +89,8 @@
 
 
 $(function() {
-
     $("#userRegister").validate({
+        
         rules: {
             user_number: {
                 required: true,
@@ -101,19 +100,33 @@ $(function() {
                 required: true,
                 equalTo: "#password"
             },
-            // user_email: {
-            //   required: true,
-            //   email: true,
-            //   remote: {
-            //     url: "confirm_duplicate",
-            //     type: "get",
-            //     data: {
-            //       user_email: function() {
-            //         return $( "#user_email" ).val();
-            //       }
-            //     }
-            //   }
-            // }
+            user_email: {
+              required: true,
+              email: true,
+              remote: {
+                url: "/users/check_email",
+                type: "get",
+                data: {
+                  user_email: function() {
+                    return $( "#user_email" ).val();
+                  }
+                }
+              }
+            },
+            user_number: {
+              required: true,
+              minlength: 11,
+              maxlength: 11,
+              remote: {
+                url: "/users/check_number",
+                type: "get",
+                data: {
+                  user_email: function() {
+                    return $( "#user_number" ).val();
+                  }
+                }
+              }
+            }
         }
     });
 

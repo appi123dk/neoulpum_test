@@ -4,6 +4,16 @@ Myapp::Application.routes.draw do
   root to: 'landing#index'
 
   # All routes
+  #emplyees routes
+  get "employees/index"
+  get "employees/duty"
+  get "employees/semester"
+  get "employees/employee_new"
+  get "employees/employee_create"
+  get "employees/employee_edit/:id", to:'employees#employee_edit'
+
+  #files routes
+  get "files/index"
 
   #accounts routes
   get "accounts/account_new"
@@ -47,6 +57,12 @@ Myapp::Application.routes.draw do
   post "users/create"
   get "users/find_user"
   get "users/money/:id", to: 'users#money'
+  get "users/user_cs"
+  get "users/cs_create"
+  get "users/cs_complete"
+  get "users/check_email"
+  get "users/check_number"
+  get "users/user_rate"
 
   # menu routes
     #메뉴관련

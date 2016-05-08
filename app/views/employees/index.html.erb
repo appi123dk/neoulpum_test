@@ -1,0 +1,93 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+      <h2>지기현황</h2>
+      <ol class="breadcrumb">
+          <li>
+              <a href="<%= url_for :controller => 'dashboards', :action => 'dashboard_1' %>">Home</a>
+	        </li>
+	        <li>
+	            <a>늘품지기</a>
+	        </li>
+	        <li class="active">
+	            <strong>전체지기현황</strong>
+	        </li>
+	    </ol>
+	</div>
+	<div class="col-lg-2">
+
+	</div>
+</div>	
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+				    <h5>늘품 지기현황</h5>
+				</div>
+				<div class="ibox-content">
+		
+					<table class="table table-striped table-bordered table-hover employee-table" data-page-length="50">
+						<thead>
+							<tr>
+							    <th>학번</th>
+							    <th>이름</th>
+							    <th>전화번호</th>
+							    <th>이메일</th>
+							    <th>생년월일</th>
+							    <th>기수</th>
+							    <th>정보수정</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% @employees.each do |employee| %>
+								<tr class="gradeC">
+								    <td><%= employee.student_number %></td>
+								    <td style="text-align: center;"><%= employee.employee_name %></td>
+								    <td style="text-align: center;"><%= employee.employee_phone %></td>
+								    <td style="text-align: center;"><%= employee.employee_email %></td>
+								    <td style="text-align: center;"><%= employee.employee_birth %></td>
+								    <td style="text-align: center;"><%= employee.cardinal_number %>기</td>
+								    <td style="text-align: center;"> <%= link_to '수정', "employee_edit/#{employee.id}", class: "btn btn-primary btn-xs btn-block" %></td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    $('.employee-table').DataTable({
+    		order: [5,'desc'],
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ]
+
+    });
+
+});
+
+</script>
+
+<% end %>

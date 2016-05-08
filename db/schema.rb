@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429145739) do
+ActiveRecord::Schema.define(version: 20160508125237) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",           limit: 4,                default: 0
@@ -31,6 +31,16 @@ ActiveRecord::Schema.define(version: 20160429145739) do
     t.datetime "updated_at",                                             null: false
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string   "cs_content",   limit: 255
+    t.boolean  "read_confirm",             default: false
+    t.integer  "user_id",      limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+  end
+
+  add_index "comments", ["user_id"], name: "fk_rails_03de2dc08c", using: :btree
+
   create_table "details", force: :cascade do |t|
     t.integer  "menu_id",    limit: 4
     t.integer  "order_id",   limit: 4
@@ -41,6 +51,18 @@ ActiveRecord::Schema.define(version: 20160429145739) do
 
   add_index "details", ["menu_id"], name: "index_details_on_menu_id", using: :btree
   add_index "details", ["order_id"], name: "index_details_on_order_id", using: :btree
+
+  create_table "employees", force: :cascade do |t|
+    t.string   "student_number",  limit: 255
+    t.string   "employee_name",   limit: 255
+    t.string   "employee_phone",  limit: 255
+    t.string   "employee_email",  limit: 255
+    t.date     "employee_birth"
+    t.integer  "cardinal_number", limit: 4
+    t.string   "employee_image",  limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
 
   create_table "materials", force: :cascade do |t|
     t.string   "material_name",     limit: 255
@@ -113,6 +135,13 @@ ActiveRecord::Schema.define(version: 20160429145739) do
 
   add_index "sales", ["menu_id"], name: "index_sales_on_menu_id", using: :btree
 
+  create_table "semesters", force: :cascade do |t|
+    t.string   "year",       limit: 255
+    t.string   "semester",   limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
   create_table "storages", force: :cascade do |t|
     t.date     "storage_date"
     t.integer  "storage_unit", limit: 4
@@ -137,6 +166,7 @@ ActiveRecord::Schema.define(version: 20160429145739) do
     t.integer  "user_rate",   limit: 4,   default: 0
   end
 
+  add_foreign_key "comments", "users"
   add_foreign_key "details", "menus"
   add_foreign_key "details", "orders"
   add_foreign_key "recipes", "materials"

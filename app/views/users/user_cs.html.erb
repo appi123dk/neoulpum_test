@@ -1,0 +1,140 @@
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>CS관리</h2>
+        <ol class="breadcrumb">
+        <li>
+            <a href="#">Home</a>
+        </li>
+        <li>
+            <a>Users</a>
+        </li>
+        <li class="active">
+            <strong>고객 CS현황</strong>
+        </li>
+        </ol>
+    </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row comment-container">
+        <div class="col-lg-offset-1 col-lg-10">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="padding-bottom: 10px;">
+                    <h3 class="text-navy">늘품 CS관리</h3> 
+                    <h5>고객들의 CS를 확인하고 문자를 이용해 고객과 소통 후, </br> 특이사항은 회의 때 보고</h5>
+                    확인하지 않은 것만 보기 <input type="checkbox" class="js-switch_2"/>
+                </div>
+            </div>
+            
+            <div class="chat-activity-list">
+                <% @comments.each do |comment| %>
+                    <% user = comment.user %>
+                    <div class="chat-element" data-complete="<%= comment.read_confirm %>">
+                        <div class="col-md-1 col-sm-12">
+                            No. <small class="pull-right"><%= comment.id %></small>
+                        </div>
+                        <div class="col-md-10 col-sm-12 chat" style="padding: 10px">
+                            <div class="media-body">
+                                <small class="pull-right"><span class="text-navy"><%= time_ago_in_words(comment.created_at) %> ago</span> (<%= comment.created_at.strftime("%Y-%m-%d, %R") %>)</small>
+                                <strong><%= user.user_name %></strong> (<%= user.user_number %>)
+                                <p class="m-b-xs" style="font-size:15px">
+                                    <%= comment.cs_content %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-1" style="padding-left: 0px; padding-right: 0px;">
+                            <button type="button" class="ladda-button btn btn-warning complete-btn btn-block" data-style="zoom-in" data-comment="<%= comment.id %>">처리완료</button>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div style="float:right">
+                <%= will_paginate @comments, :page_links => false, :next_label => "다음 >>", :previous_label => "<< 이전" %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+    function checked(){
+        $(".pagination").children().addClass("btn btn-warning");
+        // var is_complete = $(".chat-element").attr("data-complete");
+        $.each($(".chat-element"), function(index,value){
+            var is_complete = value.getAttribute("data-complete");
+            if (is_complete == 'true') {
+                $(".chat").eq(index).css({"background-color":"#1ab394", "color":"#FFFFFF"});
+                $(".complete-btn").eq(index).attr('disabled','disabled');
+            };
+        });
+    }
+
+    $(function() {
+        
+        checked();
+        
+        $(document).on('click', '.complete-btn',function(){
+            var button = $(this).ladda(),
+                n = $(this).attr("data-comment"),
+                index = $.inArray(this, $(".complete-btn"));
+            button.ladda('start');
+            $.ajax({
+                data: {
+                    comment_id: n,
+                },
+                method: "GET",
+                url: "/users/cs_complete",
+                success: function(){
+                    button.ladda('stop');
+                    $(".chat").eq(index).css({"background-color":"#1ab394", "color":"#FFFFFF"});
+                    $(".complete-btn").eq(index).attr('disabled','disabled');
+                }
+            });
+        });
+        
+        var elem_2 = document.querySelector('.js-switch_2');
+        var switchery_2 = new Switchery(elem_2, { color: '#1ab394'});
+
+        $(".switchery").click(function(){
+            var is_checked = document.querySelector('.js-switch_2').checked;
+            $.ajax({
+                data: {
+                    is_checked: is_checked,
+                },
+                method: "GET",
+                url: "/users/user_cs",
+                success: function(data){
+                    $(".chat-activity-list").children().remove();
+                    $.grep(data.comments, function(value, index){
+                        $(".chat-activity-list").append(
+                            '<div class="chat-element" data-complete=' + value.read_confirm + '>' +
+                                '<div class="col-md-1 col-sm-12">' +
+                                    'No. <small class="pull-right">' + value.id + '</small>' +
+                                '</div>' +
+                                '<div class="col-md-10 col-sm-12 chat" style="padding: 10px">' +
+                                    '<div class="media-body">' +
+                                        '<small class="pull-right"><span class="text-navy">'+ $.timeago(value.created_at)+ '</span> ('+ $.format.date(value.created_at, "yyyy-MM-dd, HH:mm") + ')</small>' +
+                                        '<strong>' + data.users[index].user_name + '</strong> (' + data.users[index].user_number + ')' +
+                                        '<p class="m-b-xs" style="font-size:15px">' +
+                                            value.cs_content +
+                                        '</p>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="col-md-1" style="padding-left: 0px; padding-right: 0px;">' +
+                                    '<button type="button" class="ladda-button btn btn-warning complete-btn btn-block" data-style="zoom-in" data-comment=' + value.id + '>처리완료</button>' +
+                                '</div>' +
+                            '</div>'
+                        ); 
+                    });
+                    checked();
+                }
+            });
+        });
+    });
+
+</script>
+
+<% end %>
