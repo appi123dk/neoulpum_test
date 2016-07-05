@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
 
   helper_method :admin_user
+  helper_method :account_user
 
   def admin_user
   	if session[:user_id]
@@ -13,7 +14,19 @@ class ApplicationController < ActionController::Base
   	end
   end
 
+  def account_user
+    if session[:user_id]
+      if User.find(session[:user_id]).user_email == 'account@neulpum.com'
+        @account_user ||= User.find(session[:user_id])
+      end
+    end
+  end
+
   def require_user
   	redirect_to '/' unless admin_user
+  end
+
+  def require_account_user
+    redirect_to '/' unless account_user
   end
 end

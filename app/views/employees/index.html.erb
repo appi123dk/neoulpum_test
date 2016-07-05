@@ -35,6 +35,7 @@
 							    <th>이메일</th>
 							    <th>생년월일</th>
 							    <th>기수</th>
+							    <th>활동횟수</th>
 							    <th>정보수정</th>
 							</tr>
 						</thead>
@@ -46,7 +47,8 @@
 								    <td style="text-align: center;"><%= employee.employee_phone %></td>
 								    <td style="text-align: center;"><%= employee.employee_email %></td>
 								    <td style="text-align: center;"><%= employee.employee_birth %></td>
-								    <td style="text-align: center;"><%= employee.cardinal_number %>기</td>
+								    <td style="text-align: center;"><%= employee.cardinal_number %> 기</td>
+								    <td style="text-align: center;"><%= employee.teams.count %> 회</td>
 								    <td style="text-align: center;"> <%= link_to '수정', "employee_edit/#{employee.id}", class: "btn btn-primary btn-xs btn-block" %></td>
 								</tr>
 							<% end %>

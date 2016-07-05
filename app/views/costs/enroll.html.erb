@@ -1,0 +1,88 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<form class="form-horizontal" action="/costs/create" method="GET">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>지출 등록</h5>
+        </div>
+        <div class="ibox-content user-info">
+            <div class="form-group" style="margin-bottom: 0px;">
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">날짜 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                        <input type="date" class="form-control" name="buy_date" required="">
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">구분 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                       <select class="form-control m-b" name="category">
+                            <option disabled selected>선택해주세요</option>
+                            <option value="1">시설구매비</option>
+                            <option value="2">비품구매비</option>
+                            <option value="3">지기지원비</option>
+                        </select>
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">내용 |</label>
+                    <div class="col-lg-4" style="padding-right: 0px;" required="">
+                       <input type="text" name="buy_content" class="form-control" placeholder="구매내역을 자세히 적어주세요" required="">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">가격 |</label>
+                    <div class="col-lg-9" style="padding-right: 0px;">
+                       <input type="number" name="price" class="form-control" placeholder="가격을 입력해주세요" required="">
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-info btn-block" type="submit">등록</button>
+                    </div>
+                </div>
+            </div> 
+            <!-- <hr> -->
+        </div>
+    </div>
+    </form>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox">
+        <div class="ibox-title">
+            <h5>구매요청내역 <small> 입금 완료 후 처리완료 버튼 클릭!</small> </h5>
+        </div>
+        <div class="ibox-content user-info">
+            <div class="chat-activity-list">
+                <% if @requests.take.nil? %>
+                    <div class="chat-element">
+                        <h3 class="text-center">구매요청 내역이 없습니다</h3>
+                    </div>
+                <% else %>
+                    <% index = 1 %>
+                    <% @requests.each do |request| %>
+                        <div class="chat-element">
+                            <div class="col-md-1 col-sm-12" style="padding-top: 10px;">
+                                No. <small class="pull-right"><%= index %></small>
+                            </div>
+                            <div class="col-md-10 col-sm-12 chat" style="padding: 10px">
+                                <div class="media-body">
+                                    <small class="pull-right"><span class="text-navy"><%= request.buy_date %></span></small>
+                                    <p class="m-b-xs" style="font-size:15px">구매요청 지기 : <%= Employee.find(request.employee_id).employee_name %> <small> (<%= Employee.find(request.employee_id).employee_phone %>) </small> </p>
+                                    <p class="m-b-xs" style="font-size:15px">
+                                        구매내역 : <%= Material.find(request.material_id).material_name %>
+                                    </p>
+                                    <p class="m-b-xs text-navy" style="font-size:15px">
+                                        요청 가격 : <%= number_with_delimiter(request.buy_price, delimiter: ",") %> 원 
+                                    </p>
+                                    <p class="m-b-xs" style="font-size:15px">
+                                        계좌정보 : <%= request.buy_content %>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="padding-left: 0px; padding-right: 0px;">
+                                <button type="button" class="ladda-button btn btn-warning complete-btn btn-block" data-style="zoom-in" onclick="location.href='/costs/payment_check/<%= request.id %>'">처리완료</button>
+                            </div>
+                        </div>
+                        <% index += 1 %>
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,6 +1,7 @@
 class AccountsController < ApplicationController
 	before_action :require_user
 	def account_open
+		## 늘품 오픈 페이지
 		account = Account.new
 		account.pre_money = params[:pre_money]
 		account.account_date = Date.strptime(params[:date],'%m/%d/%Y')
@@ -9,43 +10,45 @@ class AccountsController < ApplicationController
 	end
 
 	def account_new
+		## 마감페이지
 		@saving_point = Account.last.saving_point
 		@pre_money = Account.where('account_date=?',Date.today()).take
 		@etc = Account.last.cash_buy
-		@revenue = 0
 		@point = 0
-		orders = Detail.where(created_at: Time.now.midnight..(Time.now.midnight + 1.day))
+
+		#오늘의 주문과 수입
+		orders = Detail.today_orders
+		@revenue = Account.today_revenue orders
+
+		# 유저 포인트 사용내역
 		big_orders = Order.where(created_at: Time.now.midnight..(Time.now.midnight + 1.day))
-		orders.each do |order|
-			menu = Menu.find(order.menu_id)
-			@revenue += order.order_unit * menu.menu_price
-		end
 		big_orders.each do |order|
 			unless order.use_point.nil?
 				@point += order.use_point 
 			end
 		end
+
+		# 통장잔고
 		unless @pre_money.nil?
 			@saving = @revenue + @pre_money.pre_money - @etc - @point + @saving_point
 		end
 	end
 
 	def account_update
-		# 정산가격
+		## 마감시 계좌정보 최신
+		# 적립금 추가액
 		@saving_point = Account.last.saving_point
-		@revenue = 0
-		@menu_cost = 0
-		orders = Detail.where(created_at: Time.now.midnight..(Time.now.midnight + 1.day))
-		orders.each do |order|
-			menu = Menu.find(order.menu_id)
-			@revenue += order.order_unit * menu.menu_price
-			@menu_cost += order.order_unit * menu.unit_price
-		end
+
+		#오늘의 주문과 수입/비용
+		orders = Detail.today_orders
+		@revenue = Account.today_revenue orders
+		@menu_cost = Account.today_cost orders
 
 		# Sales 개수
 		menus = Menu.all
 		sales = Sale.where('date_sales=?',Date.today()).take
 		menus.each do |menu|
+			#마감 전
 			if sales.nil?
 				sale = Sale.new
 				sale.menu_id = menu.id
@@ -55,7 +58,8 @@ class AccountsController < ApplicationController
 					sale.menu_sales = orders.where('menu_id=?', menu.id).count * orders.where('menu_id=?', menu.id).sum(:order_unit)
 				end
 				sale.date_sales = Date.today().to_formatted_s(:db)
-				sale.save
+				sale.save			
+			#마감 후
 			else
 				if sales.where('menu_id=?', menu.id).nil?
 					sale = Sale.new

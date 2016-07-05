@@ -11,24 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160508125237) do
+ActiveRecord::Schema.define(version: 20160705035743) do
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "revenue",           limit: 4,                default: 0
-    t.decimal  "menu_cost",                   precision: 10, default: 0
-    t.decimal  "profit",                      precision: 10, default: 0
-    t.integer  "cash",              limit: 4,                default: 0
-    t.integer  "cash_loss",         limit: 4,                default: 0
-    t.integer  "etc_buy_cost",      limit: 4,                default: 0
-    t.integer  "material_buy_cost", limit: 4,                default: 0
-    t.integer  "labor_cost",        limit: 4,                default: 0
-    t.integer  "saving_point",      limit: 4,                default: 0
-    t.integer  "pre_money",         limit: 4,                default: 0
-    t.integer  "end_money",         limit: 4,                default: 0
-    t.integer  "cash_buy",          limit: 4,                default: 0
+    t.integer  "revenue",      limit: 4,                default: 0
+    t.decimal  "menu_cost",              precision: 10, default: 0
+    t.decimal  "profit",                 precision: 10, default: 0
+    t.integer  "cash",         limit: 4,                default: 0
+    t.integer  "cash_loss",    limit: 4,                default: 0
+    t.integer  "saving_point", limit: 4,                default: 0
+    t.integer  "pre_money",    limit: 4,                default: 0
+    t.integer  "end_money",    limit: 4,                default: 0
+    t.integer  "cash_buy",     limit: 4,                default: 0
     t.date     "account_date"
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -40,6 +37,20 @@ ActiveRecord::Schema.define(version: 20160508125237) do
   end
 
   add_index "comments", ["user_id"], name: "fk_rails_03de2dc08c", using: :btree
+
+  create_table "costs", force: :cascade do |t|
+    t.integer  "material_id", limit: 4
+    t.integer  "employee_id", limit: 4
+    t.string   "buy_content", limit: 255
+    t.integer  "buy_price",   limit: 4
+    t.date     "buy_date"
+    t.boolean  "buy_pament",              default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
+
+  add_index "costs", ["employee_id"], name: "index_costs_on_employee_id", using: :btree
+  add_index "costs", ["material_id"], name: "fk_rails_51407c110f", using: :btree
 
   create_table "details", force: :cascade do |t|
     t.integer  "menu_id",    limit: 4
@@ -90,9 +101,10 @@ ActiveRecord::Schema.define(version: 20160508125237) do
     t.string   "menu_degree",      limit: 255
     t.integer  "menu_price",       limit: 4
     t.integer  "menu_category_id", limit: 4
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
-    t.decimal  "unit_price",                   precision: 10, default: 0
+    t.datetime "created_at",                                                          null: false
+    t.datetime "updated_at",                                                          null: false
+    t.decimal  "unit_price",                   precision: 6, scale: 2, default: 0.0
+    t.boolean  "display",                                              default: true
   end
 
   create_table "orders", force: :cascade do |t|
@@ -113,6 +125,15 @@ ActiveRecord::Schema.define(version: 20160508125237) do
 
   add_index "orders_users", ["order_id"], name: "index_orders_users_on_order_id", using: :btree
   add_index "orders_users", ["user_id"], name: "index_orders_users_on_user_id", using: :btree
+
+  create_table "payments", force: :cascade do |t|
+    t.date     "buy_date"
+    t.integer  "category",    limit: 4
+    t.string   "buy_content", limit: 255
+    t.integer  "price",       limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "recipes", force: :cascade do |t|
     t.integer  "material_id",   limit: 4
@@ -152,6 +173,18 @@ ActiveRecord::Schema.define(version: 20160508125237) do
 
   add_index "storages", ["material_id"], name: "index_storages_on_material_id", using: :btree
 
+  create_table "teams", force: :cascade do |t|
+    t.string   "team",        limit: 255
+    t.string   "job",         limit: 255
+    t.integer  "employee_id", limit: 4
+    t.integer  "semester_id", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "teams", ["employee_id"], name: "index_teams_on_employee_id", using: :btree
+  add_index "teams", ["semester_id"], name: "index_teams_on_semester_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "user_email",  limit: 255
     t.string   "user_name",   limit: 255
@@ -167,10 +200,14 @@ ActiveRecord::Schema.define(version: 20160508125237) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "costs", "employees"
+  add_foreign_key "costs", "materials"
   add_foreign_key "details", "menus"
   add_foreign_key "details", "orders"
   add_foreign_key "recipes", "materials"
   add_foreign_key "recipes", "menus"
   add_foreign_key "sales", "menus"
   add_foreign_key "storages", "materials"
+  add_foreign_key "teams", "employees"
+  add_foreign_key "teams", "semesters"
 end

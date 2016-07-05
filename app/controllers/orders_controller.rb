@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 	before_action :require_user
 	def order_index
-		@menus = Menu.all
+		@menus = Menu.where('display = ?',true)
 		@pre_money = Account.where('account_date=?',Date.today()).take
 	end
 

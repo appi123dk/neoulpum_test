@@ -376,6 +376,13 @@ body.body-small .footer.fixed {
   padding-top: 15px;
 }
 
+.border-all {
+  border-left: 1px solid $border-color;
+  border-right: 1px solid $border-color;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+}
+
 .border-left-right {
   border-left: 1px solid $border-color;
   border-right: 1px solid $border-color;

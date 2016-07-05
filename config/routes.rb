@@ -4,12 +4,23 @@ Myapp::Application.routes.draw do
   root to: 'landing#index'
 
   # All routes
+
+  #costs routes
+  get "costs/enroll"
+  get "costs/create"
+  get "costs/index"
+  get "costs/request_create"
+  get "costs/payment_check/:id", to: 'costs#payment_check'
+
   #emplyees routes
   get "employees/index"
   get "employees/duty"
   get "employees/semester"
+  get "employees/team_create"
+  get "employees/delete/:id", to: 'employees#delete'
+  get "employees/semester_team/:id", to: 'employees#semester_team'
   get "employees/employee_new"
-  get "employees/employee_create"
+  post "employees/employee_create"
   get "employees/employee_edit/:id", to:'employees#employee_edit'
 
   #files routes
@@ -50,6 +61,10 @@ Myapp::Application.routes.draw do
   get "materials/check_update"
   get "materials/edit_price"
 
+    #구매관련
+  get "materials/request_buy"
+  get "materials/material_price"
+
   # user routes
   post "users/login_process"
   get "users/logout"
@@ -87,6 +102,7 @@ Myapp::Application.routes.draw do
   get "dashboards/dashboard_4"
   get "dashboards/dashboard_4_1"
   get "dashboards/dashboard_5"
+  get "dashboards/neulpum_dashboard"
 
   get "pages/search_results"
   get "pages/lockscreen"

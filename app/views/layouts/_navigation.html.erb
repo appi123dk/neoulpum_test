@@ -32,24 +32,27 @@
             <li class="<%= is_active_controller('dashboards') %>">
                 <a href=""><i class="fa fa-area-chart"></i> <span class="nav-label">현황판</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('dashboards') %>">
-                    <li class="<%= is_active_action('dashboard_1') %>"><%= link_to "Dashboard v.1", root_path %></li>
-                    <li class="<%= is_active_action('dashboard_2') %>"><%= link_to "Dashboard v.2", dashboards_dashboard_2_path %></li>
-                    <li class="<%= is_active_action('dashboard_3') %>"><%= link_to "Dashboard v.3", dashboards_dashboard_3_path %></li>
-                    <li class="<%= is_active_action('dashboard_4_1') %>"><%= link_to "Dashboard v.4", dashboards_dashboard_4_1_path %></li>
-                    <li class="<%= is_active_action('dashboard_5') %>"><%= link_to "Dashboard v.5", dashboards_dashboard_5_path %></li>
+                    <li class="<%= is_active_action('neulpum_dashboard') %>"><%= link_to "늘품현황판", dashboards_neulpum_dashboard_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('orders') %>">
-                <a href=""><i class="fa fa-desktop"></i> <span class="nav-label">주문현황</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-desktop"></i> <span class="nav-label">주문(현장)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('orders') %>">
                     <li class="<%= is_active_action('order_open') %>"><%= link_to "오픈준비", orders_order_open_path %></li>
-                    <li class="<%= is_active_action('order_index') %>"><%= link_to "주문화면", orders_order_index_path %></li>
+                    <li class="<%= is_active_action('order_index') %>"><%= link_to "주문화면(POS)", orders_order_index_path %></li>
                     <li class="<%= is_active_action('order_manage') %>"><%= link_to "주문현황", orders_order_manage_path %></li>
                     <li class="<%= is_active_action('order_list') %>"><%= link_to "주문정보", orders_order_list_path %></li>
                 </ul>
             </li>
+            <li class="<%= is_active_controller('accounts') %>">
+                <a href=""><i class="fa fa-dollar"></i> <span class="nav-label">마감(현장)</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('accounts') %>">
+                    <li class="<%= is_active_action('account_new') %>"><%= link_to "일간정산", accounts_account_new_path %></li>
+                    <li class="<%= is_active_action('account_index') %>"><%= link_to "정산내역", accounts_account_index_path %></li>
+                </ul>
+            </li>
             <li class="<%= is_active_controller('menus') %>">
-                <a href=""><i class="fa fa-coffee"></i> <span class="nav-label">메뉴관리</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-coffee"></i> <span class="nav-label">메뉴관리(기획팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('menus') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "메뉴관리", menus_index_path %></li>
                     <li class="<%= is_active_action('new') %>"><%= link_to "메뉴등록", menus_new_path %></li>
@@ -57,40 +60,41 @@
                 </ul>
             </li>
             <li class="<%= is_active_controller('users') %>">
-                <a href=""><i class="fa fa-users"></i> <span class="nav-label">고객관리</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-users"></i> <span class="nav-label">고객관리(마케팅팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('users') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "고객정보", users_index_path %></li>
                     <li class="<%= is_active_action('user_cs') %>"><%= link_to "CS관리", users_user_cs_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('materials') %>">
-                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리(구매팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('materials') %>">
                     <li class="<%= is_active_action('check_index') %>"><%= link_to "재고확인", materials_check_index_path %></li>
                     <li class="<%= is_active_action('check') %>"><%= link_to "재고체크", materials_check_path %></li>
                     <li class="<%= is_active_action('index') %>"><%= link_to "재료확인", materials_index_path %></li>
                     <li class="<%= is_active_action('new') %>"><%= link_to "재료등록", materials_new_path %></li>
+                    <li class="<%= is_active_action('request_buy') %>"><%= link_to "구매요청", materials_request_buy_path %></li>
+                </ul>
+            </li>
+            <li class="<%= is_active_controller('employees') %>">
+                <a href=""><i class="fa fa-user-plus"></i> <span class="nav-label">지기관리(인사팀)</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('employees') %>">
+                    <li class="<%= is_active_action('duty') %>"><%= link_to "연도별 지기현황", employees_duty_path %></li>
+                    <li class="<%= is_active_action('index') %>"><%= link_to "지기현황", employees_index_path %></li>
+                    <li class="<%= is_active_action('employee_new') %>"><%= link_to "지기등록", employees_employee_new_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('accounts') %>">
-                <a href=""><i class="fa fa-dollar"></i> <span class="nav-label">회계관리</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse <%= is_active_controller('accounts') %>">
-                    <li class="<%= is_active_action('account_new') %>"><%= link_to "일간정산", accounts_account_new_path %></li>
-                    <li class="<%= is_active_action('account_index') %>"><%= link_to "정산내역", accounts_account_index_path %></li>
+                <a href=""><i class="fa fa-money"></i> <span class="nav-label">회계관리(회계팀)</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('costs') %>">
+                    <li class="<%= is_active_action('enroll') %>"><%= link_to "지출등록", costs_enroll_path %></li>
+                    <li class="<%= is_active_action('index') %>"><%= link_to "지출현황", costs_index_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('files') %>">
                 <a href=""><i class="fa fa-folder-open"></i> <span class="nav-label">늘품자료</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('files') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "전체보기", files_index_path %></li>
-                </ul>
-            </li>
-            <li class="<%= is_active_controller('employees') %>">
-                <a href=""><i class="fa fa-user-plus"></i> <span class="nav-label">지기관리</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse <%= is_active_controller('employees') %>">
-                    <li class="<%= is_active_action('duty') %>"><%= link_to "연도별 지기현황", employees_duty_path %></li>
-                    <li class="<%= is_active_action('index') %>"><%= link_to "지기현황", employees_index_path %></li>
-                    <li class="<%= is_active_action('employee_new') %>"><%= link_to "지기등록", employees_employee_new_path %></li>
                 </ul>
             </li>
         </ul>

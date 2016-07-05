@@ -10,7 +10,12 @@ class MenusController < ApplicationController
 
 	def delete
 		@menu = Menu.find(params[:id])
-		@menu.destroy
+		if @menu.display
+			@menu.display = false
+		else 
+			@menu.display = true
+		end
+		@menu.save
 
 		redirect_to menus_index_path
 	end
@@ -54,32 +59,14 @@ class MenusController < ApplicationController
 		recipe_unit_arr2  = params[:material_unit2]
 
 		if Recipe.where('menu_id=?',params[:menu]).take.nil?
-			recipe_id_arr.each do |material|
-				recipe = Recipe.new
-				recipe.menu_id        = params[:menu].to_i
-				recipe.material_id    = material
-				recipe.material_unit  = recipe_unit_arr[recipe_id_arr.index(material)]
-				recipe.save
-			end
-			recipe_id_arr2.each do |material|
-				recipe = Recipe.new
-				recipe.menu_id        = params[:menu].to_i
-				recipe.material_id    = material
-				recipe.material_unit  = recipe_unit_arr2[recipe_id_arr2.index(material)]
-				recipe.save
+			# 레시피 등록
+			Recipe.make_recipe params[:menu], recipe_id_arr, recipe_unit_arr
+			unless recipe_id_arr2.nil?
+				Recipe.make_recipe params[:menu], recipe_id_arr2, recipe_unit_arr2
 			end
 
 			# 메뉴 단가 입력
-			menu = Menu.find(params[:menu].to_i)
-			menu_price = menu.unit_price.to_f
-			Recipe.where('menu_id = ?',menu.id).each do |recipe|
-				m = Material.find(recipe.material_id)
-				unless recipe.material_unit == nil
-					menu_price += ((m.material_price / m.material_unit) / m.material_volume.to_f)*recipe.material_unit.to_f
-				end
-			end
-			menu.unit_price = menu_price
-			menu.save
+			Menu.calculate_unit_price params[:menu]
 		end
 
 		redirect_to '/menus/index'
@@ -103,33 +90,17 @@ class MenusController < ApplicationController
 		recipe_unit_arr   = params[:material_unit]
 		recipe_id_arr2    = params[:material_num2]
 		recipe_unit_arr2  = params[:material_unit2]
-		recipes = Recipe.where('menu_id=?', params[:id])
-		materials = Material.all
-
-		recipe_id_arr.each do |material|
-			recipe = recipes.where('material_id=?', material).take
-			recipe.material_unit  = recipe_unit_arr[recipe_id_arr.index(material)]
-			recipe.save
-		end
-		recipe_id_arr2.each do |material|
-			recipe = recipes.where('material_id=?', material).take
-			recipe.material_unit  = recipe_unit_arr2[recipe_id_arr2.index(material)]
-			recipe.save
+		menu_id = params[:id]
+		# 레시피 업데이트
+		Recipe.update_recipe menu_id, recipe_id_arr, recipe_unit_arr
+		unless recipe_id_arr2.nil?
+			Recipe.update_recipe menu_id, recipe_id_arr2, recipe_unit_arr2
 		end
 
 		# 메뉴 단가 입력
-		menu = Menu.find(params[:id])
-		menu_price = 0
-		recipes.each do |recipe|
-			m = materials.find(recipe.material_id)
-			unless recipe.material_unit == nil
-				menu_price += ((m.material_price / m.material_unit) / m.material_volume.to_f)*recipe.material_unit.to_f
-			end
-		end
-		menu.unit_price = menu_price
-		menu.save
+		Menu.calculate_unit_price menu_id
 
-		redirect_to "/menus/recipe_index/#{menu.id}"
+		redirect_to "/menus/recipe_index/#{menu_id}"
 	end
 
 end

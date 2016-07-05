@@ -97,6 +97,18 @@
                                 <input style="text-align: right;" type="number" class="form-control" placeholder="0" id="five-hundred">
                             </div>    
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">100 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" placeholder="0" id="one-hundred">
+                            </div>    
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">50 원 X </label>
+                            <div class="col-sm-6">
+                                <input style="text-align: right;" type="number" class="form-control" placeholder="0" id="fifty">
+                            </div>    
+                        </div>
                         <hr>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" style="font-size:18px; color:#1ab394;">잔고</label>
@@ -151,13 +163,15 @@ $(function() {
         five_hundred = 0,
         ten_thousand = 0,
         fifty_thousand = 0,
+        one_hundred = 0,
+        fifty = 0,
         cash_loss = 0,
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand,
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty,
         cash_money = 0;
 
     $("#fifty-thousand").change(function(){
         fifty_thousand = parseInt($(this).val()) * 50000;
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
         $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
@@ -165,7 +179,7 @@ $(function() {
     });
     $("#ten-thousand").change(function(){
         ten_thousand = parseInt($(this).val()) * 10000;
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
         $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
@@ -173,7 +187,7 @@ $(function() {
     });
     $("#five-thousand").change(function(){
         five_thousand = parseInt($(this).val()) * 5000;
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
         $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
@@ -181,7 +195,7 @@ $(function() {
     });
     $("#one-thousand").change(function(){
         one_thousand = parseInt($(this).val()) * 1000;
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
         $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
@@ -189,7 +203,25 @@ $(function() {
     });
     $("#five-hundred").change(function(){
         five_hundred = parseInt($(this).val()) * 500;
-        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+
+    $("#one-hundred").change(function(){
+        five_hundred = parseInt($(this).val()) * 100;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
+        $(".total-money").text(numberWithCommas(total_money)+" 원");
+        $("#cash-money").val(total_money-cash_money);
+        $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");
+        $("#cash-loss").val(<%= @saving %> - total_money);
+    });
+
+    $("#fifty").change(function(){
+        five_hundred = parseInt($(this).val()) * 50;
+        total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
         $(".cash-money").text(numberWithCommas(total_money-cash_money)+" 원");

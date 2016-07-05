@@ -1,0 +1,152 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+	<div class="col-md-10">
+	 	<div class="ibox">
+	    <div class="ibox-title">
+        <h5><%= @semester.year %> - <%= @semester.semester %> 학기 조직도</h5>
+	    </div>
+	    <div class="ibox-content text-center team-panel" style="height:700px">
+	    	<div class="row">
+	    		<% unless @president.nil? %>
+		      	<div class="col-md-6">
+		      		<% president = @employees.find(@president.employee_id) %>
+		          <div class="m-b-sm">
+		              <img alt="image" class="img-circle" src="<%= president.employee_image.big_thumb.url %>" style="width:120px">
+		          </div>
+							<h3>늘품 사장</h3>
+								<h2 class="font-bold"><%= president.student_number[2,2] %>. <%= president.employee_name %></h2>
+		        </div>
+	        <% end %>
+	        <% unless @vice_president.nil? %>
+		        <div class="col-md-6">
+		        	<% vice_president = @employees.find(@vice_president.employee_id) %>
+		          <div class="m-b-sm">
+		               <img alt="image" class="img-circle" src="<%= vice_president.employee_image.big_thumb.url %>" style="width:120px">
+		          </div>
+		          <h3>늘품 부사장</h3>
+								<h2 class="font-bold"><%= vice_president.student_number[2,2] %>. <%= vice_president.employee_name %></h2>
+		        </div>
+	        <% end %>
+	      </div>
+	      <hr>
+	      <div class="row" style="margin-top: 40px;">
+	      	<!-- 팀장반복 -->
+	      	<% unless @team_leaders.nil? %>
+	      		<% @team_leaders.each do |team_leader| %>
+	      			<% leader = @employees.find(team_leader.employee_id) %>
+			        <div class="col-md-2">
+			          <div class="m-b-sm">
+			               <img alt="image" class="img-circle" src="<%= leader.employee_image.thumb.url %>" style="width:96px">
+			          </div>
+								<h5><%= team_leader.team %> 팀장</h5>
+								<h3><%= leader.student_number[2,2] %>. <%= leader.employee_name %></h3>
+			        </div>
+			      <% end %>
+	        <% end %>
+	        <!-- 팀장반복 끝 -->
+	      </div>
+	      <div class="row" style="margin-top: 10px;">
+	      	<% @team_elements.each do |element| %>
+		        <div class="col-md-2" style="padding-left: 5px; padding-right: 5px;">
+		        	<div class="border-all">	
+			        	<div style="background-color: rgb(26, 179, 148); color:white; padding-top: 1px; padding-bottom: 1px;" >
+			        		<h4 style="margin-bottom: 5px;"><%= element  %></h4>
+			        	</div>
+			        	<!-- 팀원반복 -->
+			        	<% unless @team_partners.nil? %>
+			        		<% @team_partners.where("team = ?", element).each do |team_partner| %>
+			        			<% partner = @employees.find(team_partner.employee_id) %>
+					        	<div class="chat-element" style="margin-left: 7px;">
+				              <div class="pull-left">
+				                  <img alt="image" class="img-circle" src="<%= partner.employee_image.small_thumb.url %>">
+				              </div>
+					        		<div class="media-body text-left">
+					              <strong><%= team_partner.team %>원</strong>
+					              <p class="m-b-xs">
+					                  <%= partner.student_number[2,2] %>. <%= partner.employee_name %>
+					              </p>
+					            </div>
+					          </div>
+				          <% end %>
+			          <% end %>
+			          <!-- 팀원반복 끝 -->
+			        </div>
+		        </div>
+	        <% end %>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<div class="col-md-2" style="padding-left: 0px;">
+		<div class="ibox">
+			<div class="ibox-title">
+				<h5>조직원 추가</h5>
+			</div>
+			<div class="ibox-content">
+				<form action="/employees/team_create" method="GET">
+					<h4>지기선택</h4>
+					<input type="text" name="semester_id" value="<%= @semester_id %>" style="display:none">
+					<select class="employee_lists form-control" name="employee" required="">
+	          <option disabled selected>지기선택</option>
+	          <% @employees.each do |employee| %>
+	          	<option value="<%= employee.id %>">(<%= employee.employee_phone.last(4) %>) <%= employee.employee_name %></option>
+	          <% end %>
+	        </select>
+	        <hr>
+	        <h4>직책 선택</h4>
+					<select class="form-control job" name="job" required="">
+	          <option disabled selected>직책 선택</option>
+	          <option>사장</option>
+	          <option>부사장</option>
+	          <option>팀장</option>
+	          <option>팀원</option>
+	        </select>
+	        <hr>
+	        <h4>팀 선택</h4>
+					<select class="form-control team" name="team" required="">
+	          <option disabled selected>팀 선택</option>
+	          <% @team_elements.each do |element| %>
+		          <option><%= element %></option>
+	          <% end %>
+	        </select>
+	        <hr>	
+	        <button type="submit" class="btn btn-primary btn-block">확인</button>	
+	      </form>
+	      <hr>
+	      <small>조직도 수정</small>
+	      <ul class="todo-list m-t small-list">
+	        <!-- 반복 -->
+	        <% unless @teams.nil? %>
+		        <% @teams.each do |team| %>
+		          <li>
+		            <span class="m-l-xs"><%= Employee.find(team.employee_id).employee_name %></span>
+		            <a href="/employees/delete/<%= team.employee_id %>"><i class="fa fa-times" style="float: right"></i> </a>
+		          </li>
+	          <% end %>
+          <% end %>
+          <!-- 반복 끝 -->
+        </ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+$(function() {
+	$(".employee_lists").select2();
+	$(".job").change(function(){
+		var job = $(this).val();
+		if (job == "사장" || job == "부사장") {
+			$(".team").attr("disabled","true");
+		} else {
+			$(".team").removeAttr("disabled");
+		}
+	});
+
+});
+
+</script>
+
+<% end %>

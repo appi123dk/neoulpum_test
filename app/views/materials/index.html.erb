@@ -41,8 +41,9 @@
                         <th>구매갯수</th>
                         <th>구매시점</th>
                         <th>재료가격</th>
+                        <th>재료단가</th>
                         <th>배송일</th>
-                        <th>수정/삭제</th>
+                        <th>수정</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -56,11 +57,11 @@
                             <td class="center"><%= number_with_delimiter( material.material_unit, delimiter: ',') %></td>
                             <td class="center"><%= material.material_limit %></td>
                             <td class="center"><%= number_with_delimiter( material.material_price, delimiter: ',') %> 원</td>
+                            <td class="center"><%= material.material_price/(material.material_volume * material.material_unit) %> 원</td>
                             <td class="center"><%= material.material_shipping %> 일</td>
                             <td class="center">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
-                                <%= link_to 'Edit', "edit/#{material.id}", class: "btn btn-primary btn-xs" %>
-                                <button id="btn_delete" data-menu= "<%= material.id %>" class="btn btn-danger btn-xs delete_modal">Delete</button>
+                                <%= link_to 'Edit', "edit/#{material.id}", class: "btn btn-primary btn-xs btn-block" %>
                                 <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
                                 <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
                                 

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-
+gem "mini_magick"
 gem 'carrierwave'
 gem 'pg', group: :production
 gem 'rails_12factor', group: :production

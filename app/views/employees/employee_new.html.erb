@@ -9,7 +9,7 @@
             <p>
                 신입지기를 등록해주세요
             </p>
-            <form class="m-t form-horizontal" role="form" action="/employees/employee_create" method="GET">
+            <form class="m-t form-horizontal" role="form" action="/employees/employee_create" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label class="col-md-3 control-label">학번 : </label>
                     <div class="col-md-9">
@@ -51,6 +51,7 @@
                     <div class="col-md-9">
                         <input type="file" class="form-control" name="employee_image">
                     </div>
+                    <small>이미지크기 120 x 120px 준수!!</small>
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
             </form>
