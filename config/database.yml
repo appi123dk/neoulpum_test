@@ -27,8 +27,12 @@ test:
   timeout: 5000
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  adapter: mysql2   #사용할 database
+  database: neulpum  # 실제 mysql에 생성되는 database 이름
+  username: root    # mysql에 접속할 id와 password
+  password: dkemf33#
+  encoding: utf8
+  collation: utf8_general_ci
   # database: db/production.sqlite3
   pool: 5
   timeout: 5000
