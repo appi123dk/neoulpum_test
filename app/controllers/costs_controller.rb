@@ -1,4 +1,5 @@
 class CostsController < ApplicationController
+	before_action :require_user
 	def enroll
 		@requests = Cost.where('buy_pament = ?', false)
 	end
