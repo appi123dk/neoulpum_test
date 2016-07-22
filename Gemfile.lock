@@ -68,6 +68,7 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     json (1.8.3)
+    libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -83,7 +84,6 @@ GEM
     mysql2 (0.3.20)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
-    pg (0.18.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -106,11 +106,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (4.2.3)
       actionpack (= 4.2.3)
       activesupport (= 4.2.3)
@@ -119,6 +114,7 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    ref (2.0.0)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -139,6 +135,9 @@ GEM
     sqlite3 (1.3.11)
     switchery-rails (0.8.1)
       railties (~> 4)
+    therubyracer (0.12.2)
+      libv8 (~> 3.16.14.0)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
@@ -161,13 +160,12 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   mini_magick
   mysql2 (~> 0.3.18)
-  pg
   rails (= 4.2.3)
-  rails_12factor
   sass-rails (~> 5.0.4)
   sdoc
   sqlite3
   switchery-rails
+  therubyracer
   turbolinks
   uglifier (>= 1.3.0)
   will_paginate (~> 3.1.0)
