@@ -33,7 +33,7 @@ production:
   password: dkemf33#
   encoding: utf8
   collation: utf8_general_ci
-  socket: /tmp/mysql.sock
+  # socket: /tmp/mysql.sock
   # database: db/production.sqlite3
   pool: 5
   timeout: 5000
