@@ -33,10 +33,13 @@
                     <thead>
                     <tr>
                         <th data-toggle="true">재료명</th>
-                        <% 6.downto(0) do |n| %>
-                            <th><%= (Date.today-n).to_formatted_s %></th>
-                        <% end %>
                         <th>구매시점</th>
+                        <% 0.upto(6) do |n| %>
+                            <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
+                            <% else %>  
+                                <th><%= (Date.today-n).to_formatted_s %></th>
+                            <% end %>  
+                        <% end %>
                         <th data-hide="all">거래처</th>
                         <th data-hide="all">연락처</th>
                         <th data-hide="all">구매갯수</th>
@@ -49,15 +52,18 @@
                     <% @materials.each do |material| %>
                         <tr>
                             <td><%= material.material_name %></td>
-                            <% 6.downto(0) do |n| %>
-                                <% data = Storage.where('storage_date = ? AND material_id = ?', (Date.today-n).to_formatted_s, material.id).take %>
-                                <% unless data.nil? %>
-                                    <td><%= data.storage_unit %></td>
+                            <td><%= material.material_limit %></td>
+                            <% 0.upto(6) do |n| %>
+                                <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
                                 <% else %>
-                                    <td> 0 </td>
+                                    <% data = Storage.where('storage_date = ? AND material_id = ?', (Date.today-n).to_formatted_s, material.id).take %>
+                                    <% unless data.nil? %>
+                                        <td><%= data.storage_unit %></td>
+                                    <% else %>
+                                        <td> 0 </td>
+                                    <% end %>
                                 <% end %>
                             <% end %>
-                            <td><%= material.material_limit %></td>
                             <td><%= material.material_buyer %></td>
                             <td><%= material.material_url %></td>
                             <td><%= material.material_unit %> 개</td>
@@ -90,25 +96,18 @@
 $(function() {
 
     $('.footable').footable();
-    $('.footable2').footable();
 
-
-});
-
-$(function() {
- $('#data_1 .input-group.date').datepicker({
+    $('#data_1 .input-group.date').datepicker({
         todayBtn: "linked",
         keyboardNavigation: false,
         forceParse: false,
         calendarWeeks: true,
         autoclose: true
     });
-});
 
-$(function(){
     $('tbody tr').each(function() {
-        var store_unit = parseInt($(this).find("td").eq(7).html());
-        var limit = parseInt($(this).find("td").eq(8).html());
+        var store_unit = parseInt($(this).find("td").eq(2).html());
+        var limit = parseInt($(this).find("td").eq(3).html());
         if (store_unit <= limit) {
             $(this).css('background-color', "rgba(255,0,0,0.2)")
         }

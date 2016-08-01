@@ -8,7 +8,7 @@
 
 
 # 관리자 아이디 시드데이터
-User.create(user_email: 'admin@neoulpum.com', user_name: '늘품지기', password: 'dkemf123', admin: true)
+User.create(user_email: 'admin@neoulpum.com', user_name: '늘품지기', user_number: '0', password: 'dkemf123', admin: true)
 
 
 # 카테고리 시드데이터

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 		else 
 			session[:user_id] = user.id
 			count = OrdersUser.where('user_id = ?', user.id).count
-			user.user_rate = count/10
+			user.user_rate = count/15
 			user.save
 			redirect_to '/'
 		end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 				render :json => @f_user
 			end
 			@grade = Hash.new
-			@grade = { "0": "일반", '1': '브론즈', '2': '실버', '3': '골드', '4': 'VIP', '5': 'VVIP'}
+			@grade = { "0": "일반", '1': '골드', '2': 'VIP', '3': 'VVIP'}
 			@jobs = Hash.new
 			@jobs = {'1': '학생', '2': '교직원', '3': '기'}
 			@colleges = Hash.new
@@ -143,7 +143,7 @@ class UsersController < ApplicationController
 		users = User.all
 		users.each do |user|
 			count = OrdersUser.where('user_id = ?', user.id).count
-			user.user_rate = count/10
+			user.user_rate = count/15
 			user.save
 		end
 		redirect_to '/users/index'

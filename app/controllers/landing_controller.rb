@@ -16,20 +16,16 @@ class LandingController < ApplicationController
 			  @counts[menu] += 1
 			end
 			@user_level = '일반'
-			if @user.user_rate >= 1
-				@user_level = '브론즈'
-			elsif @user.user_rate >= 2
-				@user_level = '실버'
-			elsif @user.user_rate >= 3
+			if @user.user_rate == 1
 				@user_level = '골드'
-			elsif @user.user_rate >= 4
+			elsif @user.user_rate == 2
 				@user_level = 'VIP'
-			elsif @user.user_rate >= 5
+			elsif @user.user_rate >= 3
 				@user_level = 'VVIP'
 			end
 
-
   	end
+  	@employees = Employee.last(24)
     render :layout => "empty"
   end
 

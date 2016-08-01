@@ -52,11 +52,21 @@
                 </ul>
             </li>
             <li class="<%= is_active_controller('menus') %>">
-                <a href=""><i class="fa fa-coffee"></i> <span class="nav-label">메뉴관리(기획팀)</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-coffee"></i> <span class="nav-label">메뉴관리(구매팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('menus') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "메뉴관리", menus_index_path %></li>
                     <li class="<%= is_active_action('new') %>"><%= link_to "메뉴등록", menus_new_path %></li>
                     <li class="<%= is_active_action('recipe_new') %>"><%= link_to "레시피등록", menus_recipe_new_path %></li>
+                </ul>
+            </li>
+            <li class="<%= is_active_controller('materials') %>">
+                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리(구매팀)</span> <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse <%= is_active_controller('materials') %>">
+                    <li class="<%= is_active_action('request_buy') %>"><%= link_to "구매요청", materials_request_buy_path %></li>
+                    <li class="<%= is_active_action('check_index') %>"><%= link_to "재고확인", materials_check_index_path %></li>
+                    <li class="<%= is_active_action('check') %>"><%= link_to "재고체크", materials_check_path %></li>
+                    <li class="<%= is_active_action('index') %>"><%= link_to "재료확인", materials_index_path %></li>
+                    <li class="<%= is_active_action('new') %>"><%= link_to "재료등록", materials_new_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('users') %>">
@@ -64,16 +74,6 @@
                 <ul class="nav nav-second-level collapse <%= is_active_controller('users') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "고객정보", users_index_path %></li>
                     <li class="<%= is_active_action('user_cs') %>"><%= link_to "CS관리", users_user_cs_path %></li>
-                </ul>
-            </li>
-            <li class="<%= is_active_controller('materials') %>">
-                <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리(구매팀)</span> <span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level collapse <%= is_active_controller('materials') %>">
-                    <li class="<%= is_active_action('check_index') %>"><%= link_to "재고확인", materials_check_index_path %></li>
-                    <li class="<%= is_active_action('check') %>"><%= link_to "재고체크", materials_check_path %></li>
-                    <li class="<%= is_active_action('index') %>"><%= link_to "재료확인", materials_index_path %></li>
-                    <li class="<%= is_active_action('new') %>"><%= link_to "재료등록", materials_new_path %></li>
-                    <li class="<%= is_active_action('request_buy') %>"><%= link_to "구매요청", materials_request_buy_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('employees') %>">
