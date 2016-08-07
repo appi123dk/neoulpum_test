@@ -87,6 +87,7 @@ Myapp::Application.routes.draw do
   get "menus/delete/:id", to: 'menus#delete'
   post "menus/update/:id", to: 'menus#update'
   post "menus/create"
+  get "menus/engineering"
 
     #레시피관련
   get "menus/recipe_new"
