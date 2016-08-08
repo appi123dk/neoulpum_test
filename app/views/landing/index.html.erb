@@ -279,8 +279,13 @@
         </div>
         <div class="row">
             <% @employees.each do |employee| %>
-                <div class="col-lg-2 col-xs-6 wow fadeInLeft" style="margin-top: 20px; padding-left: 50px;">
-                    <img src="<%= employee.image_url %>" class="img-responsive img-circle" alt="">
+                <div class="col-lg-2 col-xs-6 wow fadeInLeft" style="margin-top: 20px;">
+                    <div style="text-align:center">
+                        <img src="<%= employee.image_url %>" class="img-responsive img-circle" style="display:initial; border:3px solid rgba(154,179,26,0.43)" alt="">
+                    </div>
+                    <div class="text-center" style="margin-top: 5px;">
+                        <h4><%= employee.employee_name %></h4>
+                    </div>
                 </div>  
             <% end %>
         </div>

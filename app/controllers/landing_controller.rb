@@ -25,7 +25,7 @@ class LandingController < ApplicationController
 			end
 
   	end
-  	@employees = Employee.last(24)
+  	@employees = Employee.last(24).reverse
     render :layout => "empty"
   end
 
