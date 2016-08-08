@@ -10,7 +10,7 @@
 		      	<div class="col-md-6">
 		      		<% president = @employees.find(@president.employee_id) %>
 		          <div class="m-b-sm">
-		              <img alt="image" class="img-circle" src="<%= president.employee_image.big_thumb.url %>" style="width:120px">
+		              <img alt="image" class="img-circle" src="<%= president.image_url %>" style="width:120px">
 		          </div>
 							<h3>늘품 사장</h3>
 								<h2 class="font-bold"><%= president.student_number[2,2] %>. <%= president.employee_name %></h2>
@@ -20,7 +20,7 @@
 		        <div class="col-md-6">
 		        	<% vice_president = @employees.find(@vice_president.employee_id) %>
 		          <div class="m-b-sm">
-		               <img alt="image" class="img-circle" src="<%= vice_president.employee_image.big_thumb.url %>" style="width:120px">
+		               <img alt="image" class="img-circle" src="<%= vice_president.image_url %>" style="width:120px">
 		          </div>
 		          <h3>늘품 부사장</h3>
 								<h2 class="font-bold"><%= vice_president.student_number[2,2] %>. <%= vice_president.employee_name %></h2>
@@ -35,7 +35,7 @@
 	      			<% leader = @employees.find(team_leader.employee_id) %>
 			        <div class="col-md-2">
 			          <div class="m-b-sm">
-			               <img alt="image" class="img-circle" src="<%= leader.employee_image.thumb.url %>" style="width:96px">
+			               <img alt="image" class="img-circle" src="<%= leader.image_url %>" style="width:96px">
 			          </div>
 								<h5><%= team_leader.team %> 팀장</h5>
 								<h3><%= leader.student_number[2,2] %>. <%= leader.employee_name %></h3>
@@ -57,7 +57,7 @@
 			        			<% partner = @employees.find(team_partner.employee_id) %>
 					        	<div class="chat-element" style="margin-left: 7px;">
 				              <div class="pull-left">
-				                  <img alt="image" class="img-circle" src="<%= partner.employee_image.small_thumb.url %>">
+				                  <img alt="image" class="img-circle" src="<%= partner.image_url %>">
 				              </div>
 					        		<div class="media-body text-left">
 					              <strong><%= team_partner.team %>원</strong>

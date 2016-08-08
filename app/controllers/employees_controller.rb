@@ -21,12 +21,29 @@ class EmployeesController < ApplicationController
  		employee.employee_birth  = params[:employee_birth]
   	employee.cardinal_number = params[:cardinal_number]
   	employee.employee_image = params[:employee_image]
+  	employee.image_url = params[:image_url]
   	employee.save
 
   	redirect_to '/employees/employee_new'
 	end
 
 	def employee_edit
+		@employee = Employee.find(params[:id])
+	end
+
+	def employee_update
+		employee = Employee.find(params[:id])
+		employee.student_number  = params[:student_number]
+  	employee.employee_name   = params[:employee_name]
+  	employee.employee_phone  = params[:employee_phone]
+  	employee.employee_email  = params[:employee_email]
+ 		employee.employee_birth  = params[:employee_birth]
+  	employee.cardinal_number = params[:cardinal_number]
+  	# employee.employee_image = params[:employee_image]
+  	employee.image_url = params[:image_url]
+  	employee.save
+
+  	redirect_to '/employees/index'
 		
 	end
 

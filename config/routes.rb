@@ -20,7 +20,9 @@ Myapp::Application.routes.draw do
   get "employees/delete/:id", to: 'employees#delete'
   get "employees/semester_team/:id", to: 'employees#semester_team'
   get "employees/employee_new"
+  get "employees/employee_edit/:id", to: 'employees#employee_edit'
   post "employees/employee_create"
+  get "employees/employee_update/:id", to: 'employees#employee_update'
   get "employees/employee_edit/:id", to:'employees#employee_edit'
 
   #files routes

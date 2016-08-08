@@ -9,47 +9,47 @@
             <p>
                 신입지기를 등록해주세요
             </p>
-            <form class="m-t form-horizontal" role="form" action="/employees/employee_create" enctype="multipart/form-data" method="POST">
+            <form class="m-t form-horizontal" role="form" action="/employees/employee_update/<%= @employee.id %>" enctype="multipart/form-data" method="GET">
                 <div class="form-group">
                     <label class="col-md-2 control-label">학번 : </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="ex : 2015434532" name="student_number" required="">
+                        <input type="text" class="form-control" value="<%= @employee.student_number %>" name="student_number" required="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">이름 : </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" placeholder="이름을 입력해주세요" name="employee_name" required="">
+                        <input type="text" class="form-control" value="<%= @employee.employee_name %>" name="employee_name" required="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">전화번호 : </label>
                     <div class="col-md-10">
-                        <input type="tel" class="form-control" placeholder="01066669999 (-없이 입력)" name="employee_phone" required="">
+                        <input type="tel" class="form-control" value="<%= @employee.employee_phone %>" name="employee_phone" required="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">이메일 : </label>
                     <div class="col-md-10">
-                        <input type="email" class="form-control" placeholder="neulpum@gmail.com" name="employee_email" required="">
+                        <input type="email" class="form-control" value="<%= @employee.employee_email %>" name="employee_email" required="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">생년월일 : </label>
                     <div class="col-md-10">
-                        <input type="date" class="form-control" name="employee_birth" required="">
+                        <input type="date" class="form-control" name="employee_birth" required="" value = "<%= @employee.employee_birth %>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">기수 : </label>
                     <div class="col-md-10">
-                        <input type="number" class="form-control" placeholder="ex : 11기 -> 11" name="cardinal_number" required="">
+                        <input type="number" class="form-control" value="<%= @employee.cardinal_number %>" name="cardinal_number" required="">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">이미지주소 : </label>
                     <div class="col-md-10">
-                        <input type="text" class="form-control" value="" name="image_url" required="">
+                        <input type="text" class="form-control" value="<%= @employee.image_url %>" name="image_url" required="">
                     </div>
                     <small>************** 이미지 등록방법!!! *************</small><br>
                     <small>1. 드롭박스에서 해당 지기의 사진 url을 복사한다</small><br>
