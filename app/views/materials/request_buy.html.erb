@@ -25,7 +25,7 @@
                        <select class="form-control m-b" name="employee">
                             <option disabled selected>선택해주세요</option>
                             <% @employees.each do |employee| %>
-                                <option value="<%= employee.employee_id %>"><%= Employee.find(employee.employee_id).employee_name %></option>
+                                <option value="<%= employee.employee_id %>"><%= employee.employee.employee_name %></option>
                             <% end %>
                         </select>
                     </div>
@@ -81,9 +81,9 @@
                             <div class="col-md-10 col-sm-12 chat" style="padding: 10px">
                                 <div class="media-body">
                                     <small class="pull-right"><span class="text-navy"><%= request.buy_date %></span></small>
-                                    <p class="m-b-xs" style="font-size:15px">구매요청 지기 : <%= Employee.find(request.employee_id).employee_name %> <small> (<%= Employee.find(request.employee_id).employee_phone %>) </small> </p>
+                                    <p class="m-b-xs" style="font-size:15px">구매요청 지기 : <%= request.employee.employee_name %> <small> (<%= request.employee.employee_phone %>) </small> </p>
                                     <p class="m-b-xs" style="font-size:15px">
-                                        구매내역 : <%= Material.find(request.material_id).material_name %>
+                                        구매내역 : <%= request.material.material_name %>
                                     </p>
                                     <p class="m-b-xs text-navy" style="font-size:15px">
                                         요청 가격 : <%= number_with_delimiter(request.buy_price, delimiter: ",") %> 원 

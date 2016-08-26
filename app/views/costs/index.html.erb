@@ -32,22 +32,61 @@
 							    <th>분류</th>
 							    <th>내용</th>
 							    <th>금액</th>
+							    <th>수정</th>
 							</tr>
 						</thead>
 						<tbody>
 								<!-- each문 작성 -->
 							<% @payments.each do |payment| %>	
 								<tr class="gradeC">
-								    <td><%= payment.buy_date %></td>
-								    <td style="text-align: right;"><%= @category[:"#{payment.category}"] %></td>
-								    <td style="text-align: right;"><%= payment.buy_content %></td>
+								    <td style="text-align: center;"><%= payment.buy_date %></td>
+								    <td style="text-align: center;"><%= @category[:"#{payment.category}"] %></td>
+								    <td style="text-align: center;"><%= payment.buy_content %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(payment.price.to_i, dilimiter:',') %> 원</td>
+								    <td style="text-align: center;">
+								    	<button type="button" class="btn btn-xs btn-primary btn-block payment-edit" data-pay=<%= payment.id %>>수정</button>
+								    </td>
 								</tr>
 							<% end %>
 								<!-- 끝 -->
 						</tbody>
 					</table>
 				</div>
+				<div class="ibox-content payment-info">
+					<form class="form-horizontal form-submit" action="" method="GET">
+            <div class="form-group" style="margin-bottom: 0px;">
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">날짜 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                        <input type="date" class="form-control date-form" name="buy_date" required="">
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">구분 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                       <select class="form-control m-b" name="category" class="category-form">
+                            <option disabled selected>선택해주세요</option>
+                            <option value="1">시설구매비</option>
+                            <option value="2">비품구매비</option>
+                            <option value="3">지기지원비</option>
+                        </select>
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">내용 |</label>
+                    <div class="col-lg-4" style="padding-right: 0px;" required="">
+                       <input type="text" name="buy_content" class="form-control content-form" placeholder="구매내역을 자세히 적어주세요" required="">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">가격 |</label>
+                    <div class="col-lg-9" style="padding-right: 0px;">
+                       <input type="number" name="price" class="form-control price-form" placeholder="가격을 입력해주세요" required="">
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-info btn-block" type="submit">수정완료</button>
+                    </div>
+                </div>
+            </div> 
+          </form>
+            <!-- <hr> -->
+        </div>
 			</div>
 		</div>
 	</div>
@@ -72,8 +111,8 @@
 							<% @requests.each do |request| %>	
 								<tr class="gradeC">
 								    <td><%= request.buy_date %></td>
-								    <td style="text-align: right;"><%= Employee.find(request.employee_id).employee_name %></td>
-								    <td style="text-align: right;"><%= Material.find(request.material_id).material_name %></td>
+								    <td style="text-align: right;"><%= request.employee.employee_name %></td>
+								    <td style="text-align: right;"><%= request.material.material_name %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(request.buy_price.to_i, dilimiter:',') %> 원</td>
 								</tr>
 							<% end %>
@@ -133,6 +172,27 @@ $(function() {
             }
         ]
 
+    });
+
+    $('.payment-info').hide();
+    $('.payment-edit').click(function(){
+    	$('.payment-info').hide();
+    	$('.payment-info').show('fast');
+    	// console.log($(this).attr("data-pay"));
+    	$.ajax({
+            data: {
+                payment_num: $(this).attr("data-pay")
+            },
+            url: "/costs/getinfo",
+            success: function(data){
+            	var link = '/costs/edit_payment/' + data.id;
+            	$(".date-form").val(data.buy_date);
+            	$("select").val(data.category);
+            	$(".content-form").val(data.buy_content);
+            	$(".price-form").val(data.price);
+            	$('.form-submit').attr("action", link);
+            }
+      });
     });
 
 });

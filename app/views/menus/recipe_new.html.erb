@@ -24,17 +24,17 @@
             <option>메뉴를 선택해주세요</option>
             <optgroup label="커피">
             <% @menus.where('menu_category_id=?',"001").each do |menu| %>
-                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+                <option value="<%= menu.id %>"><%= menu.menu_degree == 1 ? 'H. ' : 'I. ' %><%= menu.menu_title %></option>
             <% end %>
              </optgroup>
              <optgroup label="차">
             <% @menus.where('menu_category_id=?',"002").each do |menu| %>
-                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+                <option value="<%= menu.id %>"><%= menu.menu_degree == 1 ? 'H. ' : 'I. ' %><%= menu.menu_title %></option>
             <% end %>
              </optgroup>
              <optgroup label="음료">
             <% @menus.where('menu_category_id=?',"003").each do |menu| %>
-                <option value="<%= menu.id %>"><%= menu.menu_title %></option>
+                <option value="<%= menu.id %>"><%= menu.menu_degree == 1 ? 'H. ' : 'I. ' %><%= menu.menu_title %></option>
             <% end %>
              </optgroup>
             </select>
@@ -48,7 +48,7 @@
                     <li>
                         <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit[]"> 개</span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit[]"> <%= material.scale %></span>
                     </li>
                     <% end %>
                 <% end %>    
@@ -64,7 +64,7 @@
                     <li>
                         <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit2[]"> 개</span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" step="0.1" type="number" name="material_unit2[]"> <%= material.scale %></span>
                     </li>
                     <% end %>
                 <% end %> 

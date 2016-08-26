@@ -28,10 +28,10 @@
                             <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '1').each do |menu| %>
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-primary dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title.force_encoding('UTF-8') %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title.force_encoding('UTF-8') %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom: 0px">
                                     </button>
                                 </div>
                             <% end %>
@@ -40,10 +40,10 @@
                             <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '2').each do |menu| %>
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-primary dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
                                     </button>
                                 </div>
                             <% end %>
@@ -55,10 +55,10 @@
                             <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '1').each do |menu| %>
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-warning dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
                                     </button>
                                 </div>
                             <% end %>
@@ -67,10 +67,10 @@
                             <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '2').each do |menu| %>
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-warning dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
                                     </button>
                                 </div>
                             <% end %>
@@ -82,10 +82,10 @@
                             <% @menus.where('menu_category_id = ? AND menu_degree = ?', "003", '1').each do |menu| %>
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><% if menu.menu_degree == '1' %>H<% else %>I<% end %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><% if menu.menu_degree == '1' %>H<% else %>I<% end %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
                                     </button>
                                 </div>
                             <% end %>
@@ -95,9 +95,9 @@
                                 <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
                                 <div class="col-md-3">
                                     <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left"><%= degree %>. <%= menu.menu_title %>(<%= menu.menu_symbol %>)</p>
-                                        <p style="font-size:20px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
-                                        <hr>
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
                                     </button>
                                 </div>
                             <% end %>

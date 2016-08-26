@@ -72,4 +72,15 @@ class OrdersController < ApplicationController
 	def order_open
 		@end_money = Account.where('end_money != ?', 0).last.end_money
 	end
+
+	def order_list
+		@orders = Order.where('updated_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day).all
+	end
+
+	def order_delete
+		order = Order.find(params[:id])
+		order.destroy
+
+		redirect_to '/orders/order_list'
+	end
 end

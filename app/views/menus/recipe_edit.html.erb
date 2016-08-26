@@ -33,7 +33,7 @@
                             <li>
                                 <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
                                 <span class="m-l-xs"><%= material.material_name %></span>
-                                <span style="float:right;"><input style="text-align:right; width:50px" type="number" step="0.1" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit[]"> 개</span>
+                                <span style="float:right;"><input style="text-align:right; width:50px" type="number" step="0.1" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit[]"> <%= material.scale %></span>
                             </li>
                         <% end %>
                     <% end %>
@@ -51,7 +51,7 @@
                     <li>
                         <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px"  step="0.1" type="number" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit2[]"> 개</span>
+                        <span style="float:right;"><input style="text-align:right; width:50px"  step="0.1" type="number" value="<% unless unit.nil? %><% unless unit.material_unit.nil? %><%= unit.material_unit %><% end %><% end %>" name="material_unit2[]"> <%= material.scale %></span>
                     </li>
                     <% end %>
                 <% end %> 

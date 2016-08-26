@@ -18,6 +18,7 @@ class MaterialsController < ApplicationController
 		material.material_limit     = params[:material_limit]
 		material.material_price     = params[:material_price]
 		material.material_shipping  = params[:material_shipping]
+		material.scale = params[:material_scale]
 		material.save
 
 		redirect_to '/materials/index'
@@ -68,6 +69,7 @@ class MaterialsController < ApplicationController
 		material.material_limit     = params[:material_limit]
 		material.material_price     = params[:material_price]
 		material.material_shipping  = params[:material_shipping]
+		material.scale              = params[:material_scale]
 		material.save
 
 		redirect_to '/materials/index'

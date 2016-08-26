@@ -44,4 +44,21 @@ class CostsController < ApplicationController
 
 		redirect_to '/costs/enroll'
 	end
+
+	def getinfo
+		@payment = Payment.find(params[:payment_num])
+		render :json => @payment
+	end
+
+	def edit_payment
+		payment = Payment.find(params[:id])
+		payment.buy_date     = params[:buy_date]
+		payment.category     = params[:category]
+		payment.buy_content  = params[:buy_content]
+		payment.price        = params[:price]
+		payment.save
+
+		redirect_to '/costs/index'
+	end
+
 end

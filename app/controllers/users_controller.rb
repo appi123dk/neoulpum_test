@@ -95,6 +95,15 @@ class UsersController < ApplicationController
 		redirect_to '/'
 	end
 
+	def offline_cs_create
+		comment = Offcomment.new
+		comment.user_name = params[:user_name]
+		comment.user_number = params[:user_number]
+		comment.user_content = params[:user_content]
+		comment.save
+		redirect_to '/users/user_cs'
+	end
+
 	def user_cs
 		if admin_user
 			if params[:is_checked].nil?
@@ -147,6 +156,16 @@ class UsersController < ApplicationController
 			user.save
 		end
 		redirect_to '/users/index'
+	end
+
+	def total_cs
+		@comments = Comment.all
+		@offcomments = Offcomment.all
+	end
+
+	def find_user
+		@user = User.where('user_email = ? AND password = ?', params[:user_email], params[:passward]).take
+		render json: @user
 	end
 
 end

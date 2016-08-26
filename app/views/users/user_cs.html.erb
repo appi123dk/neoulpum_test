@@ -20,6 +20,35 @@
         <div class="col-lg-offset-1 col-lg-10">
             <div class="ibox float-e-margins">
                 <div class="ibox-content" style="padding-bottom: 10px;">
+                    <h3 class="text-navy">오프라인 CS입력</h3> 
+                    <h5>오프라인 창구를 통해 들어온 고객의견 입력, 특이사항은 회의 때 보고</h5>
+                    <form class="form-horizontal" action="/users/offline_cs_create" method="GET">
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="row">
+                                <label class="col-lg-offset-1 col-lg-1 control-label" style="text-align:center;">이름 |</label>
+                                <div class="col-lg-2" style="padding-right: 0px;">
+                                    <input type="text" class="form-control" name="user_name" required="">
+                                </div>
+                                <label class="col-lg-offset-1 col-lg-2 control-label" style="text-align:center;">전화번호 |</label>
+                                <div class="col-lg-3" style="padding-right: 0px;">
+                                    <input type="text" class="form-control" name="user_number" placeholder="- 제외" required="">
+                                </div>
+                                <div class="col-lg-1" style="padding-right: 0px;">
+                                    <button class="btn btn-warning btn-block">등록</button>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <label class="col-lg-offset-1 col-lg-1 control-label" style="text-align:center;">내용 |</label>
+                                <div class="col-lg-8" style="padding-right: 0px;">
+                                    <textarea class="form-control" name="user_content" placeholder="255자 이내로 작성해주세요" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-content" style="padding-bottom: 10px;">
                     <h3 class="text-navy">늘품 CS관리</h3> 
                     <h5>고객들의 CS를 확인하고 문자를 이용해 고객과 소통 후, </br> 특이사항은 회의 때 보고</h5>
                     확인하지 않은 것만 보기 <input type="checkbox" class="js-switch_2"/>

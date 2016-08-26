@@ -11,6 +11,8 @@ Myapp::Application.routes.draw do
   get "costs/index"
   get "costs/request_create"
   get "costs/payment_check/:id", to: 'costs#payment_check'
+  get "costs/getinfo"
+  get "costs/edit_payment/:id", to: 'costs#edit_payment'
 
   #emplyees routes
   get "employees/index"
@@ -45,6 +47,7 @@ Myapp::Application.routes.draw do
   get "orders/order_create"
   get "orders/make_confirm/:id", to:'orders#make_confirm'
   get "orders/order_confirm/:id", to:'orders#order_confirm'
+  get "orders/order_delete/:id", to:'orders#order_delete'
 
   # mateiral routes
     #기본재료
@@ -72,10 +75,12 @@ Myapp::Application.routes.draw do
   get "users/logout"
   get "users/index"
   post "users/create"
-  get "users/find_user"
+  post "users/find_user"
   get "users/money/:id", to: 'users#money'
   get "users/user_cs"
+  get "users/total_cs"
   get "users/cs_create"
+  get "users/offline_cs_create"
   get "users/cs_complete"
   get "users/check_email"
   get "users/check_number"

@@ -32,7 +32,7 @@
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <h3><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
@@ -72,7 +72,7 @@
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
-                                        <div class="col-md-4">
+                                        <div class="col-md-12">
                                             <h3><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
