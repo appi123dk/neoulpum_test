@@ -46,6 +46,7 @@ Myapp::Application.routes.draw do
   get "orders/user_point"
   get "orders/find_user"
   get "orders/order_create"
+  get "orders/order_cancle/:id", to: 'orders#order_cancle'
   get "orders/make_confirm/:id", to:'orders#make_confirm'
   get "orders/order_confirm/:id", to:'orders#order_confirm'
   get "orders/order_delete/:id", to:'orders#order_delete'
