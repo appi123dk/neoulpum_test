@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
 	before_action :require_user
 	def order_index
-		@menus = Menu.where('display = ?',true)
+		@menus = Menu.where('display = ?',true).order("menu_order")
 		@pre_money = Account.where('account_date=?',Date.today()).take
 	end
 
@@ -82,5 +82,13 @@ class OrdersController < ApplicationController
 		order.destroy
 
 		redirect_to '/orders/order_list'
+	end
+
+	def order_cancle
+		order = Order.find(params[:id])
+		order.make_confirm = false
+		order.save
+
+		redirect_to '/orders/order_manage'
 	end
 end

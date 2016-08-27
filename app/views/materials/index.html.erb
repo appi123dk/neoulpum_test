@@ -43,7 +43,7 @@
                         <th>재료가격</th>
                         <th>재료단가</th>
                         <th>배송일</th>
-                        <th>수정</th>
+                        <th>수정/사용여부</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,8 +61,8 @@
                             <td class="center"><%= material.material_shipping %> 일</td>
                             <td class="center">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
-                                <%= link_to 'Edit', "edit/#{material.id}", class: "btn btn-primary btn-xs btn-block" %>
-                                <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
+                                <%= link_to '수정', "edit/#{material.id}", class: "btn btn-primary btn-xs" %>
+                                <button id="btn_delete" data-display="<%= material.display  %>" data-menu= "<%= material.id %>" class="btn btn-danger btn-xs delete_modal">사용중</button>
                                 <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
                                 
                             </td>
@@ -94,14 +94,11 @@ $(function() {
     $('.footable').footable();
     $('.footable2').footable();
 
-
-});
-
-$(function() {
+    // 숨기기 모달띄우기
     $('.delete_modal').click(function () {
         var index = $('.delete_modal').index(this);
         swal({
-            title: "삭제하시겠습니까?",
+            title: "재료이용 상태를 변경하시겠습니까?",
             type: "warning",
             showCancelButton: true,
             cancelButtonText: "취소",
@@ -113,6 +110,15 @@ $(function() {
             location.href='delete/' + n;
             // swal("Deleted!", "Your imaginary file has been deleted.", "success");
         });
+    });
+
+    // 디스플레이 true, false 버튼표시
+    $('.delete_modal').each(function( index, value ) {
+        if (value.getAttribute('data-display') == 'false') {
+            $(value).css({'background-color':'#5f5f5f', 'border-color':'#5f5f5f'});
+            $(value).text('미사용');
+
+         }
     });
 });
 

@@ -5,11 +5,15 @@ class CostsController < ApplicationController
 	end
 
 	def index
-		@payments = Payment.all
+		@payments = Payment.where('category != ?', 0).all
+		@revenues = Payment.where('category = ?', 0).all
 		@category = {
+      '0': '매출외수입',
       '1': '시설구매비',
       '2': '비품구매비',
-      '3': '지기지원비'
+      '3': '지기지원비',
+      '4': '재료구매비',
+      '5': '예비비'
     }
     @requests = Cost.where('buy_pament = ?', true)
 	end
@@ -59,6 +63,28 @@ class CostsController < ApplicationController
 		payment.save
 
 		redirect_to '/costs/index'
+	end
+
+	def balance
+		params[:balance_year].nil? ? @year = Date.today().year() : @year = params[:balance_year]
+		params[:balance_month].nil? ? @month = Date.today().month() : @month = params[:balance_month]
+		params[:balance_money].nil? ? @money = 0 : @money = params[:balance_money]
+
+		@sales_revs = Account.where('extract(year from account_date) = ? AND extract(month from account_date) = ?', @year, @month)
+		@etc_revs = Payment.where('extract(year from buy_date) = ? AND extract(month from buy_date) = ? AND category = ?', 
+																			@year, @month, 0)
+		@material_costs = Cost.where('extract(year from buy_date) = ? AND extract(month from buy_date) = ?', @year, @month)
+		@material2_costs = Payment.where('extract(year from buy_date) = ? AND extract(month from buy_date) = ? AND category != ?', 
+																			@year, @month, 0)
+
+		@category = {
+      '0': '매출외수입',
+      '1': '시설구매비',
+      '2': '비품구매비',
+      '3': '지기지원비',
+      '4': '재료구매비',
+      '5': '예비비'
+    }
 	end
 
 end

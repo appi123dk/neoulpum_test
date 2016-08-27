@@ -31,6 +31,7 @@ class MenusController < ApplicationController
 			menu_symbol: params[:menu_symbol],
 			menu_degree: params[:menu_degree],
 			menu_price: params[:menu_price],
+			menu_order: params[:menu_order],
 			menu_category_id: MenuCategory.where('category_code = ?', params[:menu_category]).take.id
 			)
 		redirect_to menus_index_path
@@ -42,14 +43,15 @@ class MenusController < ApplicationController
 		menu.menu_symbol      = params[:menu_symbol]
 		menu.menu_degree      = params[:menu_degree]
 		menu.menu_price       = params[:menu_price]
+		menu.menu_order       = params[:menu_order]
 		menu.menu_category_id = MenuCategory.where('category_code = ?', params[:menu_category]).take.id
 		menu.save
 		redirect_to menus_index_path
 	end
 
 	def recipe_new
-		@menus = Menu.all
-		@materials = Material.all
+		@menus = Menu.where('display = ?', true).all
+		@materials = Material.where('display = ?', true).all
 	end
 
 	def recipe_create
@@ -82,7 +84,7 @@ class MenusController < ApplicationController
 
 	def recipe_edit
 		@recipes = Recipe.where('menu_id=?',params[:id])
-		@materials = Material.all
+		@materials = Material.where('display = ?', true).all
 	end
 
 	def recipe_update

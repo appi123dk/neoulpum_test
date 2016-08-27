@@ -85,8 +85,9 @@
             <li class="<%= is_active_controller('accounts') %>">
                 <a href=""><i class="fa fa-money"></i> <span class="nav-label">회계관리(회계팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('costs') %>">
-                    <li class="<%= is_active_action('enroll') %>"><%= link_to "지출등록", costs_enroll_path %></li>
+                    <li class="<%= is_active_action('enroll') %>"><%= link_to "지출 및 수입등록", costs_enroll_path %></li>
                     <li class="<%= is_active_action('index') %>"><%= link_to "지출현황", costs_index_path %></li>
+                    <li class="<%= is_active_action('balance') %>"><%= link_to "월별 정산", costs_balance_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('files') %>">

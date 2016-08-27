@@ -38,6 +38,9 @@
                       <input type="radio" name="menu_degree" class="menu_degree" id="ice_menu" value="2"> Ice
                     </label>
                 </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" value="<%= @menu.menu_order %>" name="menu_order" required="">
+                </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
                 <%= link_to '취소', menus_index_path, class: 'btn btn-danger block full-width m-b' %>
             </form>

@@ -25,7 +25,7 @@ class MaterialsController < ApplicationController
 	end
 
 	def check_index
-		@materials = Material.all
+		@materials = Material.where('display = ?', true).all
 	end
 
 	def check_create
@@ -46,7 +46,7 @@ class MaterialsController < ApplicationController
 	end
 
 	def check
-		@materials = Material.all
+		@materials = Material.where('display = ?', true).all
 	end
 
 	def new
@@ -55,7 +55,8 @@ class MaterialsController < ApplicationController
 
 	def delete
 		material = Material.find(params[:id])
-		material.destroy
+		material.display = !material.display
+		material.save
 		redirect_to '/materials/index'
 	end	
 
@@ -78,7 +79,7 @@ class MaterialsController < ApplicationController
 
 	def check_edit
 		storage_date = Date.strptime(params[:date],'%m/%d/%Y')
-		@materials = Material.all
+		@materials = Material.where('display = ?', true).all
 		@storages = Storage.where('storage_date = ?', storage_date)
 	end
 
@@ -117,7 +118,7 @@ class MaterialsController < ApplicationController
 		#이번학기 구하는 로직
 		year = Date.today.year
 		semester = Date.today.month / 6 > 1 ? 1 : 2
-		@materials = Material.all.order("material_name")
+		@materials = Material.where('display = ?', true).all.order("material_name")
 		@employees = Semester.where('year = ? AND semester = ?', year, semester).take.teams
 		@requests = Cost.where('buy_pament = ?', false)
 	end

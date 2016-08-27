@@ -32,7 +32,7 @@
     <% @semesters.each do |semester| %>
         <div class="col-lg-2">
             <button class="btn btn-success dim btn-large-dim btn-menu" onclick="location.href='/employees/semester_team/<%= semester.id %>'" type="button" style="width:100%; font-size:20px">
-                <h2 class="font-bold" style="text-align:center"><%= semester.year %> - <%= semester.semester %> 학기</h2> 
+                <h3 class="font-bold" style="text-align:center"><%= semester.year %> - <%= semester.semester %> 학기</h3> 
             </button>
         </div>
     <% end %>

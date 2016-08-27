@@ -18,6 +18,79 @@
 	</div>
 </div>	
 <div class="wrapper wrapper-content animated fadeInRight">
+    <!-- 매출외 수입 내역 -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>매출외 수입</h5>
+                </div>
+                <div class="ibox-content">      
+                    <table class="table table-striped table-bordered table-hover dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>날짜</th>
+                                <th>분류</th>
+                                <th>내용</th>
+                                <th>금액</th>
+                                <th>수정</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <!-- each문 작성 -->
+                            <% @revenues.each do |revenue| %>   
+                                <tr class="gradeC">
+                                    <td style="text-align: center;"><%= revenue.buy_date %></td>
+                                    <td style="text-align: center;"><%= @category[:"#{revenue.category}"] %></td>
+                                    <td style="text-align: center;"><%= revenue.buy_content %></td>
+                                    <td style="text-align: right;"><%= number_with_delimiter(revenue.price.to_i, dilimiter:',') %> 원</td>
+                                    <td style="text-align: center;">
+                                        <button type="button" class="btn btn-xs btn-primary btn-block payment-edit" data-pay=<%= revenue.id %>>수정</button>
+                                    </td>
+                                </tr>
+                            <% end %>
+                                <!-- 끝 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="ibox-content payment-info">
+                    <form class="form-horizontal form-submit" action="" method="GET">
+            <div class="form-group" style="margin-bottom: 0px;">
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">날짜 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                        <input type="date" class="form-control date-form" name="buy_date" required="">
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">구분 |</label>
+                    <div class="col-lg-2" style="padding-right: 0px;">
+                       <select class="form-control m-b" name="category" class="category-form">
+                            <option disabled selected>선택해주세요</option>
+                            <option value="0">매출외수입</option>
+                        </select>
+                    </div>
+                    <label class="col-lg-1 control-label" style="text-align:center;">내용 |</label>
+                    <div class="col-lg-4" style="padding-right: 0px;" required="">
+                       <input type="text" name="buy_content" class="form-control content-form" placeholder="구매내역을 자세히 적어주세요" required="">
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-lg-1 control-label" style="text-align:center;">가격 |</label>
+                    <div class="col-lg-9" style="padding-right: 0px;">
+                       <input type="number" name="price" class="form-control price-form" placeholder="가격을 입력해주세요" required="">
+                    </div>
+                    <div class="col-lg-2">
+                        <button class="btn btn-info btn-block" type="submit">수정완료</button>
+                    </div>
+                </div>
+            </div> 
+          </form>
+            <!-- <hr> -->
+        </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 늘품 지출내역 -->
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">
@@ -67,6 +140,8 @@
                             <option value="1">시설구매비</option>
                             <option value="2">비품구매비</option>
                             <option value="3">지기지원비</option>
+                            <option value="4">재료구매비</option>
+                            <option value="5">예비비</option>
                         </select>
                     </div>
                     <label class="col-lg-1 control-label" style="text-align:center;">내용 |</label>
@@ -90,6 +165,8 @@
 			</div>
 		</div>
 	</div>
+
+    <!-- 재료구매비 내역 -->
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ibox float-e-margins">

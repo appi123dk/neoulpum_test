@@ -1,3 +1,13 @@
+<style>
+    .btn{
+        font-size:13px;
+    }
+
+    .order-cancle {
+        padding-left: 12px;
+    }
+</style>
+
 <% if @pre_money.nil? || @pre_money.pre_money == 0 %>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
@@ -80,7 +90,10 @@
                                         <% end %>
                                         <% total_made_menu += menu.order_unit %>
                                     <% end %>
-                                    <div class="col-md-12 make-shot-unit" data-shot="<%= shot %>" style="margin-bottom: 10px;">
+                                    <div class="col-xs-3 make-shot-unit" data-shot="<%= shot %>" style="margin-bottom: 10px; padding-right:0px">
+                                        <a href="/orders/order_cancle/<%= order.id %>" class="btn btn-warning btn-lg order-cancle" style="width:100%" type="button">취소</a>
+                                    </div>
+                                    <div class="col-xs-9 make-shot-unit" data-shot="<%= shot %>" style="margin-bottom: 10px;">
                                         <a href="/orders/order_confirm/<%= order.id %>" class="btn btn-primary btn-lg order-success" style="width:100%" type="button"><i class="fa fa-check"></i> 콜링완료</a>
                                     </div>
                                 </div>

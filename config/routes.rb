@@ -12,6 +12,7 @@ Myapp::Application.routes.draw do
   get "costs/request_create"
   get "costs/payment_check/:id", to: 'costs#payment_check'
   get "costs/getinfo"
+  get "costs/balance"
   get "costs/edit_payment/:id", to: 'costs#edit_payment'
 
   #emplyees routes

@@ -33,7 +33,7 @@
                     <li>
                         <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"> 개</span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"></span>
                     </li>
                     <% end %>
                 <% end %>    
@@ -49,7 +49,7 @@
                     <li>
                         <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit2[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"> 개</span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit2[]" value="<% storage =  @storages.where('material_id = ?', material.id).take %><% if storage.nil? %>0<% else %><%= storage.storage_unit %><% end %>"></span>
                     </li>
                     <% end %>
                 <% end %> 
