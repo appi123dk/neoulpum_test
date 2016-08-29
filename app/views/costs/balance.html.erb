@@ -140,14 +140,14 @@
 
 
 $(function() {
-		var balance_money = <%= @money %>
+		var balance_money = 0;
 
     $('.dataTables-example').DataTable({
     		order: [0,'asc'],
         dom: '<"html5buttons"B>lTfgitp',
         paging: false,
         buttons: [
-            { extend: 'copy'},
+            {extend: 'copy'},
             {extend: 'csv'},
             {extend: 'print',
                 customize: function (win){
