@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827145157) do
+ActiveRecord::Schema.define(version: 20160830130134) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",      limit: 4,                default: 0
@@ -104,11 +104,13 @@ ActiveRecord::Schema.define(version: 20160827145157) do
     t.string   "menu_degree",      limit: 255
     t.integer  "menu_price",       limit: 4
     t.integer  "menu_category_id", limit: 4
-    t.datetime "created_at",                                                          null: false
-    t.datetime "updated_at",                                                          null: false
+    t.datetime "created_at",                                                           null: false
+    t.datetime "updated_at",                                                           null: false
     t.decimal  "unit_price",                   precision: 6, scale: 2, default: 0.0
     t.boolean  "display",                                              default: true
     t.integer  "menu_order",       limit: 4,                           default: 999
+    t.integer  "menu_size",        limit: 4,                           default: 1
+    t.boolean  "menu_promo",                                           default: false
   end
 
   create_table "offcomments", force: :cascade do |t|

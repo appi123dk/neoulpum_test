@@ -39,6 +39,19 @@
                     </label>
                 </div>
                 <div class="form-group">
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_size" class="menu_size" id="small_menu" value="1"> Small
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="menu_size" class="menu_size" id="tall_menu" value="2"> Tall
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                      <input type="checkbox" name="menu_promo" class="menu_promo" id="promo_menu" value = "true"> 프로모션 음료 여부
+                    </label>
+                </div>
+                <div class="form-group">
                     <input type="number" class="form-control" value="<%= @menu.menu_order %>" name="menu_order" required="">
                 </div>
                 <button type="submit" class="btn btn-primary block full-width m-b">등록</button>
@@ -57,6 +70,8 @@
 $(function() {
     $(".menu_category:input[value=<%= MenuCategory.find(@menu.menu_category_id).category_code %>]").prop("checked", true);
     $(".menu_degree:input[value=<%= @menu.menu_degree %>]").prop("checked", true);
+    $(".menu_size:input[value=<%= @menu.menu_size %>]").prop("checked", true);
+    $(".menu_promo:input[value=<%= @menu.menu_promo %>]").prop("checked", true);
 });
 
 </script>

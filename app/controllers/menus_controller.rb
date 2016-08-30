@@ -4,8 +4,8 @@ class MenusController < ApplicationController
 	end
 
 	def index
-
-		@menus = Menu.all
+		@tall_menus = Menu.where('menu_size = ?',2)
+		@menus = Menu.where('menu_size = ?', 1)
 	end
 
 	def delete
@@ -32,6 +32,8 @@ class MenusController < ApplicationController
 			menu_degree: params[:menu_degree],
 			menu_price: params[:menu_price],
 			menu_order: params[:menu_order],
+			menu_size: params[:menu_size],
+			menu_promo: params[:menu_promo],
 			menu_category_id: MenuCategory.where('category_code = ?', params[:menu_category]).take.id
 			)
 		redirect_to menus_index_path
@@ -44,6 +46,8 @@ class MenusController < ApplicationController
 		menu.menu_degree      = params[:menu_degree]
 		menu.menu_price       = params[:menu_price]
 		menu.menu_order       = params[:menu_order]
+		menu.menu_size       = params[:menu_size]
+		menu.menu_promo       = params[:menu_promo].nil? ? false : params[:menu_promo]
 		menu.menu_category_id = MenuCategory.where('category_code = ?', params[:menu_category]).take.id
 		menu.save
 		redirect_to menus_index_path

@@ -17,53 +17,47 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
+<!-- Small Menu Management -->
 <div class="row">
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>메뉴정보</h5>
+                <h5>메뉴정보(Small)</h5>
             </div>
             <div class="ibox-content">
-                <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                       placeholder="검색">
-
-                    <table class="footable table table-stripped" data-page-size="10" data-filter=#filter>
+                <table class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
-                    <tr>
-                        <th>메뉴 ID</th>
-                        <th>메뉴이름</th>
-                        <th data-hide="phone,tablet">기호</th>
-                        <th data-hide="phone,tablet">가격</th>
-                        <th data-hide="phone,tablet">종류</th>
-                        <th data-hide="phone,tablet">온도</th>
-                        <th data-hide="phone,tablet">단가</th>
-                        <th data-hide="phone,tablet">레시피</th>
-                        <th data-hide="phone,tablet">수정/숨기기</th>
-                        <th data-hide="phone,tablet">POS 순서</th>
-                    </tr>
+                        <tr>
+                            <th>메뉴 ID</th>
+                            <th>메뉴이름</th>
+                            <th>기호</th>
+                            <th>가격</th>
+                            <th>종류</th>
+                            <th>온도</th>
+                            <th>단가</th>
+                            <th>레시피</th>
+                            <th>수정/숨기기</th>
+                            <th>POS 순서</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <% index = 0 %>
                     <% @menus.each do |menu| %>
                         <% index += 1 %>
-                        <tr>
-                            <td class="center"><%= menu.id %></td>
-                            <td class="center"><%= menu.menu_title %></td>
-                            <td class="center"><%= menu.menu_symbol %></td>
-                            <td class="center"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
-                            <td class="center"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
-                            <td class="center">
-                                <% if menu.menu_degree == '1' %>
-                                    Hot
-                                <% else %>
-                                    Ice
-                                <% end %>
+                        <tr class="gradeC">
+                            <td style="text-align: center;"><%= menu.id %></td>
+                            <td style="text-align: center;"><%= menu.menu_title %></td>
+                            <td style="text-align: center;"><%= menu.menu_symbol %></td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
+                            <td style="text-align: center;"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
+                            <td style="text-align: center;">
+                                <%= menu.menu_degree == '1' ? "Hot" : "Ice" %>
                             </td>
-                            <td class="center"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
-                            <td class="center">
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
+                            <td style="text-align: center;">
                                 <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
                             </td>
-                            <td class="center">
+                            <td style="text-align: center;">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
                                 <%= link_to 'Edit', "edit/#{menu.id}", class: "btn btn-primary btn-xs" %>
                                 <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
@@ -71,17 +65,68 @@
                                 <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
                                 
                             </td>
-                            <td class="center"><%= menu.menu_order %></td>
+                            <td style="text-align: center;"><%= menu.menu_order %></td>
                         </tr>
                     <% end %>
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="9">
-                            <ul class="pagination pull-right"></ul>
-                        </td>
-                    </tr>
-                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tall Menu Management -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>메뉴정보(Tall)</h5>
+            </div>
+            <div class="ibox-content">
+                <table class="table table-striped table-bordered table-hover dataTables-example2">
+                    <thead>
+                        <tr>
+                            <th>메뉴 ID</th>
+                            <th>메뉴이름</th>
+                            <th>기호</th>
+                            <th>가격</th>
+                            <th>종류</th>
+                            <th>온도</th>
+                            <th>단가</th>
+                            <th>레시피</th>
+                            <th>수정/숨기기</th>
+                            <th>POS 순서</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <% index = 0 %>
+                    <% @tall_menus.each do |menu| %>
+                        <% index += 1 %>
+                        <tr class="gradeC">
+                            <td style="text-align: center;"><%= menu.id %></td>
+                            <td style="text-align: center;"><%= menu.menu_title %></td>
+                            <td style="text-align: center;"><%= menu.menu_symbol %></td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
+                            <td style="text-align: center;"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
+                            <td style="text-align: center;">
+                                <%= menu.menu_degree == '1' ? "Hot" : "Ice" %>
+                            </td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
+                            <td style="text-align: center;">
+                                <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
+                            </td>
+                            <td style="text-align: center;">
+                                <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
+                                <%= link_to 'Edit', "edit/#{menu.id}", class: "btn btn-primary btn-xs" %>
+                                <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
+                                <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
+                                <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
+                                
+                            </td>
+                            <td style="text-align: center;"><%= menu.menu_order %></td>
+                        </tr>
+                    <% end %>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -97,8 +142,45 @@
 
 $(function() {
 
-    $('.footable').footable();
-    $('.footable2').footable();
+    $('.dataTables-example').DataTable({
+            order: [0,'desc'],
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ]
+
+    });
+
+    $('.dataTables-example2').DataTable({
+            order: [0,'desc'],
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ]
+
+    });
 
     // 숨기기 모달띄우기
     $('.delete_modal').click(function () {

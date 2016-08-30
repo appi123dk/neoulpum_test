@@ -20,15 +20,19 @@
                 <li class="active"><a data-toggle="tab" href="#coffee">커피</a></li>
                 <li class=""><a data-toggle="tab" href="#tea">차</a></li>
                 <li class=""><a data-toggle="tab" href="#drink">음료</a></li>
+                <li class=""><a data-toggle="tab" href="#t_coffee">커피(T)</a></li>
+                <li class=""><a data-toggle="tab" href="#t_tea">차(T)</a></li>
+                <li class=""><a data-toggle="tab" href="#t_drink">음료(T)</a></li>
+                <li class=""><a data-toggle="tab" href="#promo">프로모션</a></li>
             </ul>
             <div class="tab-content">
                 <div id="coffee" class="tab-pane active">
                     <div class="panel-body">
                         <h3 class="col-md-12">HOT 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '1').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                            <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title.force_encoding('UTF-8') %>" type="button" style="width:100%; font-size:20px">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom: 0px">
@@ -37,10 +41,10 @@
                             <% end %>
                             
                         <h3 class="col-md-12">ICE 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "001", '2').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                            <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
@@ -50,12 +54,12 @@
                     </div>
                 </div>
                 <div id="tea" class="tab-pane">
-                     <div class="panel-body">
+                    <div class="panel-body">
                         <h3 class="col-md-12">HOT 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '1').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                            <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
@@ -64,10 +68,10 @@
                             <% end %>
                             
                         <h3 class="col-md-12">ICE 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "002", '2').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                             <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
@@ -76,14 +80,14 @@
                             <% end %>
                     </div>
                 </div>
-                 <div id="drink" class="tab-pane">
-                     <div class="panel-body">
+                <div id="drink" class="tab-pane">
+                    <div class="panel-body">
                         <h3 class="col-md-12">HOT 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "003", '1').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                            <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
-                                        <p style="text-align:left; font-size:15px"><% if menu.menu_degree == '1' %>H<% else %>I<% end %>. <%= menu.menu_title %></p>
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
                                     </button>
@@ -91,10 +95,118 @@
                             <% end %>
                             
                         <h3 class="col-md-12">ICE 음료</h3>
-                            <% @menus.where('menu_category_id = ? AND menu_degree = ?', "003", '2').each do |menu| %>
-                                <% if menu.menu_degree == '1' %><% degree = 'H' %><% else %><% degree = 'I' %><% end %>
+                            <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
-                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" type="button" style="width:100%; font-size:20px">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="t_coffee" class="tab-pane">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom: 0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="t_tea" class="tab-pane">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                             <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="t_drink" class="tab-pane">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="promo" class="tab-pane">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">HOT 음료</h3>
+                            <% @promo_menus.where('menu_degree = ?', '1').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                            
+                        <h3 class="col-md-12">ICE 음료</h3>
+                            <% @promo_menus.where('menu_degree = ?', '2').each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
@@ -190,6 +302,10 @@ function append_menu(menu_arr){
     var total_price = 0;
     $(".append-menu").children().remove();
     $.grep(menu_arr, function(value){
+        var tall = "";
+        if(value.size == 2) {
+            tall = "(T)";
+        }
         $(".append-menu").append(
             '<div class="form-group">' +
             '<div>' +
@@ -199,7 +315,7 @@ function append_menu(menu_arr){
                     '</button>' +
                 '</div>' +
                 '<input type="number" value="'+ value.id +'" readonly="readonly" style="display:none" name="menu_id[]">' +
-                '<label class="col-lg-6 control-label" style="text-align:left; font-size:15px">'+ value.name +'</label>' +
+                '<label class="col-lg-6 control-label" style="text-align:left; font-size:15px">'+ value.name + tall + '</label>' +
                 '<div class="col-lg-3">' +
                     '<input type="number" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control" readonly="readonly" value="'+ value.unit +'" name="order_unit[]">' +
                 '</div>' +
@@ -240,12 +356,14 @@ $(function(){
         var price = $('.btn-menu')[index].getAttribute('data-price');
         var number = $('.btn-menu')[index].getAttribute('data-menu');
         var name = $('.btn-menu')[index].getAttribute('data-title');
+        var size = $('.btn-menu')[index].getAttribute('data-size');
 
         var id_arr = [];
         var menu = {};
             menu.id = number;
             menu.name = name;
             menu.price = price;
+            menu.size = size;
             menu.unit = 1;
 
         var result = $.grep(menu_array, function(value){
@@ -301,15 +419,28 @@ $(function(){
             success: function(data){
                 $(".user-info hr").remove();
                 $(".user-point").remove();
-                $(".user-info").append(
-                    '<hr>' +
-                    '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
-                        '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
-                        '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
-                        '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.user_money)) + '원'+
-                        '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
-                    '</div>'
-                );
+                if (data.employee != null){
+                    $(".user-info").append(
+                        '<hr>' +
+                        '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                            '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.users.id +'">'+
+                            '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                            '<strong>' + data.users.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.users.user_money)) + '원'+
+                            '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                        '</div>' +
+                        '<div class="alert alert-success" style="padding-right:15px">기존 늘품지기 입니다. ( ' + data.employee.cardinal_number + '기 ' + data.employee.employee_name + ' )</div>'
+                    );    
+                } else {
+                    $(".user-info").append(
+                        '<hr>' +
+                        '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                            '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.users.id +'">'+
+                            '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                            '<strong>' + data.users.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.users.user_money)) + '원'+
+                            '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                        '</div>'
+                    );
+                };        
             }
         });
     });

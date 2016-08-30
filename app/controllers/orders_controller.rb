@@ -1,7 +1,10 @@
 class OrdersController < ApplicationController
 	before_action :require_user
 	def order_index
-		@menus = Menu.where('display = ?',true).order("menu_order")
+		@promo_menus = Menu.where('display = ? AND menu_promo = ?', true, true).order("menu_order")
+		@coffee_menus = Menu.where('display = ? AND menu_category_id = ?',true, 1).order("menu_order")
+		@tea_menus = Menu.where('display = ? AND menu_category_id = ?',true, 2).order("menu_order")
+		@drink_menus = Menu.where('display = ? AND menu_category_id = ?',true, 3).order("menu_order")
 		@pre_money = Account.where('account_date=?',Date.today()).take
 	end
 
@@ -13,8 +16,16 @@ class OrdersController < ApplicationController
 	end
 
 	def find_user
-		@user = User.where('user_number = ?', params[:user_number].to_s).take
-		render :json => @user
+		employee = Employee.where('employee_phone = ?', params[:user_number].to_s).take
+		if employee.nil?
+			@user = User.where('user_number = ?', params[:user_number].to_s).take
+			@employee = employee
+		else
+			@user = User.where('user_number = ?', "0").take
+			@employee = employee
+		end
+
+		render json: {employee: @employee, users: @user }
 	end
 
 	def order_create

@@ -69,6 +69,8 @@
 						<thead>
 							<tr>
 						    <th data-toggle="true">재료명</th>
+						    <th data-toggle="true">온도</th>
+						    <th data-toggle="true">크기</th>
                 <% 0.upto(6) do |n| %>
                     <th><%= (Date.today-n).to_formatted_s %></th>
                 <% end %>
@@ -78,6 +80,8 @@
 							<% @menus.each do |menu| %>
                   <tr>
                     <td><%= menu.menu_title %></td>
+                    <td><%= menu.menu_degree == "1" ? "Hot" : "Ice" %></td>
+                    <td><%= menu.menu_size == 1 ? "Small" : "Tall" %></td>
                     <% 0.upto(6) do |n| %>
                         <% data = Sale.where('date_sales = ? AND menu_id = ?', (Date.today-n).to_formatted_s, menu.id).take %>
                         <% unless data.nil? %>
@@ -126,7 +130,7 @@ $(function() {
     });
 
     $('.dataTables-example2').DataTable({
-    		order: [1,'desc'],
+    		order: [3,'desc'],
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
 

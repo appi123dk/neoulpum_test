@@ -68,7 +68,7 @@
 							<% index = 0 %>
 							<% @hot_menus.each do |menu| %>	
 								<tr class="gradeC">
-								    <td style="text-align: center;"><%= menu.menu_title %></td>
+								    <td style="text-align: center;"><%= menu.menu_title %> <%= menu.menu_size == 1 ? "" : "(Tall)" %></td>
 								    <td style="text-align: center;"><%= @hot_sales[index] %></td>
 								    <td style="text-align: center;"><%= @hot_menumix[index] %></td>
 								    <td style="text-align: center;"><%= @hot_margin[index] %></td>
@@ -123,7 +123,7 @@
 							<% index = 0 %>
 							<% @ice_menus.each do |menu| %>	
 								<tr class="gradeC">
-								    <td style="text-align: center;"><%= menu.menu_title %></td>
+								    <td style="text-align: center;"><%= menu.menu_title %> <%= menu.menu_size == 1 ? "" : "(Tall)" %></td>
 								    <td style="text-align: center;"><%= @ice_sales[index] %></td>
 								    <td style="text-align: center;"><%= @ice_menumix[index] %></td>
 								    <td style="text-align: center;"><%= @ice_margin[index] %></td>
