@@ -63,6 +63,10 @@ GEM
       railties (>= 3.2, < 5.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
+    hirb (0.7.3)
+    hirb-unicode (0.0.5)
+      hirb (~> 0.5)
+      unicode-display_width (~> 0.1.1)
     i18n (0.7.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -147,6 +151,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.0.0)
       execjs (>= 0.3.0, < 3)
+    unicode-display_width (0.1.1)
     will_paginate (3.1.0)
 
 PLATFORMS
@@ -157,6 +162,8 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 4.0.0)
   font-awesome-rails (= 4.3.0.0)
+  hirb
+  hirb-unicode
   jbuilder (~> 1.2)
   mini_magick
   mysql2 (~> 0.3.18)

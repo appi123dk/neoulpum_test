@@ -117,7 +117,7 @@
 								    <td style="text-align: center;"><%= payment.buy_content %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(payment.price.to_i, dilimiter:',') %> 원</td>
 								    <td style="text-align: center;">
-								    	<button type="button" class="btn btn-xs btn-primary btn-block payment-edit" data-pay=<%= payment.id %>>수정</button>
+								    	<button type="button" class="btn btn-xs btn-primary btn-block payment-edit2" data-pay=<%= payment.id %>>수정</button>
 								    </td>
 								</tr>
 							<% end %>
@@ -125,7 +125,7 @@
 						</tbody>
 					</table>
 				</div>
-				<div class="ibox-content payment-info">
+				<div class="ibox-content payment-info2">
 					<form class="form-horizontal form-submit" action="" method="GET">
             <div class="form-group" style="margin-bottom: 0px;">
                 <div class="row">
@@ -213,7 +213,7 @@
 $(function() {
 
     $('.dataTables-example').DataTable({
-    		order: [0,'desc'],
+    	order: [0,'desc'],
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             { extend: 'copy'},
@@ -229,11 +229,10 @@ $(function() {
                 }
             }
         ]
-
     });
 
     $('.dataTables-example1').DataTable({
-            order: [0,'desc'],
+        order: [0,'desc'],
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
             { extend: 'copy'},
@@ -249,31 +248,28 @@ $(function() {
                 }
             }
         ]
-
     });
 
     $('.dataTables-example2').DataTable({
-    		order: [0,'desc'],
+    	order: [0,'desc'],
         dom: '<"html5buttons"B>lTfgitp',
         buttons: [
-
             { extend: 'copy'},
             {extend: 'csv'},
             {extend: 'print',
                 customize: function (win){
                     $(win.document.body).addClass('white-bg');
                     $(win.document.body).css('font-size', '10px');
-
                     $(win.document.body).find('table')
                             .addClass('compact')
                             .css('font-size', 'inherit');
                 }
             }
         ]
-
     });
 
     $('.payment-info').hide();
+    $('.payment-info2').hide();
     $('.payment-edit').click(function(){
     	$('.payment-info').hide();
     	$('.payment-info').show('fast');
@@ -290,6 +286,26 @@ $(function() {
             	$(".content-form").val(data.buy_content);
             	$(".price-form").val(data.price);
             	$('.form-submit').attr("action", link);
+            }
+      });
+    });
+
+    $('.payment-edit2').click(function(){
+        $('.payment-info2').hide();
+        $('.payment-info2').show('fast');
+        // console.log($(this).attr("data-pay"));
+        $.ajax({
+            data: {
+                payment_num: $(this).attr("data-pay")
+            },
+            url: "/costs/getinfo",
+            success: function(data){
+                var link = '/costs/edit_payment/' + data.id;
+                $(".date-form").val(data.buy_date);
+                $("select").val(data.category);
+                $(".content-form").val(data.buy_content);
+                $(".price-form").val(data.price);
+                $('.form-submit').attr("action", link);
             }
       });
     });

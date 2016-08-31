@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "hirb"
+gem "hirb-unicode"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "mini_magick"
 gem 'carrierwave'
