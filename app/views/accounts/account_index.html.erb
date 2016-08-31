@@ -33,9 +33,10 @@
 							    <th>수입</th>
 							    <th>비용(메뉴)</th>
 							    <th>이익</th>
-							    <th>현금(통장입금액)</th>
+							    <th>통장입금액</th>
 							    <th>손실액</th>
-							    <th>적립액</th>
+							    <th>적립금사용액</th>
+							    <th>현금사용액</th>	
 							</tr>
 						</thead>
 						<tbody>
@@ -47,7 +48,8 @@
 								    <td style="text-align: right;"><%= number_with_delimiter(account.profit.round, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.cash, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_loss, delimiter: ',') %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(account.saving_point, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.use_point, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_buy, delimiter: ',') %></td>
 								</tr>
 							<% end %>
 						</tbody>

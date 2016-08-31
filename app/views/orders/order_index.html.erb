@@ -221,7 +221,7 @@
 
     <!-- 정산 -->
     <div class="col-md-3">
-        <form class="form-horizontal" action="/orders/order_create" method="GET">
+        <form class="form-horizontal" id="order" action="/orders/order_create" method="GET">
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>유저찾기</h5>
@@ -272,10 +272,34 @@
                     </h2>
                     <hr>            
                     <div class="m-t-sm">
-                        <button class="btn btn-lg btn-primary btn-block"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
+                        <button class="btn btn-lg btn-primary btn-block btn-order"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
                         <a href="#" class="btn btn-white btn-sm btn-block btn-cancel"> 취소</a>
                     </div>   
-                </div> 
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" id="cashbuy" action="/accounts/cashbuy_create" method="GET">
+            <div class="ibox-title">
+                    <h5>현금사용액</h5>
+            </div>  
+            <div class="ibox-content" style="padding-bottom: 3px">
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label class="col-lg-4 control-label" style="text-align:left;">사용내역</label>
+                    <div class="col-lg-8" style="padding-right: 0px;">
+                        <input type="text" name="cash_buy_content" style="padding-left:5px; padding-right:5px; text-align:right;" class="form-control" placeholder = "ex) 택배비, 퀵비 등" required="">
+                    </div>
+                </div>
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label class="col-lg-4 control-label" style="text-align:left;">사용액</label>
+                    <div class="col-lg-8" style="padding-right: 0px;">
+                        <input type="number" name="cash_buy" style="padding-left:5px; padding-right:5px; text-align:right;" class="form-control" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-xs btn-primary btn-block btn-usecash">확인
+                </div>
+
+                <!-- <hr> -->
             </div>
         </form>
     </div>
@@ -348,7 +372,7 @@ function add_new_price(){
 };
 
 $(function(){
-    $("body").addClass("mini-navbar")
+    $("body").addClass("mini-navbar");
     
     // 메뉴 클릭시 내역에 뜨도록 하는 구문
     $('.btn-menu').click(function(){
@@ -488,11 +512,15 @@ $(function(){
                 });
     });
 
+    // $(".btn-usecash").click(function(){
+    //     $("#cashbuy").submit();
+    // });
+
+    // $(".btn-order").click(function(){
+    //     $("#order").submit();
+    // });
+
 });
-
-
-
-
 
 
 </script>

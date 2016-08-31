@@ -11,21 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160830130134) do
+ActiveRecord::Schema.define(version: 20160831082029) do
 
   create_table "accounts", force: :cascade do |t|
-    t.integer  "revenue",      limit: 4,                default: 0
-    t.decimal  "menu_cost",              precision: 10, default: 0
-    t.decimal  "profit",                 precision: 10, default: 0
-    t.integer  "cash",         limit: 4,                default: 0
-    t.integer  "cash_loss",    limit: 4,                default: 0
-    t.integer  "saving_point", limit: 4,                default: 0
-    t.integer  "pre_money",    limit: 4,                default: 0
-    t.integer  "end_money",    limit: 4,                default: 0
-    t.integer  "cash_buy",     limit: 4,                default: 0
+    t.integer  "revenue",          limit: 4,                  default: 0
+    t.decimal  "menu_cost",                    precision: 10, default: 0
+    t.decimal  "profit",                       precision: 10, default: 0
+    t.integer  "cash",             limit: 4,                  default: 0
+    t.integer  "cash_loss",        limit: 4,                  default: 0
+    t.integer  "saving_point",     limit: 4,                  default: 0
+    t.integer  "pre_money",        limit: 4,                  default: 0
+    t.integer  "end_money",        limit: 4,                  default: 0
+    t.integer  "cash_buy",         limit: 4,                  default: 0
     t.date     "account_date"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.integer  "use_point",        limit: 4
+    t.string   "cash_buy_content", limit: 255
   end
 
   create_table "comments", force: :cascade do |t|

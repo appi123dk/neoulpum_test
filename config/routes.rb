@@ -37,6 +37,7 @@ Myapp::Application.routes.draw do
   get "accounts/account_index"
   get "accounts/account_open"
   post "accounts/account_update"
+  get "accounts/cashbuy_create"
 
   #orders routes
   get "orders/order_open"

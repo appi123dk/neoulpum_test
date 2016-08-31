@@ -123,6 +123,16 @@
 									    <td style="text-align: right;" class="balance"></td>
 									</tr>
 								<% end %>
+								<% @sales_revs.where('cash_buy != ?', 0).each do |cash_cost| %>
+									<tr class="gradeC">
+									    <td style="text-align: center;"><%= cash_cost.account_date %></td>
+									    <td style="text-align: center;">기타(현금지급액)</td>
+									    <td style="text-align: center;"><%= cash_cost.cash_buy_content %></td>
+									    <td style="text-align: right;"><%= cash_cost.cash_buy %></td>
+									    <td style="text-align: right;"><%= cash_cost.cash_buy %></td>
+									    <td style="text-align: right;" class="balance"></td>
+									</tr>
+								<% end %>
 								<!-- 끝 -->
 						</tbody>
 					</table>
