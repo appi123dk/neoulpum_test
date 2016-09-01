@@ -65,7 +65,7 @@ class AccountsController < ApplicationController
 				if orders.where('menu_id=?', menu.id).take.nil?
 					sale.menu_sales = 0
 				else
-					sale.menu_sales = orders.where('menu_id=?', menu.id).count * orders.where('menu_id=?', menu.id).sum(:order_unit)
+					sale.menu_sales = orders.where('menu_id=?', menu.id).sum(:order_unit)
 				end
 				sale.date_sales = Date.today().to_formatted_s(:db)
 				sale.save			
@@ -77,13 +77,13 @@ class AccountsController < ApplicationController
 					if orders.where('menu_id=?', menu.id).take.nil?
 						sale.menu_sales = 0
 					else
-						sale.menu_sales = orders.where('menu_id=?', menu.id).count * orders.where('menu_id=?', menu.id).sum(:order_unit)
+						sale.menu_sales = orders.where('menu_id=?', menu.id).sum(:order_unit)
 					end
 					sale.date_sales = Date.today().to_formatted_s(:db)
 					sale.save
 				else
 					sale = sales2.where('menu_id=?', menu.id).take
-					sale.menu_sales = orders.where('menu_id=?', menu.id).count * orders.where('menu_id=?', menu.id).sum(:order_unit)
+					sale.menu_sales = orders.where('menu_id=?', menu.id).sum(:order_unit)
 					sale.save
 				end
 			end
