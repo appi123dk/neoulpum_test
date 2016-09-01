@@ -318,6 +318,14 @@
 var menu_array = [];
 var use_point = 0;
 
+function is_in_menu(){
+    if ($('.append-menu').children().length == 0){
+        $('.btn-order').attr('disabled',true);
+    } else {
+        $('.btn-order').attr('disabled',false);
+    }
+};
+
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -372,6 +380,7 @@ function add_new_price(){
 };
 
 $(function(){
+    is_in_menu();
     $("body").addClass("mini-navbar");
     
     // 메뉴 클릭시 내역에 뜨도록 하는 구문
@@ -406,6 +415,7 @@ $(function(){
         if (use_point != 0) {
             add_new_price();
         }
+        is_in_menu();
     });
 
     // 삭제버튼 클릭 시
@@ -426,12 +436,14 @@ $(function(){
         if (use_point != 0) {
             add_new_price();
         }
+        is_in_menu();
     });
 
     $('.btn-cancel').click(function(){
         menu_array = [];
         var price = append_menu(menu_array);
         $("#total_price").text(numberWithCommas(price) + ' 원');
+        is_in_menu();
     });
 
     $('.find-user').click(function(){
