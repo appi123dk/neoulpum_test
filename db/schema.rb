@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160831082029) do
+ActiveRecord::Schema.define(version: 20160901140031) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160831082029) do
     t.datetime "updated_at",                                                  null: false
     t.string   "scale",             limit: 255
     t.boolean  "display",                                      default: true
+    t.integer  "material_order",    limit: 4,                  default: 999
   end
 
   create_table "menu_categories", force: :cascade do |t|
@@ -181,10 +182,10 @@ ActiveRecord::Schema.define(version: 20160831082029) do
 
   create_table "storages", force: :cascade do |t|
     t.date     "storage_date"
-    t.integer  "storage_unit", limit: 4
+    t.decimal  "storage_unit",           precision: 6, scale: 2
     t.integer  "material_id",  limit: 4
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   add_index "storages", ["material_id"], name: "index_storages_on_material_id", using: :btree

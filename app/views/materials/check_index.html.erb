@@ -75,7 +75,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="7">
                             <ul class="pagination pull-right"></ul>
                         </td>
                     </tr>
@@ -106,9 +106,9 @@ $(function() {
     });
 
     $('tbody tr').each(function() {
-        var store_unit = parseInt($(this).find("td").eq(2).html());
-        var limit = parseInt($(this).find("td").eq(3).html());
-        if (store_unit <= limit) {
+        var store_unit = parseFloat($(this).find("td").eq(1).html());
+        var limit = parseFloat($(this).find("td").eq(2).html());
+        if (store_unit >= limit) {
             $(this).css('background-color', "rgba(255,0,0,0.2)")
         }
     });  

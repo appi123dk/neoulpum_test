@@ -28,14 +28,12 @@
             <div class="ibox-content">
                 <h4>재고체크 리스트</h4>
                 <ul class="todo-list m-t">
-                <% @materials.each do |material| %>
-                    <% if material.id.odd? %>
+                <% @materials.first(@counts + 1).each do |material| %>
                     <li>
                         <input type="integer" style="text-align:center; width:20px; display:none" readonly="readonly" value="<%= material.id %>" name="material_num[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit[]"></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" step="0.01" required="" name="material_unit[]"></span>
                     </li>
-                    <% end %>
                 <% end %>    
                 </ul>   
             </div>
@@ -44,14 +42,12 @@
             <div class="ibox-content">
                 <h4>재고체크 리스트</h4>
                 <ul class="todo-list m-t">
-                <% @materials.each do |material| %>
-                    <% if material.id.even? %>
+                <% @materials.last(@all_count - @counts - 1).each do |material| %>
                     <li>
                         <input type="integer" readonly="readonly" style="text-align:center; width:20px; display:none" value="<%= material.id %>" name="material_num2[]">
                         <span class="m-l-xs"><%= material.material_name %></span>
-                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" required="" name="material_unit2[]"></span>
+                        <span style="float:right;"><input style="text-align:right; width:50px" type="number" step="0.01" required="" name="material_unit2[]"></span>
                     </li>
-                    <% end %>
                 <% end %> 
                 </ul>
             </div>

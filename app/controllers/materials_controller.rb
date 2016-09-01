@@ -18,6 +18,7 @@ class MaterialsController < ApplicationController
 		material.material_limit     = params[:material_limit]
 		material.material_price     = params[:material_price]
 		material.material_shipping  = params[:material_shipping]
+		material.material_order     = params[:material_order]
 		material.scale = params[:material_scale]
 		material.save
 
@@ -25,7 +26,7 @@ class MaterialsController < ApplicationController
 	end
 
 	def check_index
-		@materials = Material.where('display = ?', true).all
+		@materials = Material.where('display = ?', true).order("material_order")
 	end
 
 	def check_create
@@ -46,7 +47,10 @@ class MaterialsController < ApplicationController
 	end
 
 	def check
-		@materials = Material.where('display = ?', true).all
+		@materials = Material.where('display = ?', true).order("material_order")
+		@all_count = @materials.count
+		count = @materials.count/2
+		@all_count.even? ? @counts = count - 1 : @counts = count
 	end
 
 	def new
@@ -71,6 +75,7 @@ class MaterialsController < ApplicationController
 		material.material_price     = params[:material_price]
 		material.material_shipping  = params[:material_shipping]
 		material.scale              = params[:material_scale]
+		material.material_order     = params[:material_order]
 		material.save
 
 		redirect_to '/materials/index'
@@ -79,7 +84,10 @@ class MaterialsController < ApplicationController
 
 	def check_edit
 		storage_date = Date.strptime(params[:date],'%m/%d/%Y')
-		@materials = Material.where('display = ?', true).all
+		@materials = Material.where('display = ?', true).order("material_order")
+		@all_count = @materials.count
+		count = @materials.count/2
+		@all_count.even? ? @counts = count - 1 : @counts = count
 		@storages = Storage.where('storage_date = ?', storage_date)
 	end
 
