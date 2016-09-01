@@ -220,7 +220,7 @@ $(function() {
     });
 
     $("#fifty").change(function(){
-        five_hundred = parseInt($(this).val()) * 50;
+        fifty = parseInt($(this).val()) * 50;
         total_money = five_thousand + one_thousand + five_hundred + ten_thousand + fifty_thousand + one_hundred + fifty;
         $(".total-money").text(numberWithCommas(total_money)+" 원");
         $("#cash-money").val(total_money-cash_money);
