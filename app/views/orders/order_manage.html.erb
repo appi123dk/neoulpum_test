@@ -7,7 +7,7 @@
         padding-left: 12px;
     }
 </style>
-
+<body class="mini-navbar">
 <% if @pre_money.nil? || @pre_money.pre_money == 0 %>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
@@ -109,6 +109,7 @@
 </div>
 </div>
 <% end %>
+</body>
 
 <% content_for :javascript do %>
 
@@ -116,7 +117,7 @@
 
 
     $(function() {
-        $("body").addClass("mini-navbar")
+        // $("body").addClass("mini-navbar")
 
         // 같은 번호가 있을때 표시해주는 함수
         var order_arr = [],

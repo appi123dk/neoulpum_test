@@ -1,3 +1,4 @@
+<body class="mini-navbar">
 <% if @pre_money.nil? || @pre_money.pre_money == 0 %>
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="col-md-offset-2 col-md-8" style="margin-top:100px">
@@ -11,6 +12,7 @@
         </div>
     </div>
 <% else %>
+<body class="mini-navbar">
 <div class="wrapper wrapper-content animated fadeInRight">
 <div class="row">
     <!-- 음료내역 -->
@@ -306,7 +308,10 @@
 </div>
 
 </div>
+
 <% end %>
+</body>
+
 
 
 
@@ -381,7 +386,7 @@ function add_new_price(){
 
 $(function(){
     is_in_menu();
-    $("body").addClass("mini-navbar");
+    // $("body").addClass("mini-navbar");
     
     // 메뉴 클릭시 내역에 뜨도록 하는 구문
     $('.btn-menu').click(function(){
