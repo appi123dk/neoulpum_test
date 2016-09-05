@@ -1,54 +1,80 @@
-    <div class="large-box text-center loginscreen  animated fadeInDown">
+<div class="large-box text-center loginscreen  animated fadeInDown">
+    <div>
         <div>
-            <div>
 
-                <h3 class="logo-name">Neulpum</h1>
+            <h3 class="logo-name">Neulpum</h1>
 
-            </div>
-            <h3 style="margin-top: 50px;">재료(<%= @material.material_name %>) 수정</h3>
-            <form class="m-t" role="form" action="/materials/update/<%= @material.id %>" method="GET">
-                <label class="col-lg-2 control-label">재료이름 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="text" class="form-control" placeholder="재료이름" name="material_name" required="" value="<%= @material.material_name %>">
-                </div>
-                <label class="col-lg-2 control-label">구매처 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="text" class="form-control" placeholder="구매처" name="material_buyer" required="" value="<%= @material.material_buyer %>">
-                </div>
-                <label class="col-lg-2 control-label">구매처 주소 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="text" class="form-control" placeholder="구매처 주소" name="material_url" required="" value="<%= @material.material_url %>">
-                </div>
-                <label class="col-lg-2 control-label">재료용량 : </label>   
-                <div class="form-group col-lg-10">
-                    <input type="number" class="form-control" placeholder="재료용량" name="material_volume" required="" value="<%= @material.material_volume %>">
-                </div>
-                <label class="col-lg-2 control-label">구매갯수 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="number" class="form-control" placeholder="구매갯수" name="material_unit" required="" value="<%= @material.material_unit %>">
-                </div>
-                <label class="col-lg-2 control-label">구매시점 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="number" class="form-control" placeholder="구매시점의 갯수" name="material_limit" required="" value="<%= @material.material_limit %>">
-                </div>
-                <label class="col-lg-2 control-label">재료가격 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="number" class="form-control" placeholder="재료가격" name="material_price" required="" value="<%= @material.material_price %>">
-                </div>
-                <label class="col-lg-2 control-label">배송일수 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="number" class="form-control" placeholder="배송일수" name="material_shipping" required="" value="<%= @material.material_shipping %>">
-                </div>
-                <label class="col-lg-2 control-label">단위 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="text" class="form-control" placeholder="ml, 개, g 등" name="material_scale" required="" value="<%= @material.scale %>">
-                </div>
-                <label class="col-lg-2 control-label">재고체크 순서 : </label>
-                <div class="form-group col-lg-10">
-                    <input type="text" class="form-control" placeholder="기본값 : 999" name="material_order" required="" value="<%= @material.material_order %>">
-                </div>
-                <button type="submit" class="btn btn-primary block full-width m-b">수정</button>
-            </form>
-            <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p> -->
         </div>
+        <h3 style="margin-top: 50px;">재료(<%= @material.material_name %>) 수정</h3>
+        <form class="m-t" role="form" action="/materials/update/<%= @material.id %>" method="GET">
+            <label class="col-lg-2 control-label">재료이름 : </label>
+            <div class="form-group col-lg-10">
+                <input type="text" class="form-control" placeholder="재료이름" name="material_name" required="" value="<%= @material.material_name %>">
+            </div>
+            <label class="col-lg-2 control-label">구매처 : </label>
+            <div class="form-group col-lg-10">
+                <input type="text" class="form-control" placeholder="구매처" name="material_buyer" required="" value="<%= @material.material_buyer %>">
+            </div>
+            <label class="col-lg-2 control-label">구매처 주소 : </label>
+            <div class="form-group col-lg-10">
+                <input type="text" class="form-control" placeholder="구매처 주소" name="material_url" required="" value="<%= @material.material_url %>">
+            </div>
+            <label class="col-lg-2 control-label">재료용량 : </label>   
+            <div class="form-group col-lg-10">
+                <input type="number" class="form-control" placeholder="재료용량" name="material_volume" required="" value="<%= @material.material_volume %>">
+            </div>
+            <label class="col-lg-2 control-label">구매갯수 : </label>
+            <div class="form-group col-lg-10">
+                <input type="number" class="form-control" placeholder="구매갯수" name="material_unit" required="" value="<%= @material.material_unit %>">
+            </div>
+            <label class="col-lg-2 control-label">구매시점 : </label>
+            <div class="form-group col-lg-10">
+                <input type="number" class="form-control" placeholder="구매시점의 갯수" name="material_limit" required="" value="<%= @material.material_limit %>">
+            </div>
+            <label class="col-lg-2 control-label">재료가격 : </label>
+            <div class="form-group col-lg-10">
+                <input type="number" class="form-control" placeholder="재료가격" name="material_price" required="" value="<%= @material.material_price %>">
+            </div>
+            <label class="col-lg-2 control-label">배송일수 : </label>
+            <div class="form-group col-lg-10">
+                <input type="number" class="form-control" placeholder="배송일수" name="material_shipping" required="" value="<%= @material.material_shipping %>">
+            </div>
+            <label class="col-lg-2 control-label">단위 : </label>
+            <div class="form-group col-lg-10">
+                <input type="text" class="form-control" placeholder="ml, 개, g 등" name="material_scale" required="" value="<%= @material.scale %>">
+            </div>
+            <label class="col-lg-2 control-label">재고체크 순서 : </label>
+            <div class="form-group col-lg-10">
+                <input type="text" class="form-control" placeholder="기본값 : 999" name="material_order" required="" value="<%= @material.material_order %>">
+            </div>
+            <label class="col-lg-2 control-label">구매담당지기 : </label>
+            <div class="form-group col-lg-10">
+                <select class="form-control m-b" name="employee_id" required>
+                    <option value="" disabled selected><%= Date.today().year() %>년도 구매팀</option>
+                    <% @semesters.each do |semester| %>
+                        <% semester.teams.where('team = ?','구매팀').each do |team| %>
+                            <option value="<%= team.employee.id %>"><%= team.employee.employee_name %></option>
+                        <% end %>
+                    <% end %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">수정</button>
+        </form>
+        <!-- <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2015</small> </p> -->
     </div>
+</div>
+
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+    var employee_id = <%= @material.employee_id %>
+    $('select option[value="'+ employee_id +'"]').attr("selected",true); 
+});
+
+</script>
+
+<% end %>

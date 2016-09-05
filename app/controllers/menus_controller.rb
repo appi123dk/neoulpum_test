@@ -1,6 +1,7 @@
 class MenusController < ApplicationController
 	before_action :require_user
 	def new
+		
 	end
 
 	def index

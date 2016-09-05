@@ -6,6 +6,7 @@ class MaterialsController < ApplicationController
 
 	def edit
 		@material = Material.find(params[:id])
+		@semesters = Semester.where('year = ?', Date.today().year().to_s)
 	end
 
 	def update
@@ -19,6 +20,7 @@ class MaterialsController < ApplicationController
 		material.material_price     = params[:material_price]
 		material.material_shipping  = params[:material_shipping]
 		material.material_order     = params[:material_order]
+		material.employee_id     = params[:employee_id]
 		material.scale = params[:material_scale]
 		material.save
 
@@ -54,7 +56,7 @@ class MaterialsController < ApplicationController
 	end
 
 	def new
-		
+		@semesters = Semester.where('year = ?', Date.today().year().to_s)
 	end
 
 	def delete
@@ -76,6 +78,7 @@ class MaterialsController < ApplicationController
 		material.material_shipping  = params[:material_shipping]
 		material.scale              = params[:material_scale]
 		material.material_order     = params[:material_order]
+		material.employee_id     = params[:employee_id]
 		material.save
 
 		redirect_to '/materials/index'

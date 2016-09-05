@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160901140031) do
+ActiveRecord::Schema.define(version: 20160905042345) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -92,7 +92,10 @@ ActiveRecord::Schema.define(version: 20160901140031) do
     t.string   "scale",             limit: 255
     t.boolean  "display",                                      default: true
     t.integer  "material_order",    limit: 4,                  default: 999
+    t.integer  "employee_id",       limit: 4
   end
+
+  add_index "materials", ["employee_id"], name: "index_materials_on_employee_id", using: :btree
 
   create_table "menu_categories", force: :cascade do |t|
     t.string   "category_code",  limit: 255

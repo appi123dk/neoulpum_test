@@ -33,6 +33,7 @@
                     <thead>
                     <tr>
                         <th data-toggle="true">재료명</th>
+                        <th data-toggle="true">담당지기</th>
                         <th>구매시점</th>
                         <% 0.upto(6) do |n| %>
                             <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
@@ -52,6 +53,7 @@
                     <% @materials.each do |material| %>
                         <tr>
                             <td><%= material.material_name %></td>
+                            <td><%= material.employee.nil? ? '미정' : material.employee.employee_name  %></td>
                             <td><%= material.material_limit %></td>
                             <% 0.upto(6) do |n| %>
                                 <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
