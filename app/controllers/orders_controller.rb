@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
 	before_action :require_user
 	def order_index
 		@promo_menus = Menu.where('display = ? AND menu_promo = ?', true, true).order("menu_order")
+		@etc_menus = Menu.where('display = ? AND menu_symbol = ?', true, '+').order("menu_order")
 		@coffee_menus = Menu.where('display = ? AND menu_category_id = ?',true, 1).order("menu_order")
 		@tea_menus = Menu.where('display = ? AND menu_category_id = ?',true, 2).order("menu_order")
 		@drink_menus = Menu.where('display = ? AND menu_category_id = ?',true, 3).order("menu_order")

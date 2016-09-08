@@ -26,6 +26,7 @@
                 <li class=""><a data-toggle="tab" href="#t_tea">차(T)</a></li>
                 <li class=""><a data-toggle="tab" href="#t_drink">음료(T)</a></li>
                 <li class=""><a data-toggle="tab" href="#promo">프로모션</a></li>
+                <li class=""><a data-toggle="tab" href="#etc">기타추가</a></li>
             </ul>
             <div class="tab-content">
                 <div id="coffee" class="tab-pane active">
@@ -209,6 +210,21 @@
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
                                 <div class="col-md-3">
                                     <button class="btn btn-info dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
+                                        <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
+                                        <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
+                                        <hr style="margin-bottom:0px">
+                                    </button>
+                                </div>
+                            <% end %>
+                    </div>
+                </div>
+                <div id="etc" class="tab-pane">
+                    <div class="panel-body">
+                        <h3 class="col-md-12">기타</h3>
+                            <% @etc_menus.each do |menu| %>
+                                <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
+                                <div class="col-md-3">
+                                    <button class="btn btn-danger dim btn-large-dim btn-menu" data-price="<%= menu.menu_price %>" data-menu="<%= menu.id %>" data-title="<%= degree %>. <%= menu.menu_title %>" data-size="<%= menu.menu_size %>" type="button" style="width:100%; font-size:20px">
                                         <p style="text-align:left; font-size:15px"><%= degree %>. <%= menu.menu_title %></p>
                                         <p style="font-size:15px; text-align:right; margin-bottom:-10px"><%= menu.menu_price %> 원</p> 
                                         <hr style="margin-bottom:0px">
