@@ -108,8 +108,8 @@ $(function() {
     });
 
     $('tbody tr').each(function() {
-        var store_unit = parseFloat($(this).find("td").eq(1).html());
-        var limit = parseFloat($(this).find("td").eq(2).html());
+        var store_unit = parseFloat($(this).find("td").eq(2).html());
+        var limit = parseFloat($(this).find("td").eq(3).html());
         if (store_unit >= limit) {
             $(this).css('background-color', "rgba(255,0,0,0.2)")
         }

@@ -85,8 +85,8 @@
 				<form action="/employees/team_create" method="GET">
 					<h4>지기선택</h4>
 					<input type="text" name="semester_id" value="<%= @semester_id %>" style="display:none">
-					<select class="employee_lists form-control" name="employee" required="">
-	          <option disabled selected>지기선택</option>
+					<select class="employee_lists form-control" name="employee" required>
+	          <option value="" disabled selected>지기선택</option>
 	          <% @employees.each do |employee| %>
 	          	<option value="<%= employee.id %>">(<%= employee.employee_phone.last(4) %>) <%= employee.employee_name %></option>
 	          <% end %>
@@ -94,7 +94,7 @@
 	        <hr>
 	        <h4>직책 선택</h4>
 					<select class="form-control job" name="job" required="">
-	          <option disabled selected>직책 선택</option>
+	          <option value="" disabled selected>직책 선택</option>
 	          <option>사장</option>
 	          <option>부사장</option>
 	          <option>팀장</option>
@@ -103,7 +103,7 @@
 	        <hr>
 	        <h4>팀 선택</h4>
 					<select class="form-control team" name="team" required="">
-	          <option disabled selected>팀 선택</option>
+	          <option value="" disabled selected>팀 선택</option>
 	          <% @team_elements.each do |element| %>
 		          <option><%= element %></option>
 	          <% end %>
