@@ -59,7 +59,7 @@
             <li class="<%= is_active_controller('materials') %>">
                 <a href=""><i class="fa fa-shopping-cart"></i> <span class="nav-label">구매관리(구매팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('materials') %>">
-                    <li class="<%= is_active_action('request_buy') %>"><%= link_to "구매요청", materials_request_buy_path %></li>
+                    <!-- <li class="<%= is_active_action('request_buy') %>"><%= link_to "구매요청", materials_request_buy_path %></li> -->
                     <li class="<%= is_active_action('check_index') %>"><%= link_to "재고확인", materials_check_index_path %></li>
                     <li class="<%= is_active_action('check') %>"><%= link_to "재고체크", materials_check_path %></li>
                     <li class="<%= is_active_action('index') %>"><%= link_to "재료확인", materials_index_path %></li>
