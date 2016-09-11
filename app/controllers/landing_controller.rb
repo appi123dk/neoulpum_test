@@ -25,7 +25,9 @@ class LandingController < ApplicationController
 			end
 
   	end
-  	@teams = Semester.last.teams
+    @year = Date.today().year()
+    Date.today().month().in?(2..7) ? @semseter = 1 : @semester = 2
+  	@teams = Semester.where('year = ? AND semester = ?', @year.to_s, @semester.to_s).take.teams
     render :layout => "empty"
   end
 
