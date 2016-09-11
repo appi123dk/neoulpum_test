@@ -13,7 +13,6 @@
                 <% else %>
                     <a class="navbar-brand" href="<%= url_for :controller => 'users', :action => 'logout' %>"> 로그아웃</a>
                 <% end %>
-
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
@@ -111,7 +110,7 @@
                         <!-- 유저 적립금 -->
                         <div class="col-lg-5">
                             <img src="<%= image_path('logo_x2.png') %>" alt="profile">
-                            <h2>적립금 현황</h2>
+                            <h2><span style="color:#FFCE1F; font-weight: bold">커피콩</span> 현황</h2>
                             <h1><span id="targetElem" style="color:#FFCE1F; font-size:70px; font-weight:bold"><%= @user.user_money %></span> 원</h1>
                         </div>
                         <!-- 유저 적립금 끝 -->
@@ -274,16 +273,18 @@
             </div>
         </div>
         <div class="row">
-            <% @employees.each do |employee| %>
+        <% unless @teams.nil? %>
+            <% @teams.each do |team| %>
                 <div class="col-lg-2 col-xs-6 wow fadeInLeft" style="margin-top: 20px;">
                     <div style="text-align:center">
-                        <img src="<%= employee.image_url %>" class="img-responsive img-circle" style="display:initial; border:3px solid rgba(154,179,26,0.43)" alt="">
+                        <img src="<%= team.employee.image_url %>" class="img-responsive img-circle" style="display:initial; border:3px solid rgba(154,179,26,0.43)" alt="">
                     </div>
                     <div class="text-center" style="margin-top: 5px;">
-                        <h4><%= employee.employee_name %></h4>
+                        <h4><%= team.employee.employee_name %></h4>
                     </div>
                 </div>  
             <% end %>
+        <% end %>
         </div>
     </div>
 </section>

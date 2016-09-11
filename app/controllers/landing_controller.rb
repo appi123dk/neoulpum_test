@@ -25,7 +25,7 @@ class LandingController < ApplicationController
 			end
 
   	end
-  	@employees = Employee.order('cardinal_number DESC').last(24)
+  	@teams = Semester.last.teams
     render :layout => "empty"
   end
 
