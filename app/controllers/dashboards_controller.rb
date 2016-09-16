@@ -59,7 +59,7 @@ class DashboardsController < ApplicationController
         @y_axis2 << 0
       else
         hour_order.each do |order|
-          rev = order.menu.menu_price * order.order_unit
+          rev += order.menu.menu_price * order.order_unit
         end
         @y_axis2 << rev
         @day_rev += rev
@@ -82,7 +82,7 @@ class DashboardsController < ApplicationController
         @y_axis2 << 0
       else
         hour_order.each do |order|
-          rev = order.menu.menu_price * order.order_unit
+          rev += order.menu.menu_price * order.order_unit
         end
         @y_axis2 << rev
         @day_rev += rev
