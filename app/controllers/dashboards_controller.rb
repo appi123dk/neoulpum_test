@@ -25,8 +25,10 @@ class DashboardsController < ApplicationController
     # 오늘의 연, 월을 구하고 마지막 일 구하는 함수
     year = DateTime.now.year
     month = DateTime.now.month
+    today = DateTime.now.day
     last_day = Date.civil(year,month,-1).day
-    month_account = Account.where('extract(month from account_date) = ?', month)
+    month_account = Account.where('extract(month from account_date) = ? AND extract(year from account_date) = ?', month, year)
+    today_order = Detail.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     
     # 그래프에 날릴 매출값 함수
     @total_rev = 0
@@ -43,6 +45,53 @@ class DashboardsController < ApplicationController
       end
 
     end
+
+    # 일매출 그래프 매출값 함수
+    @day_rev = 0
+    @x_axis2 = []
+    @y_axis2 = []
+    0.upto(23) do |hour|
+      rev = 0
+      @x_axis2 << hour.to_s + '시'
+      (hour + 15) <= 24 ? hour = hour+15 : hour = hour-9
+      hour_order = today_order.where('hour(created_at) = ?', hour)
+      if hour_order.nil?
+        @y_axis2 << 0
+      else
+        hour_order.each do |order|
+          rev = order.menu.menu_price * order.order_unit
+        end
+        @y_axis2 << rev
+        @day_rev += rev
+      end
+    end
+
+  end
+
+  def day_revenue
+    today_order = Detail.where(created_at: params[:rev_date].to_date.beginning_of_day..params[:rev_date].to_date.end_of_day)
+    @day_rev = 0
+    @x_axis2 = []
+    @y_axis2 = []
+    0.upto(23) do |hour|
+      rev = 0
+      @x_axis2 << hour.to_s + '시'
+      (hour + 15) <= 24 ? hour = hour+15 : hour = hour-9
+      hour_order = today_order.where('hour(created_at) = ?', hour)
+      if hour_order.nil?
+        @y_axis2 << 0
+      else
+        hour_order.each do |order|
+          rev = order.menu.menu_price * order.order_unit
+        end
+        @y_axis2 << rev
+        @day_rev += rev
+      end
+    end
+
+    render json:  {x_axis: @x_axis2, 
+                   y_axis: @y_axis2,
+                   day_rev: @day_rev }
   end
 
 end

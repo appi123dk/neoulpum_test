@@ -72,53 +72,52 @@
         <div class="ibox float-e-margins">
             <div class="ibox-content">
                 <div>
-                        <span class="pull-right text-right">
-                            <!-- <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                            <br /> -->
-                            <strong>총 매출 : <%= number_with_delimiter(@total_rev, delimiter: ',') %>원</strong>
-                        </span>
+                    <span class="pull-right text-right">
+                        <!-- <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                        <br /> -->
+                        <strong>총 매출 : <%= number_with_delimiter(@total_rev, delimiter: ',') %>원</strong>
+                    </span>
                     <h3 class="font-bold no-margins">
-                        늘품 매출현황
+                        늘품 월 매출현황
                     </h3>
                     <!-- <small>Sales marketing.</small> -->
                 </div>
-
                 <div class="m-t-sm">
-
                     <div class="row">
                         <div class="col-md-12">
                             <div>
                                 <canvas id="lineChart" height="80"></canvas>
                             </div>
                         </div>
-<!--                         <div class="col-md-4">
-                            <ul class="stat-list m-t-lg">
-                                <li>
-                                    <h2 class="no-margins">매출 : 2,346 원</h2>
-                                    <div class="progress progress-mini">
-                                        <div class="progress-bar" style="width: 48%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <h2 class="no-margins ">4,422</h2>
-                                    <small>Orders in last month</small>
-                                    <div class="progress progress-mini">
-                                        <div class="progress-bar" style="width: 60%;"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> -->
                     </div>
-
                 </div>
-
-                <div class="m-t-md">
-<!--                     <small class="pull-right">
-                        <i class="fa fa-clock-o"> </i>
-                        Update on 16.07.2015
-                    </small> -->
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+                <div>
+                    <span class="pull-right text-right">
+                        <!-- <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                        <br /> -->
+                        <strong>총 매출 : <%= number_with_delimiter(@day_rev, delimiter: ',') %>원</strong>
+                    </span>
+                    <h3 class="font-bold no-margins">
+                        늘품 일 매출현황
+                        <input type="date" class="rev-date" value="<%= Date.today() %>">
+                    </h3>
+                    <!-- <small>Sales marketing.</small> -->
                 </div>
-
+                <div class="m-t-sm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <canvas id="day_rev_chart" height="80"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -474,6 +473,23 @@ $(function() {
         ]
     };
 
+    var x_axis2 = <%= raw @x_axis2 %>
+    var lineData2 = {
+        labels: x_axis2,
+        datasets: [
+            {
+                label: "매출현황",
+                fillColor: "rgba(26,179,148,0.5)",
+                strokeColor: "rgba(26,179,148,0.7)",
+                pointColor: "rgba(26,179,148,1)",
+                pointStrokeColor: "#fff",
+                pointHighlightFill: "#fff",
+                pointHighlightStroke: "rgba(26,179,148,1)",
+                data: <%= raw @y_axis2 %>
+            }
+        ]
+    };
+
     var lineOptions = {
         scaleShowGridLines: true,
         scaleGridLineColor: "rgba(0,0,0,.05)",
@@ -495,6 +511,38 @@ $(function() {
     var ctx = document.getElementById("lineChart").getContext("2d");
     var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
+    var ctx2 = document.getElementById("day_rev_chart").getContext("2d");
+    var myNewChart2 = new Chart(ctx2).Line(lineData2, lineOptions);
+
+    $(".rev-date").change(function(){
+        var rev_date = this.value;
+        console.log(rev_date);
+        $.ajax({
+            data: {
+                rev_date: rev_date
+            },
+            url: "/dashboards/day_revenue",
+            success: function(data){
+                lineData2 = {
+                labels: data.x_axis,
+                datasets: [
+                    {
+                        label: "매출현황",
+                        fillColor: "rgba(26,179,148,0.5)",
+                        strokeColor: "rgba(26,179,148,0.7)",
+                        pointColor: "rgba(26,179,148,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(26,179,148,1)",
+                        data: data.y_axis
+                    }
+                ]
+                };
+                ctx2 = document.getElementById("day_rev_chart").getContext("2d");
+                myNewChart2 = new Chart(ctx2).Line(lineData2, lineOptions);
+            }
+        });
+    });
 
 });
 

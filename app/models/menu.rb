@@ -1,7 +1,7 @@
 class Menu < ActiveRecord::Base
 	belongs_to :menu_category
 	belongs_to :recipe
-	has_many :detail
+	has_many :details
 	has_many :sale
 
 	def self.calculate_unit_price menu_id

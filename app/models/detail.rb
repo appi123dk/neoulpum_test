@@ -1,5 +1,5 @@
 class Detail < ActiveRecord::Base
-	belongs_to :menus
+	belongs_to :menu
 	belongs_to :order
 
 	#오늘의 모든 주문 --> account로 연결
