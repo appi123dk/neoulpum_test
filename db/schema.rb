@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905042345) do
+ActiveRecord::Schema.define(version: 20160920044248) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -84,14 +84,14 @@ ActiveRecord::Schema.define(version: 20160905042345) do
     t.string   "material_url",      limit: 255
     t.decimal  "material_volume",               precision: 10
     t.integer  "material_unit",     limit: 4
-    t.integer  "material_limit",    limit: 4
+    t.decimal  "material_limit",                precision: 6,  scale: 2
     t.integer  "material_price",    limit: 4
     t.integer  "material_shipping", limit: 4
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
     t.string   "scale",             limit: 255
-    t.boolean  "display",                                      default: true
-    t.integer  "material_order",    limit: 4,                  default: 999
+    t.boolean  "display",                                                default: true
+    t.integer  "material_order",    limit: 4,                            default: 999
     t.integer  "employee_id",       limit: 4
   end
 

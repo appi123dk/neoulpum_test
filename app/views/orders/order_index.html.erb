@@ -267,7 +267,7 @@
                         <div>
                             <label class="col-lg-7 control-label" style="text-align:left; font-size:15px">주문번호</label>
                             <div class="col-lg-4">
-                                <input type="number" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control" name="order_number" required="">
+                                <input type="number" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control order-number" name="order_number" required="">
                             </div>
                             <div class="col-lg-1" style="text-align:left; font-size: 20px; margin-top: 4px; margin-left: -15px">
                                 번
@@ -485,7 +485,7 @@ $(function(){
                             '<strong>' + data.users.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.users.user_money)) + '원'+
                             '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
                         '</div>' +
-                        '<div class="alert alert-success" style="padding-right:15px">기존 늘품지기 입니다. ( ' + data.employee.cardinal_number + '기 ' + data.employee.employee_name + ' )</div>'
+                        '<div class="alert alert-success user-point" style="padding-right:15px">기존 늘품지기 입니다. ( ' + data.employee.cardinal_number + '기 ' + data.employee.employee_name + ' )</div>'
                     );    
                 } else {
                     $(".user-info").append(
@@ -552,6 +552,18 @@ $(function(){
     // $(".btn-order").click(function(){
     //     $("#order").submit();
     // });
+
+    $(".btn-order").click(function(){
+        var button = $(this).ladda(),
+            order_number = $(".order-number").val();
+        button.ladda('start');
+        if (order_number == "") {
+            button.ladda('stop');
+            alert("주문번호를 입력해주세요");
+        } else {
+            $("#order").submit();    
+        }
+    });
 
 });
 
