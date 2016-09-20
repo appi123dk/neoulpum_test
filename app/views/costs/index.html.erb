@@ -270,7 +270,7 @@ $(function() {
 
     $('.payment-info').hide();
     $('.payment-info2').hide();
-    $('.payment-edit').click(function(){
+    $('.dataTables-example').on('click', '.payment-edit', function(){
     	$('.payment-info').hide();
     	$('.payment-info').show('fast');
     	// console.log($(this).attr("data-pay"));
@@ -290,7 +290,7 @@ $(function() {
       });
     });
 
-    $('.payment-edit2').click(function(){
+    $('.dataTables-example1').on('click', '.payment-edit2',function(){
         $('.payment-info2').hide();
         $('.payment-info2').show('fast');
         // console.log($(this).attr("data-pay"));
