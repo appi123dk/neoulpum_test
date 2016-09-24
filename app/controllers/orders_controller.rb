@@ -63,6 +63,37 @@ class OrdersController < ApplicationController
 		@orders = Order.where('make_confirm = ?', false)
 		@shot = 0
 		@make_orders = Order.where('order_confirm = ? AND make_confirm = ?', false, true)
+		@festival = Hash.new
+		@festival = {
+	      '1': '현빈',
+	      '2': '일화',
+	      '3': '미란',
+	      '4': '영희',
+	      '5': '철수',
+	      '6': '나정이',
+	      '7': '영애',
+	      '8': '구마적',
+	      '9': '덕선',
+	      '10': '정환',
+	      '11': '선우',
+	      '12': '최택',
+	      '13': '정봉이',
+	      '14': '동룡',
+	      '15': '노을',
+	      '16': '피바다',
+	      '17': '여왕벌',
+	      '18': '진주',
+	      '19': '윤재',
+	      '20': '시원',
+	      '21': '쌍칼',
+	      '22': '칠봉이',
+	      '23': '보라',
+	      '24': '삼천포',
+	      '25': '금자씨',
+	      '26': '해태',
+	      '27': '빙그레',
+	      '28': '원빈'
+	      }
 	end
 
 	def make_confirm

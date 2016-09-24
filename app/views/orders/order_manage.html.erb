@@ -36,14 +36,18 @@
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
                                 <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
-                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
-                                    <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shot<%= index %>"></span> 개</h4>
+                                    <h4 style="display:inline-block; width:80%"><%= @festival[:"#{order.order_number}"].nil? ? order.order_number : @festival[:"#{order.order_number}"] %><!-- 번 --> | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
+                                    <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shot<%= index %>"></span></h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-12">
+                                            <% if detail_menu.menu_symbol == '+' %>
+                                            <h3><%= detail_menu.menu_title %> * <%= menu.order_unit %> </h3>
+                                            <% else %>
                                             <h3><%= detail_menu.menu_size == 1 ? "" : " Tall. " %> <%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %> </h3>
+                                            <% end %>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
                                             <% detail_menu.menu_size == 2 ? shot += menu.order_unit * 2 : shot += menu.order_unit %>
@@ -76,14 +80,18 @@
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
                                 <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
-                                    <h4 style="display:inline-block; width:50%"><%= order.order_number %>번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
-                                    <h4 style="display:inline-block; width:50%; float:right;"> | 샷 개수 : <span class="shott<%= index %>"></span> 개</h4>
+                                    <h4 style="display:inline-block; width:80%"><%= @festival[:"#{order.order_number}"].nil? ? order.order_number : @festival[:"#{order.order_number}"] %><!-- 번 --> | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
+                                    <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shott<%= index %>"></span></h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-12">
-                                            <h3><%= detail_menu.menu_size == 1 ? "" : " Tall. " %><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                            <% if detail_menu.menu_symbol == '+' %>
+                                                <h3><%= detail_menu.menu_title %> * <%= menu.order_unit %> </h3>
+                                            <% else %>
+                                                <h3><%= detail_menu.menu_size == 1 ? "" : " Tall. " %><%= detail_menu.menu_degree == '1' ? "H" : "I" %>. <%= detail_menu.menu_title %>(<%= detail_menu.menu_symbol %>) * <%= menu.order_unit %></h3>
+                                            <% end %>
                                         </div>
                                         <% if detail_menu.menu_category_id == 1 %>
                                             <% detail_menu.menu_size == 2 ? shot += menu.order_unit * 2 : shot += menu.order_unit %>

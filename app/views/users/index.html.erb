@@ -57,7 +57,7 @@
                             <td class="center"><%= user.user_email %></td>
                             <td class="center"><%= user.user_name %></td>
                             <td class="center"><%= user.user_number %></td>
-                            <td class="center"><%= @jobs[:"#{user.user_job}"] %></td>
+                            <td class="center"><%= @jobs[:"#{user.user_job}"]%></td>
                             <td class="center"><%= @colleges[:"#{user.user_major}"] %></td>
                             <td class="center"><%= number_with_delimiter(user.user_money, delimiter: ',') %></td>
                             <td class="center"><%= @grade[:"#{user.user_rate}"] %></td>
