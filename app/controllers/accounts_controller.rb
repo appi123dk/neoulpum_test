@@ -100,6 +100,7 @@ class AccountsController < ApplicationController
 		account.menu_cost = @menu_cost
 		account.profit = @revenue - @menu_cost
 		account.use_point = @point
+		account.employee_name = params[:employee_name]
 		account.save
 
 		redirect_to '/accounts/account_index'

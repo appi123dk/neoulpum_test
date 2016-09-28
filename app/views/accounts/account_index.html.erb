@@ -37,6 +37,7 @@
 							    <th>손실액</th>
 							    <th>적립금사용액</th>
 							    <th>현금사용액</th>	
+							    <th>마감지기</th>	
 							</tr>
 						</thead>
 						<tbody>
@@ -50,6 +51,7 @@
 								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_loss, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.use_point, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_buy, delimiter: ',') %></td>
+								    <td style="text-align: center;"><%= account.employee_name %></td>
 								</tr>
 							<% end %>
 						</tbody>

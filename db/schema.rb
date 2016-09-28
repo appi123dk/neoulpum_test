@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160920044248) do
+ActiveRecord::Schema.define(version: 20160928111810) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160920044248) do
     t.datetime "updated_at",                                              null: false
     t.integer  "use_point",        limit: 4
     t.string   "cash_buy_content", limit: 255
+    t.string   "employee_name",    limit: 255
   end
 
   create_table "comments", force: :cascade do |t|
