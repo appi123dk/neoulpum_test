@@ -36,7 +36,7 @@
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
                                 <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
-                                    <h4 style="display:inline-block; width:80%"><%= @festival[:"#{order.order_number}"].nil? ? order.order_number : @festival[:"#{order.order_number}"] %><!-- 번 --> | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
+                                    <h4 style="display:inline-block; width:80%"><%= order.order_number %> 번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shot<%= index %>"></span></h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
@@ -80,7 +80,7 @@
                         <li class="primary-element" style="padding-bottom: 0px;">
                             <div class="panel panel-default" style="margin-bottom: 10px;">
                                 <div class="panel-heading order-panel" data-order="<%= order.order_number %>">
-                                    <h4 style="display:inline-block; width:80%"><%= @festival[:"#{order.order_number}"].nil? ? order.order_number : @festival[:"#{order.order_number}"] %><!-- 번 --> | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
+                                    <h4 style="display:inline-block; width:80%"><%= order.order_number%> 번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shott<%= index %>"></span></h4>
                                 </div>
                                 <div class="panel-body" style="padding-bottom: 0px;">
