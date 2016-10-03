@@ -15,7 +15,10 @@ class CostsController < ApplicationController
       '4': '재료구매비',
       '5': '예비비',
       '6': '사회공헌비',
-      '7': '기타'
+      '7': '활동지원비',
+      '8': '관리비',
+      '9': '예외지출',
+      '99': '기타'
     }
     @requests = Cost.where('buy_pament = ?', true)
 	end
@@ -87,7 +90,10 @@ class CostsController < ApplicationController
       '4': '재료구매비',
       '5': '예비비',
       '6': '사회공헌비',
-      '7': '기타'
+      '7': '활동지원비',
+      '8': '관리비',
+      '9': '예외지출',
+      '99': '기타'
     }
 	end
 
