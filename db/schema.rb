@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160928111810) do
+ActiveRecord::Schema.define(version: 20161003070429) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -159,9 +159,9 @@ ActiveRecord::Schema.define(version: 20160928111810) do
   create_table "recipes", force: :cascade do |t|
     t.integer  "material_id",   limit: 4
     t.integer  "menu_id",       limit: 4
-    t.decimal  "material_unit",           precision: 10
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.decimal  "material_unit",           precision: 6, scale: 2
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   add_index "recipes", ["material_id"], name: "index_recipes_on_material_id", using: :btree
