@@ -20,7 +20,7 @@
                     <li><a class="page-scroll" href="#information">MyInfo</a></li>
                     <li><a class="page-scroll" href="#introduce">Introduce</a></li>
                     <li><a class="page-scroll" href="#team">Team</a></li>
-                    <li><a class="page-scroll" href="#timeline">History</a></li>
+                    <!-- <li><a class="page-scroll" href="#timeline">History</a></li> -->
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
                     <% if @user.nil? %>
                     <% elsif @user.admin %>
@@ -37,27 +37,34 @@
         <li data-target="#inSlider" data-slide-to="1"></li>
     </ol>
     <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="container">
-
-                <div class="carousel-caption blank">
-                    <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">늘품 지원하기</a></p> -->
-                </div>
+    <div class="item active">
+        <div class="container">
+            <div class="carousel-caption blank">
+                <h1>안녕하세요, 늘품입니다.<br/> 우리는 이제 시작입니다.</h1>
+                <p>무한한 가능성을 품은 늘품 속에서, 지기들은 성장하고 있습니다.</p>
+                    <!-- <a class="btn btn-lg btn-primary" href="#" role="button">늘품 회원가입</a> -->
+                    <!-- <a class="caption-link" href="#" role="button">Inspinia Theme</a> -->
             </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back one animated fadeInLeft"></div>
+            <!--  <div class="carousel-image wow zoomIn">
+                <img src="<%= image_path('landing/laptop.png') %>" alt="laptop"/>
+            </div> -->
+        </div>
+        <!-- Set background for slide in css -->
+        <div class="header-back one animated fadeInLeft"></div>
 
-        </div>
-        <div class="item">
-            <div class="container">
-                <div class="carousel-caption blank">
-                    <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">늘품 지원하기</a></p> -->
-                </div>
-            </div>
-            <!-- Set background for slide in css -->
-            <div class="header-back two animated fadeInRight"></div>
-        </div>
     </div>
+    <div class="item">
+        <div class="container">
+            <div class="carousel-caption blank">
+                <h1>늘품은 학생들의 <br/> 열정으로 만들어져 갑니다</h1>
+                <p>돈으로 살 수 없는 가치를 만들어내며, 늘품은 성장하고 있습니다.</p>
+                <!-- <p><a class="btn btn-lg btn-primary" href="#" role="button">늘품 지원하기</a></p> -->
+            </div>
+        </div>
+        <!-- Set background for slide in css -->
+        <div class="header-back two animated fadeInRight"></div>
+    </div>
+</div>
     <a class="left carousel-control" href="#inSlider" role="button" data-slide="prev">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
@@ -110,7 +117,7 @@
                         <!-- 유저 적립금 -->
                         <div class="col-lg-5">
                             <img src="<%= image_path('logo_x2.png') %>" alt="profile">
-                            <h2><span style="color:#FFCE1F; font-weight: bold">커피콩</span> 현황</h2>
+                            <h2><span style="color:#FFCE1F; font-weight: bold">콩머니(Money)</span> 현황</h2>
                             <h1><span id="targetElem" style="color:#FFCE1F; font-size:70px; font-weight:bold"><%= @user.user_money %></span> 원</h1>
                         </div>
                         <!-- 유저 적립금 끝 -->
@@ -227,10 +234,10 @@
         </div>
     </div>
     <div class="row features-block">
-        <div class="col-lg-6 text-right wow animated fadeIn">
-            <img src="<%= image_path('landing/neulpum_act.jpeg') %>" alt="dashboard" class="img-responsive pull-left">
+        <div class="col-lg-6 col-xs-12 text-right wow animated fadeIn">
+            <img src="<%= image_path('landing/main_page2.jpeg') %>" alt="dashboard" class="img-responsive pull-left">
         </div>
-        <div class="col-lg-6 features-text wow fadeInRight">
+        <div class="col-lg-6 col-xs-12 features-text wow fadeInRight">
             <span class="navy">경영실습</span>
             <h2>늘품의 성장은 곧 나의 성장</h2>
             <p>늘품은 구매팀, 마케팅팀, 교육/인사팀, 회계팀, 기획단으로 이루어져있습니다. 지기들은 수업때 배웠던 유통, 마케팅, 회계등의 지식들을 카페 운영에 접목시키며 보다 발전된 늘품을 만들기 위해 노력하고 있습니다.</p>
@@ -239,10 +246,10 @@
     </div>
     <div class="navy-line-long"></div>
     <div class="row features-block">
-        <div class="col-lg-6 text-right wow fadeInLeft">
-            <img src="<%= image_path('landing/dashboard.png') %>" alt="dashboard" class="img-responsive pull-left">
+        <div class="col-lg-6 col-xs-12 text-right wow fadeInLeft">
+            <img src="<%= image_path('landing/main_page.JPG') %>" alt="dashboard" class="img-responsive pull-left">
         </div>
-        <div class="col-lg-6 features-text wow fadeInLeft">
+        <div class="col-lg-6 col-xs-12 features-text wow fadeInLeft">
             <span class="navy">커피교육</span>
             <h2>기본에 충실하자</h2>
             <p>매 학기 지기들이 바뀌는 늘품의 특성상 음료의 품질을 항상 일관되도록 만들기가 어렵습니다. 하지만 기본에 충실하기 위해 원두교육, 음료 실무교육, 음료 시장조사를 통해 새로운 음료, 좋은 품질의 음료를 제공하고자 열심히 교육하고 공부하고 있습니다.</p>
@@ -251,10 +258,10 @@
     </div>
     <div class="navy-line-long"></div>
     <div class="row features-block">
-        <div class="col-lg-6 text-right wow fadeInRight">
-            <img src="<%= image_path('landing/dashboard.png') %>" alt="dashboard" class="img-responsive pull-left">
+        <div class="col-lg-6 col-xs-12 text-right wow fadeInRight">
+            <img src="<%= image_path('landing/neulpum_act.jpeg') %>" alt="dashboard" class="img-responsive pull-left">
         </div>
-        <div class="col-lg-6 features-text wow fadeInLeft">
+        <div class="col-lg-6 col-xs-12 features-text wow fadeInLeft">
             <span class="navy">홈커밍데이</span>
             <h2>선후배, 동기 사이가 끈끈한 늘품</h2>
             <p>2006년에 시작된 늘품의 선배들은 사회의 다양한 분야에 진출하셨습니다. 매년 홈커밍데이를 통해 선배들과의 끈끈한 교류를 만들고 있습니다. 또한 정신없이 바쁜 근무 속에서 싹트는 동기애는 다른 어떤 동아리보다 끈끈하다고 자부합니다.</p>
