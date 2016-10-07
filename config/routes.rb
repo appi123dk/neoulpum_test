@@ -30,6 +30,7 @@ Myapp::Application.routes.draw do
 
   #files routes
   get "files/index"
+  get "files/data"
 
   #accounts routes
   get "accounts/account_new"

@@ -94,6 +94,7 @@
                 <a href=""><i class="fa fa-folder-open"></i> <span class="nav-label">늘품자료</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('files') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "전체보기", files_index_path %></li>
+                    <li class="<%= is_active_action('data') %>"><%= link_to "데이터보기", files_data_path %></li>
                 </ul>
             </li>
         </ul>
