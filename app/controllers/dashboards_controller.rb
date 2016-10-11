@@ -68,6 +68,69 @@ class DashboardsController < ApplicationController
 
   end
 
+  def marketing_dashboard
+    # 고객정보 모음
+    @users = User.where.not(user_email: "admin@neoulpum.com")
+    @grade = Hash.new
+    @grade = { "0": "일반", '1': '골드', '2': 'VIP', '3': 'VVIP'}
+    @jobs = Hash.new
+    @jobs = {'1': '학생', '2': '교직원', '3': '기'}
+    @colleges = Hash.new
+    @colleges = {
+      '1': '문과대학',
+      '2': '법과대학',
+      '3': '정경대학',
+      '4': '경영대학',
+      '5': '호텔관광대학',
+      '6': '이과대학',
+      '7': '생활과학대학',
+      '8': '의과대학',
+      '9': '한의과대학',
+      '10': '치과대학',
+      '11': '약학대학',
+      '12': '간호과학대학',
+      '13': '음악대학',
+      '14': '미술대학',
+      '15': '무용학부',
+      '16': '자율전공학부'
+    }
+    user_count = @users.count
+
+    # 데이터산출
+    # 늘품지기 혜택금
+    @employee_discount = Order.where('use_point = ?', 500).sum('use_point')
+
+    # 총 적립금
+    admin_id = User.where('user_email = ?', 'admin@neoulpum.com').take.id
+    not_admin_order = OrdersUser.where('user_id != ?', admin_id)
+    @use_point = 0
+    not_admin_order.each do |order|
+      @use_point += Order.find(order.order_id).use_point
+    end
+    @save_point = @users.sum("user_money")
+    @total_point = @use_point + @save_point
+    @avg_save_point = @save_point/user_count
+    @avg_use_point = @use_point/user_count
+
+    # 방문횟수
+    @visit_count = []
+    @visit_count.sort!
+    @users.each do |user|
+      @visit_count << OrdersUser.where('user_id = ?', user.id).count
+    end
+    @q1_visit_count = @visit_count[user_count/4]
+    @mid_visit_count = @visit_count[user_count/2]
+    @q3_visit_count = @visit_count[user_count*3/4]
+
+    # 학과인원 추출
+    @major_counts = Hash.new 0
+    majors = @users.pluck(:user_major)
+    majors.each do |major|
+      @major_counts[major] += 1
+    end
+
+  end
+
   def day_revenue
     today_order = Detail.where(created_at: params[:rev_date].to_date.beginning_of_day..params[:rev_date].to_date.end_of_day)
     @day_rev = 0

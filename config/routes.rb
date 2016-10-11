@@ -115,6 +115,7 @@ Myapp::Application.routes.draw do
   get "dashboards/dashboard_4_1"
   get "dashboards/dashboard_5"
   get "dashboards/neulpum_dashboard"
+  get "dashboards/marketing_dashboard"
   get "dashboards/day_revenue"
 
   get "pages/search_results"

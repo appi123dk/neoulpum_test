@@ -1,0 +1,284 @@
+<div class="wrapper wrapper-content animated fadeIn">
+	<div class="p-w-md m-t-sm">
+	  <!-- 메인 수치들 -->
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="row m-t-xs">
+	        <div class="col-xs-12">
+	            <h5 class="m-b-xs">이용자 수</h5>
+	            <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@users.count, delimiter: ',') %> 명</h1>
+	            <!-- <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div> -->
+	        </div>
+        </div>
+			</div>
+			<div class="col-sm-6">
+        <div class="row m-t-xs">
+            <div class="col-xs-4">
+                <h5 class="m-b-xs">방문횟수</h5>
+                <h1 class="no-margins" style="text-align:right"><%= number_with_delimiter(@mid_visit_count, delimiter: ',') %> 회 </h1>
+                <div class="font-bold text-navy">중앙값</div>
+                <table class="table small m-t-sm">
+                	<tbody>
+                		<tr>
+                			<td>
+                				<strong>1Q</strong>
+                			</td>
+                			<td>
+                				<%= number_with_delimiter(@q1_visit_count, delimiter: ',') %> 회 
+                			</td>
+                		</tr>
+                        <tr>
+                            <td>
+                                <strong>3Q</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@q3_visit_count, delimiter: ',') %> 회 
+                            </td>
+                        </tr>
+                	</tbody>
+                </table>
+            </div>
+            <div class="col-xs-4">
+                <h5 class="m-b-xs">사용 후 적립금</h5>
+                <h1 class="no-margins" style="text-align:right" ><%= number_with_delimiter(@users.sum("user_money"), delimiter: ',') %> 원 </h1>
+                <div class="font-bold text-navy">합계</div>
+                <table class="table small m-t-sm">
+                	<tbody>
+                		<tr>
+                			<td>
+                				<strong>평균</strong>
+                			</td>
+                			<td>
+                				<%= number_with_delimiter(@avg_save_point, delimiter: ',') %> 원
+                			</td>
+                		</tr>
+                	</tbody>
+                </table>
+            </div>
+            <div class="col-xs-4">
+                <h5 class="m-b-xs">사용 한 적립금</h5>
+                <h1 class="no-margins" style="text-align:right"><%= number_with_delimiter(@use_point, delimiter: ',') %> 원 </h1>
+                <div class="font-bold text-navy">합계</div>
+                <table class="table small m-t-sm">
+                	<tbody>
+                		<tr>
+                			<td>
+                				<strong>평균</strong>
+                			</td>
+                			<td>
+                				<%= number_with_delimiter(@avg_use_point, delimiter: ',') %> 원
+                			</td>
+                		</tr>
+                	</tbody>
+                </table>
+            </div>
+        </div>
+      </div>
+		</div>	
+		<hr>
+
+		<!-- 요약데이터 추가 -->
+		<div class="row">
+            <div class="col-sm-4">
+                <div class="row m-t-xs">
+                    <div class="col-xs-12">
+                        <h5 class="m-b-xs">학과별 비율</h5>
+                        <canvas id="doughnutChart" height="140"></canvas>
+                    </div>
+                </div>
+            </div>
+			<div class="col-sm-4">
+				<div class="row m-t-xs">
+        	        <div class="col-xs-12">
+        	            <h5 class="m-b-xs">적립금 사용 비율</h5>
+        	            <h1 style="font-size:40px; text-align:center"><%= @use_point * 100 / @total_point %> %</h1>
+        	            <div class="font-bold text-navy">적립금 사용액 / 적립금</div>
+        	        </div>
+                </div>
+            </div>
+			<div class="col-sm-4">
+				<div class="row m-t-xs">
+        	        <div class="col-xs-12">
+        	            <h5 class="m-b-xs">늘품지기 혜택</h5>
+        	            <h1 style="font-size:40px; text-align:center"><%= number_with_delimiter(@employee_discount, delimiter: ',') %> 원</h1>
+        	            <div class="font-bold text-navy">합계</div>
+        	        </div>
+                </div>
+			</div>
+		</div>
+		<hr>	
+		<!--표데이터 표 -->
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-title">
+					    <h5>늘품 고객현황</h5>
+					</div>
+					<div class="ibox-content">
+						<table class="table table-striped table-bordered table-hover user-table" data-page-length="50">
+							<thead>
+								<tr>
+								    <th>이메일</th>
+								    <th>이름</th>
+								    <th>전공</th>
+								    <th>직업</th>
+								    <th>적립금</th>
+								    <th>사용 한 적립금</th>
+								    <th>방문횟수</th>
+								    <th>등급</th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @users.each do |user| %>
+									<tr class="gradeC">
+									    <td><%= user.user_email %></td>
+									    <td style="text-align: center;"><%= user.user_name %></td>
+									    <td style="text-align: center;"><%= @colleges[:"#{user.user_major}"] %></td>
+									    <td style="text-align: center;"><%= @jobs[:"#{user.user_job}"] %></td>
+									    <td style="text-align: right;"><%= number_with_delimiter(user.user_money, delimiter: ',') %></td>
+									    <td style="text-align: right;"><%= number_with_delimiter(user.orders.sum("use_point"), delimiter: ',') %></td>
+									    <td style="text-align: center;"><%= user.orders.count %></td>
+									    <td style="text-align: center;"><%= @grade[:"#{user.user_rate}"] %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</div>
+
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+
+    $('.user-table').DataTable({
+    		// order: [0,'desc'],
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ]
+
+    });
+    var doughnutData = [
+        {
+            value: <%= @major_counts["1"] %>,
+            color: "#c88691",
+            highlight: "#c89699",
+            label: "문과대학"
+        },
+        {
+            value: <%= @major_counts["2"] %>,
+            color: "#ad85ba",
+            highlight: "#ad85ff",
+            label: "법과대학"
+        },
+        {
+            value: <%= @major_counts["3"] %>,
+            color: "#95a1c3",
+            highlight: "#95a1ff",
+            label: "정경대학"
+        },{
+            value: <%= @major_counts["4"] %>,
+            color: "#74a18e",
+            highlight: "#74ee8e",
+            label: "경영대학"
+        },{
+            value: <%= @major_counts["5"] %>,
+            color: "#818fb5",
+            highlight: "#818fff",
+            label: "호텔관광대학"
+        },{
+            value: <%= @major_counts["6"] %>,
+            color: "#b2c891",
+            highlight: "#1ab394",
+            label: "이과대학"
+        },{
+            value: <%= @major_counts["7"] %>,
+            color: "#b99c6b",
+            highlight: "#b99c99",
+            label: "생활과학대학"
+        },{
+            value: <%= @major_counts["8"] %>,
+            color: "#e49969",
+            highlight: "#ff9969",
+            label: "의과대학"
+        },{
+            value: <%= @major_counts["9"] %>,
+            color: "#c9c27f",
+            highlight: "#1ab394",
+            label: "한의과대학"
+        },{
+            value: <%= @major_counts["10"] %>,
+            color: "#949494",
+            highlight: "#f2f2f2",
+            label: "치과대학"
+        },{
+            value: <%= @major_counts["11"] %>,
+            color: "#b2b2b2",
+            highlight: "#f2f2f2",
+            label: "약학대학"
+        },{
+            value: <%= @major_counts["12"] %>,
+            color: "#d6d6d6",
+            highlight: "#f2f2f2",
+            label: "간호과학대학"
+        },{
+            value: <%= @major_counts["13"] %>,
+            color: "#91867e",
+            highlight: "#444444",
+            label: "음악대학"
+        },{
+            value: <%= @major_counts["14"] %>,
+            color: "#b2aaa4",
+            highlight: "#444444",
+            label: "미술대학"
+        },{
+            value: <%= @major_counts["15"] %>,
+            color: "#d9d5d2",
+            highlight: "#444444",
+            label: "무용학부"
+        },{
+            value: <%= @major_counts["16"] %>,
+            color: "#74a19e",
+            highlight: "#1ab394",
+            label: "자율전공학부"
+        }
+    ];
+
+    var doughnutOptions = {
+        segmentShowStroke: false,
+        percentageInnerCutout: 0, // This is 0 for Pie charts
+        animationSteps: 100,
+        animationEasing: "easeOutBounce",
+        animateRotate: true,
+        animateScale: false,
+        responsive: true,
+        // legend.labels.generateLabels: function(chart){}
+    };
+
+
+    var ctx = document.getElementById("doughnutChart").getContext("2d");
+    var myNewChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+
+});
+
+</script>
+
+<% end %>

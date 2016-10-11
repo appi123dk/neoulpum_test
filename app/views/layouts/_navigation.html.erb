@@ -29,6 +29,7 @@
                 <a href=""><i class="fa fa-area-chart"></i> <span class="nav-label">현황판</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('dashboards') %>">
                     <li class="<%= is_active_action('neulpum_dashboard') %>"><%= link_to "늘품현황판", dashboards_neulpum_dashboard_path %></li>
+                    <li class="<%= is_active_action('marketing_dashboard') %>"><%= link_to "고객현황판", dashboards_marketing_dashboard_path %></li>
                 </ul>
             </li>
             <li class="<%= is_active_controller('orders') %>">
