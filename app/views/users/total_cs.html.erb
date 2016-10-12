@@ -33,13 +33,15 @@
                         </thead>
                         <tbody>
                             <!-- each문 작성 -->
-                            <% @offcomments.each do |offcomment| %>   
-                                <tr class="gradeC">
-                                    <td style="text-align: center;"><%= offcomment.created_at.strftime("%Y-%m-%d") %></td>
-                                    <td style="text-align: center;"><%= offcomment.user_name %></td>
-                                    <td style="text-align: center;"><%= offcomment.user_number %></td>
-                                    <td style="text-align: left;"><%= offcomment.user_content %></td>
-                                </tr>
+                            <% unless @offcomments.nil? %>
+                                <% @offcomments.each do |offcomment| %>   
+                                    <tr class="gradeC">
+                                        <td style="text-align: center;"><%= offcomment.created_at.strftime("%Y-%m-%d") %></td>
+                                        <td style="text-align: center;"><%= offcomment.user_name %></td>
+                                        <td style="text-align: center;"><%= offcomment.user_number %></td>
+                                        <td style="text-align: left;"><%= offcomment.user_content %></td>
+                                    </tr>
+                                <% end %>
                             <% end %>
                             <!-- 끝 -->
                         </tbody>
