@@ -33,6 +33,14 @@
                 	<tbody>
                         <tr>
                             <td>
+                                <strong>최대값</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@visit_count.max, delimiter: ',') %> 회 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <strong>평균</strong>
                             </td>
                             <td>
@@ -111,6 +119,14 @@
                             </td>
                             <td>
                                 <%= number_with_delimiter(@use_point.count(1000)*100/@use_point.count, delimiter: ',') %> %
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>500원</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@use_point.count(500)*100/@use_point.count, delimiter: ',') %> %
                             </td>
                         </tr>
                 	</tbody>

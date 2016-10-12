@@ -108,6 +108,7 @@ class DashboardsController < ApplicationController
     not_admin_order.each do |order|
       @use_point << Order.find(order.order_id).use_point
     end
+    @use_point = @use_point - [0]
     @save_point = @users.sum("user_money")
     @total_point = @use_point.sum + @save_point
     @avg_save_point = @save_point/user_count
