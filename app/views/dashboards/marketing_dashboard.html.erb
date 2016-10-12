@@ -57,11 +57,19 @@
                 <table class="table small m-t-sm">
                 	<tbody>
                 		<tr>
+                            <td>
+                                <strong>평균</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@avg_save_point, delimiter: ',') %> 원
+                            </td>
+                        </tr>
+                        <tr>
                 			<td>
-                				<strong>평균</strong>
+                				<strong>최대값</strong>
                 			</td>
                 			<td>
-                				<%= number_with_delimiter(@avg_save_point, delimiter: ',') %> 원
+                				<%= number_with_delimiter(@users.maximum("user_money", delimiter: ',') %> 원
                 			</td>
                 		</tr>
                 	</tbody>
@@ -81,6 +89,14 @@
                 				<%= number_with_delimiter(@avg_use_point, delimiter: ',') %> 원
                 			</td>
                 		</tr>
+                        <tr>
+                            <td>
+                                <strong>최대값</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@use_point.max, delimiter: ',') %> 원
+                            </td>
+                        </tr>
                 	</tbody>
                 </table>
             </div>

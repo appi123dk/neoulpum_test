@@ -103,21 +103,21 @@ class DashboardsController < ApplicationController
     # 총 적립금
     admin_id = User.where('user_email = ?', 'admin@neoulpum.com').take.id
     not_admin_order = OrdersUser.where('user_id != ?', admin_id)
-    @use_point = 0
+    @use_point = []
     not_admin_order.each do |order|
-      @use_point += Order.find(order.order_id).use_point
+      @use_point << Order.find(order.order_id).use_point
     end
     @save_point = @users.sum("user_money")
-    @total_point = @use_point + @save_point
+    @total_point = @use_point.sum + @save_point
     @avg_save_point = @save_point/user_count
-    @avg_use_point = @use_point/user_count
+    @avg_use_point = @use_point.sum/user_count
 
     # 방문횟수
-    @visit_count = []
-    @visit_count.sort!
+    @visit_count = [] 
     @users.each do |user|
       @visit_count << OrdersUser.where('user_id = ?', user.id).count
     end
+    @visit_count.sort!
     @q1_visit_count = @visit_count[user_count/4]
     @mid_visit_count = @visit_count[user_count/2]
     @q3_visit_count = @visit_count[user_count*3/4]
