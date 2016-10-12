@@ -95,6 +95,7 @@ class DashboardsController < ApplicationController
       '16': '자율전공학부'
     }
     user_count = @users.count
+    @user_count = @users.count
 
     # 데이터산출
     # 늘품지기 혜택금

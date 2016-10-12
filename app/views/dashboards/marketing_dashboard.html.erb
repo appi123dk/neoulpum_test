@@ -18,7 +18,7 @@
 				<div class="row m-t-xs">
         	        <div class="col-xs-12">
         	            <h5 class="m-b-xs">이용자 수</h5>
-        	            <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@users.count, delimiter: ',') %> 명</h1>
+        	            <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@user_count, delimiter: ',') %> 명</h1>
         	            <!-- <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div> -->
         	        </div>
                 </div>
@@ -31,6 +31,14 @@
                 <div class="font-bold text-navy">중앙값</div>
                 <table class="table small m-t-sm">
                 	<tbody>
+                        <tr>
+                            <td>
+                                <strong>평균</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@visit_count.sum/@user_count, delimiter: ',') %> 회 
+                            </td>
+                        </tr>
                 		<tr>
                 			<td>
                 				<strong>1Q</strong>
@@ -81,20 +89,28 @@
                 <div class="font-bold text-navy">합계</div>
                 <table class="table small m-t-sm">
                 	<tbody>
-                		<tr>
-                			<td>
-                				<strong>평균</strong>
-                			</td>
-                			<td>
-                				<%= number_with_delimiter(@avg_use_point, delimiter: ',') %> 원
-                			</td>
-                		</tr>
                         <tr>
                             <td>
-                                <strong>최대값</strong>
+                                <strong>2000원</strong>
                             </td>
                             <td>
-                                <%= number_with_delimiter(@use_point.max, delimiter: ',') %> 원
+                                <%= number_with_delimiter(@use_point.count(2000)*100/@use_point.count, delimiter: ',') %> %
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>1500원</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@use_point.count(1500)*100/@use_point.count, delimiter: ',') %> %
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>1000원</strong>
+                            </td>
+                            <td>
+                                <%= number_with_delimiter(@use_point.count(1000)*100/@use_point.count, delimiter: ',') %> %
                             </td>
                         </tr>
                 	</tbody>
