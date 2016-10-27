@@ -288,7 +288,15 @@
                     <h2 id="total_price" style="text-align:right" class="font-bold">
                         0 원
                     </h2>
-                    <hr>            
+                    <hr>
+                    <div>
+                        <div class="form-group" style="margin-bottom: 0px;">
+                            <div class="col-lg-2">
+                                <input type="checkbox" style="padding-left:5px; padding-right:5px; text-align:right; font-size: 15px" class="form-control" name="tumbler">
+                            </div>
+                            <label class="col-lg-10 control-label" style="text-align:left; font-size:15px">텀블러 적립금 추가</label>
+                        </div>
+                    </div>          
                     <div class="m-t-sm">
                         <button class="btn btn-lg btn-primary btn-block btn-order"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
                         <a href="#" class="btn btn-white btn-sm btn-block btn-cancel"> 취소</a>
@@ -493,8 +501,14 @@ $(function(){
                         '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
                             '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.users.id +'">'+
                             '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                            '<p><strong>등급 : '+ data.users.user_rate +'</strong>  (최소 0 ~ 최대 3)</p>' +
                             '<strong>' + data.users.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.users.user_money)) + '원'+
                             '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                        '</div>'+
+                        '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px;">'+
+                        '<strong> 현금적립 / 쿠폰전환 </strong>' +
+                        '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
+                        '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
                         '</div>'
                     );
                 };        
@@ -504,7 +518,7 @@ $(function(){
 
     $(document).on('click', '.btn-point', function(){
         swal({  title: "적립금",
-                text: "사용할 적립금을 입력하세요",
+                text: "사용할 적립금을 입력하세요 (1000원 이상부터, 100원 단위 사용 가능)",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
@@ -531,8 +545,14 @@ $(function(){
                                 '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
                                     '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
                                     '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                                    '<p><strong>등급 : '+ data.user_rate +'</strong>  (최소 0 ~ 최대 3)</p>' +
                                     '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
                                     '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                                '</div>'+
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px;">'+
+                                '<strong> 현금적립 / 쿠폰전환 </strong>' +
+                                '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
+                                '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
                                 '</div>'
                             );
                             var price = append_menu(menu_array),
@@ -542,6 +562,98 @@ $(function(){
                         }
                     });
                     swal("적립금을 사용하였습니다", numberWithCommas( inputValue )+ "원 사용", "success");
+                });
+    });
+
+    // 선입금 적립
+    $(document).on('click', '.btn-prepoint', function(){
+        swal({  title: "선입금(현금) 적립",
+                text: "적립할 액수를 입력하세요",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "적립할 액수 입력" },
+                function(inputValue){
+                    if (inputValue === false)
+                        return false;
+                    if (inputValue === "") {
+                        swal.showInputError("적립할 금액을 입력해주세요!");
+                        return false
+                    }
+                    //AJAX 추가
+                    $.ajax({
+                        data: {
+                            user_id: $("#user_point").val(),
+                            user_point: inputValue
+                        },
+                        url: "/orders/user_prepoint",
+                        success: function(data){
+                            use_point += parseInt(inputValue);
+                            $(".user-point").remove();
+                            $(".user-info").append(
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                                    '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
+                                    '<p><strong>등급 : '+ data.user_rate +'</strong>  (최소 0 ~ 최대 3)</p>' +
+                                    '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                                    '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
+                                    '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                                '</div>'+
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px;">'+
+                                '<strong> 현금적립 / 쿠폰전환 </strong>' +
+                                '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
+                                '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
+                                '</div>'
+                            );
+                        }
+                    });
+                    swal("적립 되었습니다", numberWithCommas( inputValue )+ "원 적립", "success");
+                });
+    });
+
+    // 쿠폰전환
+    $(document).on('click', '.btn-coupon', function(){
+        swal({  title: "쿠폰-적립금 전환",
+                text: "전환할 액수를 입력하세요(쿠폰 1개당 200원)",
+                type: "input",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                animation: "slide-from-top",
+                inputPlaceholder: "전환할 액수 입력" },
+                function(inputValue){
+                    if (inputValue === false)
+                        return false;
+                    if (inputValue === "") {
+                        swal.showInputError("전환할 금액을 입력해주세요!");
+                        return false
+                    }
+                    //AJAX 추가
+                    $.ajax({
+                        data: {
+                            user_id: $("#user_point").val(),
+                            user_point: inputValue
+                        },
+                        url: "/orders/user_coupon",
+                        success: function(data){
+                            use_point += parseInt(inputValue);
+                            $(".user-point").remove();
+                            $(".user-info").append(
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
+                                    '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
+                                    '<p><strong>등급 : '+ data.user_rate +'</strong>  (최소 0 ~ 최대 3)</p>' +
+                                    '<input type="number" name = "use_point" style="display:none" value="'+ use_point +'">'+
+                                    '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
+                                    '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
+                                '</div>'+
+                                '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px;">'+
+                                '<strong> 현금적립 / 쿠폰전환 </strong>' +
+                                '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
+                                '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
+                                '</div>'
+                            );
+                        }
+                    });
+                    swal("전환 되었습니다", numberWithCommas( inputValue )+ "원 전환", "success");
                 });
     });
 

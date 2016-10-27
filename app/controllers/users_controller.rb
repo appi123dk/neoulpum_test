@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 			redirect_to '/'
 		else 
 			session[:user_id] = user.id
-			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()).where('user_id = ?', user.id).count
+			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', user.id).count
 			rate = 0
 			if count < 5
 				rate = 0
@@ -98,9 +98,6 @@ class UsersController < ApplicationController
 
 	def money
 		if admin_user
-			account = Account.last
-			account.saving_point += params[:user_money].to_i
-			account.save
 			user = User.find(params[:id])
 			user.user_money += params[:user_money].to_i
 			user.save
@@ -174,7 +171,7 @@ class UsersController < ApplicationController
 	def user_rate
 		users = User.all
 		users.each do |user|
-			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()).where('user_id = ?', user.id).count
+			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', user.id).count
 			rate = 0
 			if count < 5
 				rate = 0

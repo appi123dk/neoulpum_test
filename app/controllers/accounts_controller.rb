@@ -87,7 +87,6 @@ class AccountsController < ApplicationController
 					sale.save
 				end
 			end
-
 		end
 
 		# update
@@ -102,6 +101,24 @@ class AccountsController < ApplicationController
 		account.use_point = @point
 		account.employee_name = params[:employee_name]
 		account.save
+
+		# 유저등급 최신화
+		users = User.all
+		users.each do |user|
+			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', user.id).count
+			rate = 0
+			if count < 5
+				rate = 0
+			elsif count < 15
+				rate = 1
+			elsif count < 35
+				rate = 2
+			else
+				rate = 3
+			end
+			user.user_rate = rate
+			user.save
+		end
 
 		redirect_to '/accounts/account_index'
 

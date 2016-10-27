@@ -16,6 +16,24 @@ class OrdersController < ApplicationController
 		render :json => @user
 	end
 
+	def user_coupon
+		@user = User.find(params[:user_id])
+		@user.user_money += params[:user_point].to_i
+		@user.save
+		render :json => @user
+	end
+
+	def user_prepoint
+		@user = User.find(params[:user_id])
+		@user.user_money += params[:user_point].to_i
+		@user.save
+
+		account = Account.last
+		account.saving_point += params[:user_point].to_i
+		account.save
+		render :json => @user
+	end
+
 	def find_user
 		employee = Employee.where('employee_phone = ?', params[:user_number].to_s).take
 		if employee.nil?
@@ -51,7 +69,22 @@ class OrdersController < ApplicationController
 		unless params[:user_id].nil?
 			OrdersUser.create(order_id: last_order, user_id: params[:user_id])
 			user = User.find(params[:user_id])
-			user.user_money += point/10
+
+			#텀블러 적용
+			unless params[:tumbler].nil?
+				user.user_money += 100
+			end
+
+			#등급별 차등적용
+			if user.user_rate == 0
+				user.user_money += point/10
+			elsif user.user_rate == 1
+				user.user_money += point/10 * 1.1
+			elsif user.user_rate == 2
+				user.user_money += point/10 * 1.3
+			else
+				user.user_money += point/10 * 1.5
+			end
 			user.save
 		end
 
