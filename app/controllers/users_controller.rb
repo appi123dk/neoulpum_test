@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 		@user.user_number = params[:user_number]
 		@user.user_major = params[:user_major]
 		@user.user_job = params[:user_job]
+		@user.birthday = params[:birthday]
 		if @user.save
 			session[:user_id] = User.last.id
 			redirect_to '/'
@@ -18,14 +19,36 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def update
+		user = User.find(params[:id])
+		user.user_email = params[:user_email]
+		user.user_name = params[:user_name]
+		user.password = params[:password]
+		user.user_number = params[:user_number]
+		user.birthday = params[:birthday]
+		user.save
+
+		redirect_to '/'
+	end
+
 	def login_process
 		user = User.where('user_email = ? AND password = ?',params[:user_email], params[:password]).take
 		if user.nil?
 			redirect_to '/'
 		else 
 			session[:user_id] = user.id
-			count = OrdersUser.where('user_id = ?', user.id).count
-			user.user_rate = count/15
+			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()).where('user_id = ?', user.id).count
+			rate = 0
+			if count < 5
+				rate = 0
+			elsif count < 15
+				rate = 1
+			elsif count < 35
+				rate = 2
+			else
+				rate = 3
+			end
+			user.user_rate = rate
 			user.save
 			redirect_to '/'
 		end
@@ -151,8 +174,18 @@ class UsersController < ApplicationController
 	def user_rate
 		users = User.all
 		users.each do |user|
-			count = OrdersUser.where('user_id = ?', user.id).count
-			user.user_rate = count/15
+			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()).where('user_id = ?', user.id).count
+			rate = 0
+			if count < 5
+				rate = 0
+			elsif count < 15
+				rate = 1
+			elsif count < 35
+				rate = 2
+			else
+				rate = 3
+			end
+			user.user_rate = rate
 			user.save
 		end
 		redirect_to '/users/index'

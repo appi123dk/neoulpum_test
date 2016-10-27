@@ -1,0 +1,90 @@
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+            <!-- 로그인 폼화면 -->
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <h2 style="text-align: center;">회원정보수정</h3>
+                    <form class="m-t" role="form" action="/users/update/<%= @user.id %>" method="POST" id="userRegister">
+                        <div class="form-group">
+                            <label for="user_email">E-mail</label>
+                            <input type="email" class="form-control" placeholder="이메일 주소" required="" name="user_email" id="user_email" value="<%= @user.user_email %>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_name">Nickname</label>
+                            <input type="text" class="form-control" placeholder="이름 or 별명" required="" name="user_name" value="<%= @user.user_name %>">
+                            <p>* 음료가 나왔을 때 불러드릴 <span class="text-navy">이름 또는 별명</span>을 적어주세요 *</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" placeholder="비밀번호" required="" name="password" id="password" value="<%= @user.password %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="c_password">Confirm password</label>
+                            <input type="password" class="form-control" placeholder="비밀번호를 다시 입력해주세요" required="" name="c_password" value="<%= @user.password %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">생년월일(6자리)</label>
+                            <input type="text" class="form-control" placeholder="ex) 910607" required="" name="birthday" value="<%= @user.birthday %>">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_number">Phone</label>
+                            <input type="tel" class="form-control" placeholder="'-'없이 입력(01023234545)" required="" name="user_number" id="user_number" value="<%= @user.user_number %>">
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">수정완료</button>
+                        <a class="btn btn-sm btn-warning btn-block" href="/">취소</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Neulpum
+            </div>
+            <div class="col-md-6 text-right">
+                <small>© 2016</small>
+            </div>
+        </div>
+    </div>
+<% content_for :javascript do %>
+
+<script type="text/javascript">
+
+
+$(function() {
+    $("#userRegister").validate({
+        
+        rules: {
+            user_number: {
+                required: true,
+                number: true
+            },
+            c_password: {
+                required: true,
+                equalTo: "#password"
+            },
+            user_email: {
+              required: true,
+              email: true,
+            },
+            user_number: {
+              required: true,
+              minlength: 11,
+              maxlength: 11,
+            },
+            birthday: {
+              required: true,
+              minlength: 6,
+              maxlength: 6
+            }
+        }
+    });
+
+});
+
+</script>
+
+<% end %>
+
+
+

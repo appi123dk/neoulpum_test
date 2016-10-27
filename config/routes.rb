@@ -89,6 +89,7 @@ Myapp::Application.routes.draw do
   get "users/check_email"
   get "users/check_number"
   get "users/user_rate"
+  post "users/update/:id", to: 'users#update'
 
   # menu routes
     #메뉴관련
@@ -130,6 +131,7 @@ Myapp::Application.routes.draw do
   get "pages/internal_server_error"
   get "pages/empty_page"
   get "pages/confirm_duplication"
+  get "pages/edit/:id", to: 'pages#edit'
 
 
   get "landing/index"

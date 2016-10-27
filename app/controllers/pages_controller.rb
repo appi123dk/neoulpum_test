@@ -27,6 +27,30 @@ class PagesController < ApplicationController
       render :layout => "empty"
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @colleges = Hash.new
+    @colleges = {
+      '1': '문과대학',
+      '2': '법과대학',
+      '3': '정경대학',
+      '4': '경영대학',
+      '5': '호텔관광대학',
+      '6': '이과대학',
+      '7': '생활과학대학',
+      '8': '의과대학',
+      '9': '한의과대학',
+      '10': '치과대학',
+      '11': '약학대학',
+      '12': '간호과학대학',
+      '13': '음악대학',
+      '14': '미술대학',
+      '15': '무용학부',
+      '16': '자율전공학'
+    }
+    render :layout => "empty"
+  end
+
   def register
     @colleges = Hash.new
     @colleges = {

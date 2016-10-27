@@ -25,6 +25,8 @@
                     <% if @user.nil? %>
                     <% elsif @user.admin %>
                         <li><a class="page-scroll" href="<%= url_for :controller => 'orders', :action => 'order_open' %>">관리자페이지</a></li>
+                    <% else %>
+                        <li><a class="page-scroll" href='<%= url_for :controller => 'pages', :action => 'edit', :id => "#{@user.id}" %>'>회원정보수정</a></li>
                     <% end %>
                 </ul>
             </div>
@@ -128,10 +130,27 @@
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     현재 등급 : <span style="color:#FFCE1F"><%= @user_level %></span>
                                 </h2>
-                                <h4 style="text-align:right">방문 횟수 : <%= @visit_count >= 45 ? 15 : @visit_count % 15 %> / 15</h4>
-                                <div class="progress progress-mini">
-                                    <div style="width: <%= @visit_count % 15 * 100 / 15 %>%;" class="progress-bar progress-bar-warning"></div>
-                                </div>
+                                <% if @user.user_rate == 0 %>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 5</h4>
+                                    <div class="progress progress-mini">
+                                        <div style="width: <%= @visit_count * 100 / 5 %>%;" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                <% elsif @user.user_rate == 1 %>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 15</h4>
+                                    <div class="progress progress-mini">
+                                        <div style="width: <%= (@visit_count - 5) * 100 / 10 %>%;" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                <% elsif @user.user_rate == 2 %>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 35</h4>
+                                    <div class="progress progress-mini">
+                                        <div style="width: <%= (@visit_count - 15) * 100 / 20 %>%;" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                <% else %>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %></h4>
+                                    <div class="progress progress-mini">
+                                        <div style="width: 100%;" class="progress-bar progress-bar-warning"></div>
+                                    </div>
+                                <% end %>
                             </div>
                             <!-- 유저 등급 끝 -->
                             <!-- 음료 Top3 -->
@@ -207,7 +226,7 @@
                 </div>
                 <div class="widget-text-box text-center" style="padding-top: 0px;">
                     <h4>늘품을 이용하면서 좋았던 점, 불편했던 점이 있으신가요? </br>의견을 주시면 적극 반영하도록 하겠습니다!</h3>
-                    <button type="button"class="btn btn-warning btn-block cs-form">의견건의 작성</button>
+                    <a class="btn btn-warning btn-block cs-form">의견건의 작성</a>
                 </div>
                 <div class="chat-form" style="display:none">
                     <form role="form">

@@ -60,9 +60,9 @@ class OrdersController < ApplicationController
 
 	def order_manage
 		@pre_money = Account.where('account_date=?',Date.today()).take
-		@orders = Order.limit(50).order('id desc').where('make_confirm = ?', false)
+		@orders = Order.limit(50).order('id desc').where('make_confirm = ?', false).reverse_order
 		@shot = 0
-		@make_orders = Order.limit(50).order('id desc').where('order_confirm = ? AND make_confirm = ?', false, true)
+		@make_orders = Order.limit(50).order('id desc').where('order_confirm = ? AND make_confirm = ?', false, true).reverse_order
 	end
 
 	def make_confirm
