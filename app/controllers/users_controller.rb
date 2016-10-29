@@ -198,4 +198,22 @@ class UsersController < ApplicationController
 		render json: @user
 	end
 
+	def find_friend
+		@user = User.where('user_number = ?', params[:user_number].to_s).take
+		render json: @user
+	end
+
+	def present_money
+		@send_user = User.find(params[:send_user_id])
+		receive_user = User.find(params[:receive_user_id])
+		money = params[:send_money].to_i
+
+		@send_user.user_money -= money
+		@send_user.save
+		receive_user.user_money += money
+		receive_user.save
+
+		render json: @send_user
+	end
+
 end

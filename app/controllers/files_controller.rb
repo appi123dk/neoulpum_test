@@ -5,11 +5,6 @@ class FilesController < ApplicationController
 	end
 
 	def data
-		num = Detail.last.id
-		if num < 300
-			@details = Detail.last(num)
-		else
-			@details = Detail.last(300)
-		end
+			@details = Detail.all
 	end
 end

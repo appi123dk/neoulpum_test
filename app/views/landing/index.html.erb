@@ -221,6 +221,13 @@
                                 </table>
                             </div>
                             <!-- 음료 Top3 끝-->
+                            <div class="before-btn">
+                                <button type="button" class="btn btn-block btn-info sent-money">콩머니 선물하기</button>
+                            </div>
+                            <div class="after-btn" style="display:none">
+                                <input type="text" style="color:black;" class="form-control find-friend" placeholder="친구의 전화번호를 입력해주세요('-' 제외한 11자리)">
+                                <button type="button" class="btn btn-block btn-info find-friend-btn">전화번호 확인</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -420,6 +427,7 @@
 
 $(function() {
 
+    $('.after-btn').hide();
     $('body').addClass('landing-page');
     $('body').attr('id', 'page-top');
 
@@ -509,7 +517,77 @@ $(function() {
                     });
                 }
             });
-        });
+    });
+
+    $(".sent-money").click(function(){
+        $(".before-btn").hide();
+        $(".after-btn").show(100);
+    });
+
+    $(".find-friend-btn").click(function(){
+        var phone_num = $(".find-friend").val();
+        $.ajax({
+                data: {
+                    user_number: phone_num
+                },
+                method: "GET",
+                url: "/users/find_friend",
+                success: function(data){
+                    console.log(data);
+                    if (data === null){
+                        swal("번호를 잘못 입력하셨습니다", "전화번호 " + phone_num + " 의 고객정보가 존재하지 않습니다.", "warning")
+                    } else {
+                       swal({
+                          title: "콩-money를 선물하세요",
+                          text: data.user_name + " 님에게 선물할 금액을 입력해주세요",
+                          type: "input",
+                          showCancelButton: true,
+                          closeOnConfirm: false,
+                          animation: "slide-from-top",
+                          inputPlaceholder: "금액을 입력해주세요"
+                        },
+                        function(inputValue){
+                          if (inputValue === false) return false;
+                          
+                          if (inputValue === "") {
+                            swal.showInputError("금액을 입력해주세요!");
+                            return false
+                          }
+
+                          if (inputValue >= parseInt(user_money)) {
+                            swal.showInputError("현재 적립금보다 많은 금액을 선물할 수 없습니다");
+                            return false
+                          }
+
+                          var current_user = <%= @user.nil? ? "" : @user.id %>
+                          console.log(current_user);
+
+                          $.ajax({
+                            data: {
+                                send_user_id: current_user,
+                                receive_user_id: data.id,
+                                send_money: inputValue
+                            },
+                            method: "GET",
+                            url: "/users/present_money",
+                            success: function(data){
+                                swal({
+                                    title: "정상적으로 콩머니가 전달되었습니다",
+                                    text: '이용해주셔서 감사합니다',
+                                    type: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: false
+                                });
+                                var numCount = new CountUp("targetElem", 0, data.user_money, 0, 2, options);
+                                numCount.start();
+                            }
+                           });
+                        }); 
+                    }
+                }
+            });
+        
+    });
 
 });
 

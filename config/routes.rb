@@ -82,6 +82,8 @@ Myapp::Application.routes.draw do
   get "users/index"
   post "users/create"
   post "users/find_user"
+  get "users/find_friend"
+  get "users/present_money"
   get "users/money/:id", to: 'users#money'
   get "users/user_cs"
   get "users/total_cs"
