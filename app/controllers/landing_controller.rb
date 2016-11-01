@@ -15,13 +15,13 @@ class LandingController < ApplicationController
 			order_menu_arr.each do |menu|
 			  @counts[menu] += 1
 			end
-			@user_level = '일반'
+			@user_level = '콩알'
 			if @user.user_rate == 1
-				@user_level = '골드'
+				@user_level = '새싹'
 			elsif @user.user_rate == 2
-				@user_level = 'VIP'
+				@user_level = '떡잎'
 			elsif @user.user_rate >= 3
-				@user_level = 'VVIP'
+				@user_level = '킹콩'
 			end
 
   	end

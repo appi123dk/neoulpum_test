@@ -68,9 +68,9 @@ class UsersController < ApplicationController
 				render :json => @f_user
 			end
 			@grade = Hash.new
-			@grade = { "0": "일반", '1': '골드', '2': 'VIP', '3': 'VVIP'}
+			@grade = { "0": "콩알", '1': '새싹', '2': '떡잎', '3': '킹콩'}
 			@jobs = Hash.new
-			@jobs = {'1': '학생', '2': '교직원', '3': '기'}
+			@jobs = {'1': '학생', '2': '교직원', '3': '기타'}
 			@colleges = Hash.new
 	    @colleges = {
 	      '1': '문과대학',
