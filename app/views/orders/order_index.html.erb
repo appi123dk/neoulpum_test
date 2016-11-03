@@ -505,7 +505,7 @@ $(function(){
                             '<strong>' + data.users.user_name +' | </strong> 적립금 : '+ numberWithCommas(parseInt(data.users.user_money)) + '원'+
                             '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
                         '</div>'+
-                        '<div class="alert alert-warning alert-dismissable" style="padding-right:15px;">'+
+                        '<div class="alert alert-warning alert-dismissable user-point2" style="padding-right:15px;">'+
                         '<strong> 현금적립 / 쿠폰전환 </strong>' +
                         '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
                         '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
@@ -541,6 +541,7 @@ $(function(){
                         success: function(data){
                             use_point += parseInt(inputValue);
                             $(".user-point").remove();
+                            $(".user-point2").remove();
                             $(".user-info").append(
                                 '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
                                     '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
@@ -549,7 +550,7 @@ $(function(){
                                     '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
                                     '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
                                 '</div>'+
-                                '<div class="alert alert-warning alert-dismissable" style="padding-right:15px;">'+
+                                '<div class="alert alert-warning alert-dismissable user-point2" style="padding-right:15px;">'+
                                 '<strong> 현금적립 / 쿠폰전환 </strong>' +
                                 '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
                                 '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
@@ -589,8 +590,9 @@ $(function(){
                         },
                         url: "/orders/user_prepoint",
                         success: function(data){
-                            use_point += parseInt(inputValue);
+                            // use_point += parseInt(inputValue);
                             $(".user-point").remove();
+                            $(".user-point2").remove();
                             $(".user-info").append(
                                 '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
                                     '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
@@ -599,12 +601,16 @@ $(function(){
                                     '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
                                     '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
                                 '</div>'+
-                                '<div class="alert alert-warning alert-dismissable" style="padding-right:15px;">'+
+                                '<div class="alert alert-warning alert-dismissable user-point2" style="padding-right:15px;">'+
                                 '<strong> 현금적립 / 쿠폰전환 </strong>' +
                                 '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
                                 '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
                                 '</div>'
                             );
+                            // var price = append_menu(menu_array),
+                            //     discount_price = price + use_point;
+                            // add_new_price();
+                            // $("#total_price").text(numberWithCommas(discount_price) + ' 원');
                         }
                     });
                     swal("적립 되었습니다", numberWithCommas( inputValue )+ "원 적립", "success");
@@ -635,8 +641,9 @@ $(function(){
                         },
                         url: "/orders/user_coupon",
                         success: function(data){
-                            use_point += parseInt(inputValue);
+                            // use_point += parseInt(inputValue);
                             $(".user-point").remove();
+                            $(".user-point2").remove();
                             $(".user-info").append(
                                 '<div class="alert alert-warning alert-dismissable user-point" style="padding-right:15px">'+
                                     '<input type="text" id="user_point" name = "user_id" style="display:none" value="'+ data.id +'">'+
@@ -645,7 +652,7 @@ $(function(){
                                     '<strong>' + data.user_name +' | </strong> 적립금 : '+ numberWithCommas(data.user_money) + '원'+
                                     '<button aria-hidden="true" class="btn btn-xs btn-warning btn-point" style="float:right; margin-top: -1px;" type="button">사용</button>'+
                                 '</div>'+
-                                '<div class="alert alert-warning alert-dismissable" style="padding-right:15px;">'+
+                                '<div class="alert alert-warning alert-dismissable user-point2" style="padding-right:15px;">'+
                                 '<strong> 현금적립 / 쿠폰전환 </strong>' +
                                 '<button aria-hidden="true" class="btn btn-xs btn-warning btn-coupon" style="float:right; margin-top: -1px;" type="button">쿠폰전환</button>'+
                                 '<button aria-hidden="true" class="btn btn-xs btn-primary btn-prepoint" style="float:right; margin-top: -1px;" type="button">현금적립</button>'+
