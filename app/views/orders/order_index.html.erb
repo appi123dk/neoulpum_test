@@ -31,6 +31,7 @@
             <div class="tab-content">
                 <div id="coffee" class="tab-pane active">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -42,7 +43,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">    
                         <h3 class="col-md-12">ICE 음료</h3>
                             <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -54,10 +56,12 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>    
                     </div>
                 </div>
                 <div id="tea" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -69,7 +73,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>   
+                        <div class="ice-menu"> 
                         <h3 class="col-md-12">ICE 음료</h3>
                              <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -81,10 +86,13 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>
                     </div>
                 </div>
+
                 <div id="drink" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 1, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -96,7 +104,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">    
                         <h3 class="col-md-12">ICE 음료</h3>
                             <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 1, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -108,10 +117,12 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>    
                     </div>
                 </div>
                 <div id="t_coffee" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -123,7 +134,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">    
                         <h3 class="col-md-12">ICE 음료</h3>
                             <% @coffee_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -135,10 +147,12 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>
                     </div>
                 </div>
                 <div id="t_tea" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -150,7 +164,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">    
                         <h3 class="col-md-12">ICE 음료</h3>
                              <% @tea_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -162,10 +177,12 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>
                     </div>
                 </div>
                 <div id="t_drink" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 2, '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -177,7 +194,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">
                         <h3 class="col-md-12">ICE 음료</h3>
                             <% @drink_menus.where('menu_size = ? AND menu_degree = ?', 2, '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -189,10 +207,12 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>
                     </div>
                 </div>
                 <div id="promo" class="tab-pane">
                     <div class="panel-body">
+                        <div class="hot-menu">
                         <h3 class="col-md-12">HOT 음료</h3>
                             <% @promo_menus.where('menu_degree = ?', '1').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -204,7 +224,8 @@
                                     </button>
                                 </div>
                             <% end %>
-                            
+                        </div>
+                        <div class="ice-menu">  
                         <h3 class="col-md-12">ICE 음료</h3>
                             <% @promo_menus.where('menu_degree = ?', '2').each do |menu| %>
                                 <% menu.menu_degree == '1' ? degree = 'H' : degree = 'I' %>
@@ -216,6 +237,7 @@
                                     </button>
                                 </div>
                             <% end %>
+                        </div>
                     </div>
                 </div>
                 <div id="etc" class="tab-pane">
@@ -411,6 +433,19 @@ function add_new_price(){
 $(function(){
     is_in_menu();
     // $("body").addClass("mini-navbar");
+
+    var date = new Date(),
+        month = date.getMonth();
+
+    if (month >= 3 && month <= 8 ){
+        $("#coffee .hot-menu").appendTo("#coffee .ice-menu")
+        $("#tea .hot-menu").appendTo("#tea .ice-menu")
+        $("#drink .hot-menu").appendTo("#drink .ice-menu")
+        $("#t_coffee .hot-menu").appendTo("#t_coffee .ice-menu")
+        $("#t_tea .hot-menu").appendTo("#t_tea .ice-menu")
+        $("#t_drink .hot-menu").appendTo("#t_drink .ice-menu")
+        $("#promo .hot-menu").appendTo("#promo .ice-menu")
+    }
     
     // 메뉴 클릭시 내역에 뜨도록 하는 구문
     $('.btn-menu').click(function(){
@@ -484,6 +519,7 @@ $(function(){
             success: function(data){
                 $(".user-info hr").remove();
                 $(".user-point").remove();
+                $(".user-point2").remove();
                 if (data.employee != null){
                     $(".user-info").append(
                         '<hr>' +

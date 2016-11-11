@@ -3,7 +3,7 @@
             <!-- 로그인 폼화면 -->
             <div class="col-md-6">
                 <div class="ibox-content">
-                    <h2 style="text-align: center;">회원정보수정</h3>
+                    <h2 style="text-align: center;">회원정보수정(Edit-profile)</h3>
                     <form class="m-t" role="form" action="/users/update/<%= @user.id %>" method="POST" id="userRegister">
                         <div class="form-group">
                             <label for="user_email">E-mail</label>
@@ -12,7 +12,8 @@
                         <div class="form-group">
                             <label for="user_name">Nickname</label>
                             <input type="text" class="form-control" placeholder="이름 or 별명" required="" name="user_name" value="<%= @user.user_name %>">
-                            <p>* 음료가 나왔을 때 불러드릴 <span class="text-navy">이름 또는 별명</span>을 적어주세요 *</p>
+                            <p>* <span class="text-navy">음료가 나왔을 때</span> 위의 이름으로 불러드립니다 *</p>
+                            <p>* <span class="text-navy">We'll call you the name </span> when your drinks are ready *</p>
                         </div>
                         <div class="form-group">
                             <label for="password">Password</label>
@@ -23,15 +24,15 @@
                             <input type="password" class="form-control" placeholder="비밀번호를 다시 입력해주세요" required="" name="c_password" value="<%= @user.password %>">
                         </div>
                         <div class="form-group">
-                            <label for="birthday">생년월일(6자리)</label>
+                            <label for="birthday">Birthday(6자리)</label>
                             <input type="text" class="form-control" placeholder="ex) 910607" required="" name="birthday" value="<%= @user.birthday %>">
                         </div>
                         <div class="form-group">
                             <label for="user_number">Phone</label>
                             <input type="tel" class="form-control" placeholder="'-'없이 입력(01023234545)" required="" name="user_number" id="user_number" value="<%= @user.user_number %>">
                         </div>
-                        <button type="submit" class="btn btn-primary block full-width m-b">수정완료</button>
-                        <a class="btn btn-sm btn-warning btn-block" href="/">취소</a>
+                        <button type="submit" class="btn btn-primary block full-width m-b">완료(Confirm)</button>
+                        <a class="btn btn-sm btn-warning btn-block" href="/">취소(Cancle)</a>
                     </form>
                 </div>
             </div>

@@ -9,25 +9,25 @@
                     <span class="icon-bar"></span>
                 </button>
                 <% if @user.nil? %>
-                    <a class="navbar-brand" href="<%= url_for :controller => 'pages', :action => 'login_2' %>"> 로그인</a>
+                    <a class="navbar-brand" href="<%= url_for :controller => 'pages', :action => 'login_2' %>"> Log-in</a>
                 <% else %>
-                    <a class="navbar-brand" href="<%= url_for :controller => 'users', :action => 'logout' %>"> 로그아웃</a>
+                    <a class="navbar-brand" href="<%= url_for :controller => 'users', :action => 'logout' %>"> Logout</a>
                 <% end %>
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
+                    <% if @user.nil? %>
+                    <% elsif @user.admin %>
+                        <li><a class="page-scroll" href="<%= url_for :controller => 'orders', :action => 'order_open' %>">관리자페이지</a></li>
+                    <% else %>
+                        <li><a class="page-scroll" href='<%= url_for :controller => 'pages', :action => 'edit', :id => "#{@user.id}" %>'>회원정보수정(Edit)</a></li>
+                    <% end %>
                     <li><a class="page-scroll" href="#page-top">Home</a></li>
                     <li><a class="page-scroll" href="#information">MyInfo</a></li>
                     <li><a class="page-scroll" href="#introduce">Introduce</a></li>
                     <li><a class="page-scroll" href="#team">Team</a></li>
                     <!-- <li><a class="page-scroll" href="#timeline">History</a></li> -->
                     <li><a class="page-scroll" href="#contact">Contact</a></li>
-                    <% if @user.nil? %>
-                    <% elsif @user.admin %>
-                        <li><a class="page-scroll" href="<%= url_for :controller => 'orders', :action => 'order_open' %>">관리자페이지</a></li>
-                    <% else %>
-                        <li><a class="page-scroll" href='<%= url_for :controller => 'pages', :action => 'edit', :id => "#{@user.id}" %>'>회원정보수정</a></li>
-                    <% end %>
                 </ul>
             </div>
         </div>
@@ -110,6 +110,7 @@
                     <div class="m-b-md">
                         <h1 class="hello font-bold no-margins">
                             <%= @user.user_name %> 님 안녕하세요
+                            <a href="/pages/edit/<%= @user.id %>" class="btn btn-warning btn-sm">Edit-profile</a>
                         </h1>
                         <h2>
                             ( Card No. <%= @user.user_number %> )

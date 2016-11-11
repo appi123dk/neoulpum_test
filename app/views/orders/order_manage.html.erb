@@ -143,9 +143,14 @@
             }
         }
         duplicate_arr = $.unique(duplicate_arr);
+        // console.log(duplicate_arr);
         $.each(duplicate_arr, function(index, value){
             var order_index = order_arr.indexOf(value);
-            $(".order-panel").eq(order_index).after("<span class='label label-danger'>중복</span>");
+            // console.log(order_index);
+            // console.log(value);
+            if (value != 0){
+                $(".order-panel").eq(order_index).after("<span class='label label-danger'>중복</span>");    
+            }
         });
         // 함수 끝
 
@@ -163,13 +168,11 @@
 
         $.each($(".shot-unit"), function(index, value){
             var shot = value.getAttribute("data-shot");
-            console.log(shot);
             $(".shot" + index).text(shot);
         });
 
         $.each($(".make-shot-unit"), function(index, value){
             var shot = value.getAttribute("data-shott");
-            console.log(shot);
             $(".shott" + index).text(shot);
         });
     });

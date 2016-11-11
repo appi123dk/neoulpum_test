@@ -30,21 +30,35 @@ class DashboardsController < ApplicationController
     month_account = Account.where('extract(month from account_date) = ? AND extract(year from account_date) = ?', month, year)
     today_order = Detail.where(created_at: Time.zone.now.beginning_of_day..Time.zone.now.end_of_day)
     
-    # 그래프에 날릴 매출값 함수
+    #100일단위로 수정
     @total_rev = 0
     @x_axis = []
     @y_axis = []
-    1.upto(last_day) do |day|
-      @x_axis << day.to_s + '일'
-      rev = month_account.where('extract(day from account_date) = ?', day).take
+    rev_date = Date.today-50..Date.today
+    rev_date.each do |date|
+      @x_axis << date.day.to_s + '일'
+      rev = Account.where('account_date = ?', date).take
       if rev.nil?
         @y_axis << 0
       else
         @y_axis << rev.revenue 
         @total_rev += rev.revenue
       end
-
     end
+
+    # 그래프에 날릴 매출값 함수
+    # @total_rev = 0
+    # @x_axis = []
+    # @y_axis = []
+    # 1.upto(last_day) do |day|
+    #   @x_axis << day.to_s + '일'
+    #   rev = month_account.where('extract(day from account_date) = ?', day).take
+    #   if rev.nil?
+    #     @y_axis << 0
+    #   else
+    #     @y_axis << rev.revenue 
+    #     @total_rev += rev.revenue
+    #   end
 
     # 일매출 그래프 매출값 함수
     @day_rev = 0
