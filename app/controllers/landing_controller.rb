@@ -24,6 +24,8 @@ class LandingController < ApplicationController
 				@user_level = '킹콩'
 			end
 
+      @user_order = @user.orders.where('order_confirm = ?', false)
+      @first_order = Order.where('order_confirm = ?', false).first
   	end
     @year = Date.today().year()
     Date.today().month().in?(2..7) ? @semseter = 1 : @semester = 2

@@ -39,7 +39,8 @@
                                     <h4 style="display:inline-block; width:80%"><%= order.order_number %> 번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shot<%= index %>"></span></h4>
                                 </div>
-                                <div class="panel-body" style="padding-bottom: 0px;">
+                                <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px">
+                                    <h6 style="text-align: right"><%= time_ago_in_words(order.created_at, include_seconds: true) %> ago</h6>
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-12">
@@ -83,7 +84,8 @@
                                     <h4 style="display:inline-block; width:80%"><%= order.order_number%> 번 | 이름 : <%= order.users.take.nil? ? "없음" : order.users.take.user_name %></h4>
                                     <h4 style="display:inline-block; width:20%; float:right;"> | 샷 : <span class="shott<%= index %>"></span></h4>
                                 </div>
-                                <div class="panel-body" style="padding-bottom: 0px;">
+                                <div class="panel-body" style="padding-bottom: 0px; padding-top: 0px">
+                                    <h6 style="text-align: right"><%= time_ago_in_words(order.created_at, include_seconds: true) %> ago</h6>
                                     <% order.details.each do |menu| %>
                                         <% detail_menu = Menu.find(menu.menu_id) %>
                                         <div class="col-md-12">

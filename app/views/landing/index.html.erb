@@ -104,6 +104,25 @@
             </div>
         </div>
     <% else %>
+        <!-- 주문한 음료현황 -->
+        <% unless @user_order.take.nil? %>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="widget-head-color-box navy-bg p-lg text-center">
+                        <h2>주문현황</h2>
+                        <h3 style="color:#FFCE1F; text-align:left">대기자 수 : <%= @user_order.last.id - @first_order.id %> 명</h3></br>
+                        <h3 style="text-align:left">주문 음료 내역</h3>
+                        <h4 style="text-align:right">
+                            <% @user_order.each do |order|%>
+                                <% order.details.each do |detail| %>
+                                    <%= detail.menu.menu_title %> * <%= detail.order_unit %> </br></br>
+                                <% end %>
+                            <% end %>
+                        </h4> 
+                    </div>
+                </div>
+            </div>
+        <% end %>
         <div class="row">
             <div class="col-lg-12">
                 <div class="widget-head-color-box navy-bg p-lg text-center">

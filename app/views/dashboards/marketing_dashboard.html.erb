@@ -17,10 +17,18 @@
 			<div class="col-sm-6">
 				<div class="row m-t-xs">
         	        <div class="col-xs-12">
-        	            <h5 class="m-b-xs">이용자 수</h5>
+        	            <h5 class="m-b-xs">늘품 회원 수</h5>
         	            <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@user_count, delimiter: ',') %> 명</h1>
         	            <!-- <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div> -->
         	        </div>
+                </div>
+                <div class="row m-t-xs">
+                    <div class="col-xs-12">
+                        <h5 class="m-b-xs">오늘 방문자 수</h5>
+                        <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@orders_count.count, delimiter: ',') %> 명</h1>
+                        <h5 style="text-align:center">(늘품 회원 수 : <%= number_with_delimiter(@orders_user_count.count, delimiter: ',') %> 명 / <%= @orders_user_count.count * 100 / @orders_count.count %> %)</h5>
+                        <!-- <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div> -->
+                    </div>
                 </div>
 			</div>
 			<div class="col-sm-6">
@@ -155,6 +163,34 @@
         	            <div class="font-bold text-navy">적립금 사용액 / 적립금</div>
         	        </div>
                 </div>
+                <hr>
+                <div class="row m-t-xs">
+                    <div class="col-xs-12">
+                        <h5 class="m-b-xs">등급별 비율</h5>
+                        <table class="table small m-t-sm">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>콩알</strong>
+                                    </td>
+                                    <td>
+                                        <% level_0 = @users.where('user_rate = ?', 0).count %>
+                                        <%= number_with_delimiter(level_0, delimiter: ',') %> 명  /  <%= level_0 * 100 / @users.count %> %
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>새싹</strong>
+                                    </td>
+                                    <td>
+                                        <% level_1 = @users.where('user_rate = ?', 1).count %>
+                                        <%= number_with_delimiter(level_1, delimiter: ',') %> 명  /  <%= level_1 * 100 / @users.count %> %
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 			<div class="col-sm-4">
 				<div class="row m-t-xs">
@@ -163,6 +199,34 @@
         	            <h1 style="font-size:40px; text-align:center"><%= number_with_delimiter(@employee_discount, delimiter: ',') %> 원</h1>
         	            <div class="font-bold text-navy">합계</div>
         	        </div>
+                </div>
+                <hr>
+                <div class="row m-t-xs">
+                    <div class="col-xs-12">
+                        <h5 class="m-b-xs">등급별 비율</h5>
+                        <table class="table small m-t-sm">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <strong>떡잎</strong>
+                                    </td>
+                                    <td>
+                                        <% level_2 = @users.where('user_rate = ?', 2).count %>
+                                        <%= number_with_delimiter(level_2, delimiter: ',') %> 명  /  <%= level_2 * 100 / @users.count %> %
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>킹콩</strong>
+                                    </td>
+                                    <td>
+                                        <% level_3 = @users.where('user_rate = ?', 3).count %>
+                                        <%= number_with_delimiter(level_3, delimiter: ',') %> 명  /  <%= level_3 * 100 / @users.count %> %
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 			</div>
 		</div>

@@ -145,6 +145,9 @@ class DashboardsController < ApplicationController
       @major_counts[major] += 1
     end
 
+    # today 방문자 수
+    @orders_count = Order.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
+    @orders_user_count = OrdersUser.where('created_at BETWEEN ? AND ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day)
   end
 
   def day_revenue
