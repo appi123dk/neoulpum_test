@@ -26,7 +26,7 @@
                     <div class="col-xs-12">
                         <h5 class="m-b-xs">오늘 방문자 수</h5>
                         <h1 style="color:#1ab394; font-weight:bold; font-size:40px; text-align:center"><%= number_with_delimiter(@orders_count.count, delimiter: ',') %> 명</h1>
-                        <h5 style="text-align:center">(늘품 회원 수 : <%= number_with_delimiter(@orders_user_count.count, delimiter: ',') %> 명 / <%= @orders_user_count.count * 100 / @orders_count.count %> %)</h5>
+                        <h5 style="text-align:center">(늘품 회원 수 : <%= number_with_delimiter(@orders_user_count.count, delimiter: ',') %> 명 / <%= @orders_count.count == 0 ? 0 : @orders_user_count.count * 100 / @orders_count.count %> %)</h5>
                         <!-- <div class="font-bold text-navy">98% <i class="fa fa-bolt"></i></div> -->
                     </div>
                 </div>
