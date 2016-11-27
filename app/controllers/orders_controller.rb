@@ -124,6 +124,27 @@ class OrdersController < ApplicationController
 
 	def order_delete
 		order = Order.find(params[:id])
+
+		# 적립금 삭제
+		order_user = order.users.take
+		point = 0
+		order.details.each do |menu|
+			point += menu.menu.menu_price * menu.order_unit
+		end
+
+		unless order_user.nil?
+			if order_user.user_rate == 0
+				order_user.user_money -= point/10
+			elsif order_user.user_rate == 1
+				order_user.user_money -= point/10 * 1.1
+			elsif order_user.user_rate == 2
+				order_user.user_money -= point/10 * 1.3
+			else
+				order_user.user_money -= point/10 * 1.5
+			end
+			order_user.save
+		end
+
 		order.destroy
 
 		redirect_to '/orders/order_list'
