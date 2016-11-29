@@ -710,11 +710,17 @@ $(function(){
 
     $(".btn-order").click(function(){
         var button = $(this).ladda(),
-            order_number = $(".order-number").val();
+            order_number = $(".order-number").val(),
+            admin_id = <%= @admin_user.id %>;
         button.ladda('start');
         if (order_number == "") {
             if ($(".user-point").length == 1){
-                $("#order").submit();    
+                if ($("#user_point").val() == admin_id){
+                    button.ladda('stop');
+                    alert("주문번호를 입력해주세요");
+                } else {
+                    $("#order").submit();        
+                }
             } else {
                 button.ladda('stop');
                 alert("주문번호를 입력해주세요");

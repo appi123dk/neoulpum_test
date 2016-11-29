@@ -7,6 +7,7 @@ class OrdersController < ApplicationController
 		@tea_menus = Menu.where('display = ? AND menu_category_id = ?',true, 2).order("menu_order")
 		@drink_menus = Menu.where('display = ? AND menu_category_id = ?',true, 3).order("menu_order")
 		@pre_money = Account.where('account_date=?',Date.today()).take
+		@admin_user = User.where('user_email = ?', "admin@neoulpum.com").take
 	end
 
 	def user_point
