@@ -22,55 +22,45 @@
         <div class="ibox float-e-margins">
             <div class="ibox-title">
                 <h5>목록</h5>
-
                 <div class="ibox-tools">
-                    <a class="collapse-link">
-                        <i class="fa fa-chevron-up"></i>
-                    </a>
+                     <button type="button" onclick="location.href='/users/user_rate';" class="btn btn-outline btn-primary">유저 등급 최신화</button>
                 </div>
             </div>
             <div class="ibox-content" style="padding-bottom: 0px;">
-                <div class="col-md-10">
-                    <input type="text" class="form-control input m-b-xs" id="filter" placeholder="검색">
-                </div>
-                <div class="col-md-2">
-                     <button type="button" onclick="location.href='/users/user_rate';" class="btn btn-block btn-outline btn-primary">유저 등급 최신화</button>
-                </div>
-                    <table class="footable table table-stripped" data-page-size="5" data-filter=#filter>
+                <table class="table table-striped table-bordered table-hover dataTables-example">
                     <thead>
-                    <tr>
-                        <th>유저 ID</th>
-                        <th data-hide="phone,tablet">이메일</th>
-                        <th>이름</th>
-                        <th>전화번호</th>
-                        <th data-hide="phone,tablet">직업</th>
-                        <th data-hide="phone,tablet">학과</th>
-                        <th>적립금</th>
-                        <th>등급</th>
-
-                    </tr>
+                        <tr>
+                            <th>이메일</th>
+                            <th>이름</th>
+                            <th>전화번호</th>
+                            <th>생년월일</th>
+                            <!-- <th>직업</th> -->
+                            <th>학과</th>
+                            <th>적립금</th>
+                            <th>등급</th>
+                            <th>휴면계정전환</th>
+                            <th>비번초기화</th>
+                        </tr>
                     </thead>
                     <tbody>
                     <% @users.each do |user| %>
                         <tr class="user-list">
-                            <td data-user="<%= user.id %>" class="center user-id"><%= user.id %></td>
                             <td class="center"><%= user.user_email %></td>
                             <td class="center"><%= user.user_name %></td>
                             <td class="center"><%= user.user_number %></td>
-                            <td class="center"><%= @jobs[:"#{user.user_job}"]%></td>
+                            <td class="center"><%= user.birthday %></td>
                             <td class="center"><%= @colleges[:"#{user.user_major}"] %></td>
                             <td class="center"><%= number_with_delimiter(user.user_money, delimiter: ',') %></td>
                             <td class="center"><%= @grade[:"#{user.user_rate}"] %></td>
+                            <td class="center">
+                                <a href="/users/rest_user/<%= user.id %>" data-rest="<%= user.resting %>" class="btn btn-xs btn-primary btn-block btn-rest">전환</a>
+                            </td>
+                            <td class="center">
+                                <button type="button" class="btn btn-xs btn-warning btn-block btn-reset" data-reset="<%= user.id %>">초기화</button>
+                            </td>
                         </tr>
                     <% end %>
                     </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="8">
-                            <ul class="pagination pull-right"></ul>
-                        </td>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
@@ -89,11 +79,53 @@
 
 
 $(function() {
+    $('.btn-reset').click(function(){
+        var n = this.getAttribute("data-reset");
+        console.log(n);
+        swal({
+          title: "비밀번호를 초기화 하시겠습니까?",
+          text: "정말 초기화 하시겠습니까?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "네, 초기화 하겠습니다",
+          cancelButtonText: "취소",
+          closeOnConfirm: false
+        },
+        function(){
+          swal("초기화 되었습니다", "비밀번호는 0000 입니다", "success");
+          window.location.replace("/users/reset_password/" + n);
+        });
+    });
 
-    $('.footable').footable();
-    $('.footable2').footable();
+    // 휴면유저 판단
+    $('.btn-rest').each(function( index, value ) {
+    if (value.getAttribute('data-rest') == 'true') {
+        $(value).css({'background-color':'#5f5f5f', 'border-color':'#5f5f5f'});
+        $(value).text('휴면계정');
+     }
+    });
 
-    $('.user-list').click(function(){
+    $('.dataTables-example').DataTable({
+        order: [0,'desc'],
+        dom: '<"html5buttons"B>lTfgitp',
+        buttons: [
+            { extend: 'copy'},
+            {extend: 'csv'},
+            {extend: 'print',
+                customize: function (win){
+                    $(win.document.body).addClass('white-bg');
+                    $(win.document.body).css('font-size', '10px');
+
+                    $(win.document.body).find('table')
+                            .addClass('compact')
+                            .css('font-size', 'inherit');
+                }
+            }
+        ]
+    });
+
+    $('.dataTables-example').on('click','.user-list',function(){
         $('.user-list').css({'background-color':'', 'color': ''});
         $(this).css({'background-color':'#1ab394', 'color': 'white'})
         var index = $('.user-list').index(this);

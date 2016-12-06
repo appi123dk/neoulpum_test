@@ -84,7 +84,7 @@ class DashboardsController < ApplicationController
 
   def marketing_dashboard
     # 고객정보 모음
-    @users = User.where.not(user_email: "admin@neoulpum.com")
+    @users = User.where('resting = ? AND user_email != ?',false, "admin@neoulpum.com")
     @grade = Hash.new
     @grade = { "0": "콩알", '1': '새싹', '2': '떡잎', '3': '킹콩'}
     @jobs = Hash.new

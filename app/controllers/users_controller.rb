@@ -216,4 +216,24 @@ class UsersController < ApplicationController
 		render json: @send_user
 	end
 
+	def rest_user
+		user = User.find(params[:id])
+		if user.resting
+			user.resting = false
+		else 
+			user.resting = true
+		end
+		user.save
+
+		redirect_to users_index_path
+	end
+
+	def reset_password
+		user = User.find(params[:id])
+		user.password = "0000"
+		user.save
+
+		redirect_to users_index_path
+	end
+
 end

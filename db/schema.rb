@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027015002) do
+ActiveRecord::Schema.define(version: 20161206040716) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          limit: 4,                  default: 0
@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(version: 20161027015002) do
     t.datetime "updated_at",                              null: false
     t.integer  "user_rate",   limit: 4,   default: 0
     t.string   "birthday",    limit: 255
+    t.boolean  "resting",                 default: false
   end
 
   add_foreign_key "comments", "users"

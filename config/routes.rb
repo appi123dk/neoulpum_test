@@ -93,6 +93,8 @@ Myapp::Application.routes.draw do
   get "users/check_email"
   get "users/check_number"
   get "users/user_rate"
+  get "users/rest_user/:id", to: 'users#rest_user'
+  get "users/reset_password/:id", to: 'users#reset_password'
   post "users/update/:id", to: 'users#update'
 
   # menu routes
