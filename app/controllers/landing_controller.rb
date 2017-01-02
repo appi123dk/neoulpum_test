@@ -29,7 +29,11 @@ class LandingController < ApplicationController
   	end
     @year = Date.today().year()
     Date.today().month().in?(2..7) ? @semseter = 1 : @semester = 2
-  	@teams = Semester.where('year = ? AND semester = ?', @year.to_s, @semester.to_s).take.teams
+    jigi = Semester.where('year = ? AND semester = ?', @year.to_s, @semester.to_s).take
+
+    unless jigi.nil?
+      @teams = jigi.teams
+    end
     render :layout => "empty"
   end
 
