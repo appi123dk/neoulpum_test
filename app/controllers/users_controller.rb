@@ -236,4 +236,40 @@ class UsersController < ApplicationController
 		redirect_to users_index_path
 	end
 
+	def total_coupons
+		@coupons = Coupon.all
+	end
+
+	def create_coupon
+		coupon = Coupon.new
+		coupon.c_name = params[:c_name]
+		coupon.content = params[:content]
+		coupon.unit = params[:unit]
+		coupon.price = params[:price]
+		coupon.save
+
+		redirect_to '/users/total_coupons'
+	end
+
+	def view_coupon
+		@coupon = Coupon.find(params[:id])
+		@mycoupons = @coupon.mycoupons
+		@users = User.where('resting = ?', false)
+	end
+
+	def create_mycoupon
+		coupon = Coupon.find(params[:id])
+		user_ids = params[:user_id]
+		user_ids.each do |user_id|
+			coupon.users << User.find(user_id.to_i)
+		end
+		redirect_to "/users/view_coupon/#{coupon.id}"
+	end
+
+	def del_mycoupon
+		mycoupon = Mycoupon.find(params[:id])
+		mycoupon.destroy
+		redirect_to :back
+	end
+
 end

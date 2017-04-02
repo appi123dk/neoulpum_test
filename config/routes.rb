@@ -48,6 +48,7 @@ Myapp::Application.routes.draw do
   get "orders/user_point"
   get "orders/user_prepoint"
   get "orders/user_coupon"
+  get "orders/use_coupon"
   get "orders/find_user"
   get "orders/order_create"
   get "orders/order_cancle/:id", to: 'orders#order_cancle'
@@ -93,6 +94,11 @@ Myapp::Application.routes.draw do
   get "users/check_email"
   get "users/check_number"
   get "users/user_rate"
+  get "users/total_coupons"
+  get "users/create_coupon"
+  get "users/view_coupon/:id", to: 'users#view_coupon'
+  get "users/create_mycoupon/:id", to: 'users#create_mycoupon'
+  get "users/del_mycoupon/:id", to: 'users#del_mycoupon'
   get "users/rest_user/:id", to: 'users#rest_user'
   get "users/reset_password/:id", to: 'users#reset_password'
   post "users/update/:id", to: 'users#update'

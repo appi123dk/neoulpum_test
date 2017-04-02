@@ -14,14 +14,34 @@ class OrdersController < ApplicationController
 		@user = User.find(params[:user_id])
 		@user.user_money -= params[:user_point].to_i
 		@user.save
-		render :json => @user
+		@coupons = @user.coupons
+		@mycoupons = @user.mycoupons
+
+		render json: {users: @user, coupons: @coupons, mycoupons: @mycoupons }
 	end
 
 	def user_coupon
 		@user = User.find(params[:user_id])
 		@user.user_money += params[:user_point].to_i
 		@user.save
-		render :json => @user
+		@coupons = @user.coupons
+		@mycoupons = @user.mycoupons
+
+		render json: {users: @user, coupons: @coupons, mycoupons: @mycoupons }
+	end
+
+	def use_coupon
+		@user = User.find(params[:user_id])
+		@coupons = @user.coupons
+		@mycoupons = @user.mycoupons
+
+		mycoupon = @mycoupons.where('coupon_id = ?', params[:coupon_id]).take
+		mycoupon.unit += 1
+		mycoupon.save
+
+		@coupon_price = mycoupon.coupon.price
+
+		render json: {users: @user, coupons: @coupons, mycoupons: @mycoupons, coupon_price: @coupon_price }
 	end
 
 	def user_prepoint
@@ -32,7 +52,11 @@ class OrdersController < ApplicationController
 		account = Account.last
 		account.saving_point += params[:user_point].to_i
 		account.save
-		render :json => @user
+		
+		@coupons = @user.coupons
+		@mycoupons = @user.mycoupons
+
+		render json: {users: @user, coupons: @coupons, mycoupons: @mycoupons }
 	end
 
 	def find_user
@@ -40,12 +64,16 @@ class OrdersController < ApplicationController
 		if employee.nil?
 			@user = User.where('user_number = ?', params[:user_number].to_s).take
 			@employee = employee
+			@coupons = @user.coupons
+			@mycoupons = @user.mycoupons
 		else
 			@user = User.where('user_number = ?', "0").take
 			@employee = employee
+			@coupons = @user.coupons
+			@mycoupons = @user.mycoupons
 		end
 
-		render json: {employee: @employee, users: @user }
+		render json: {employee: @employee, users: @user, coupons: @coupons, mycoupons: @mycoupons }
 	end
 
 	def order_create

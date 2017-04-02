@@ -26,9 +26,15 @@ class LandingController < ApplicationController
 
       @user_order = @user.orders.where('order_confirm = ?', false)
       @first_order = Order.where('order_confirm = ?', false).first
+
+      @mycoupons = @user.mycoupons
   	end
     @year = Date.today().year()
-    Date.today().month().in?(2..7) ? @semseter = 1 : @semester = 2
+    if (2..7).include?(Date.today().month())
+      @semester = 1 
+    else
+      @semester = 2
+    end
     jigi = Semester.where('year = ? AND semester = ?', @year.to_s, @semester.to_s).take
 
     unless jigi.nil?

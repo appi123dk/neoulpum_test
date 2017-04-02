@@ -71,6 +71,7 @@
                 <a href=""><i class="fa fa-users"></i> <span class="nav-label">고객관리(마케팅팀)</span> <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse <%= is_active_controller('users') %>">
                     <li class="<%= is_active_action('index') %>"><%= link_to "고객정보", users_index_path %></li>
+                    <li class="<%= is_active_action('total_coupons') %>"><%= link_to "쿠폰관리", users_total_coupons_path %></li>
                     <li class="<%= is_active_action('user_cs') %>"><%= link_to "CS관리", users_user_cs_path %></li>
                     <li class="<%= is_active_action('total_cs') %>"><%= link_to "CS현황", users_total_cs_path %></li>
                 </ul>
