@@ -97,6 +97,8 @@ Myapp::Application.routes.draw do
   get "users/total_coupons"
   get "users/create_coupon"
   get "users/view_coupon/:id", to: 'users#view_coupon'
+  get "users/edit_coupon/:id", to: 'users#edit_coupon'
+  get "users/update_coupon/:id", to: 'users#update_coupon'
   get "users/create_mycoupon/:id", to: 'users#create_mycoupon'
   get "users/del_mycoupon/:id", to: 'users#del_mycoupon'
   get "users/rest_user/:id", to: 'users#rest_user'

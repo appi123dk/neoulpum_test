@@ -272,4 +272,19 @@ class UsersController < ApplicationController
 		redirect_to :back
 	end
 
+	def edit_coupon
+		@coupon = Coupon.find(params[:id])
+	end
+
+	def update_coupon
+		coupon = Coupon.find(params[:id])
+		coupon.c_name = params[:c_name]
+		coupon.content = params[:content]
+		coupon.unit = params[:unit]
+		coupon.price = params[:price]
+		coupon.save
+		
+		redirect_to '/users/total_coupons'
+	end
+
 end
