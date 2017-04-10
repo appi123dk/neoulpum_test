@@ -30,7 +30,7 @@ class AccountsController < ApplicationController
 
 		# 통장잔고
 		unless @pre_money.nil?
-			@saving = @revenue + @pre_money.pre_money - @etc - @point + @saving_point
+			@saving = @revenue + @pre_money.pre_money.to_i - @etc - @point + @saving_point
 		end
 	end
 
