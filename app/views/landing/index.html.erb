@@ -149,10 +149,11 @@
                                 <h2 style="text-align:left; font-weight: bold">
                                     <i class="fa fa-diamond" aria-hidden="true"></i>
                                     현재 등급 : <span style="color:#FFCE1F"><%= @user_level %></span>
+                                    
                                 </h2>
+                                <small>등급은 최근 1년간 방문 횟수로 산출됩니다</small>
                                 <% if @user.user_rate == 0 %>
                                     <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 5</h4>
-                                    <small>등급은 최근 1년간 방문 횟수로 산출됩니다</small>
                                     <div class="progress progress-mini">
                                         <div style="width: <%= @visit_count * 100 / 5 %>%;" class="progress-bar progress-bar-warning"></div>
                                     </div>
