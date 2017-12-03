@@ -176,46 +176,6 @@ ActiveRecord::Schema.define(version: 20170331103332) do
     t.datetime "updated_at",              null: false
   end
 
-  create_table "prices", force: :cascade do |t|
-    t.string   "price_name", limit: 255, default: "단가"
-    t.integer  "price_min",  limit: 4
-    t.integer  "price_1",    limit: 4
-    t.integer  "price_2",    limit: 4
-    t.integer  "price_3",    limit: 4
-    t.integer  "price_4",    limit: 4
-    t.integer  "price_5",    limit: 4
-    t.integer  "price_6",    limit: 4,   default: 0
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string   "title",         limit: 255
-    t.string   "subtitle",      limit: 255
-    t.string   "detail",        limit: 255
-    t.string   "product_image", limit: 255
-    t.string   "product_thumb", limit: 255
-    t.integer  "price_id",      limit: 4
-    t.integer  "quantity_id",   limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-  end
-
-  add_index "products", ["price_id"], name: "fk_rails_9d3d28518b", using: :btree
-  add_index "products", ["quantity_id"], name: "fk_rails_6baa5484e7", using: :btree
-
-  create_table "quantities", force: :cascade do |t|
-    t.integer  "qty_max",    limit: 4
-    t.integer  "qty_1",      limit: 4
-    t.integer  "qty_2",      limit: 4
-    t.integer  "qty_3",      limit: 4
-    t.integer  "qty_4",      limit: 4
-    t.integer  "qty_5",      limit: 4
-    t.integer  "qty_6",      limit: 4, default: 0
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-  end
-
   create_table "recipes", force: :cascade do |t|
     t.integer  "material_id",   limit: 4
     t.integer  "menu_id",       limit: 4
@@ -287,8 +247,6 @@ ActiveRecord::Schema.define(version: 20170331103332) do
   add_foreign_key "costs", "materials"
   add_foreign_key "details", "menus"
   add_foreign_key "details", "orders"
-  add_foreign_key "products", "prices"
-  add_foreign_key "products", "quantities"
   add_foreign_key "recipes", "materials"
   add_foreign_key "recipes", "menus"
   add_foreign_key "sales", "menus"
