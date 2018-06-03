@@ -16,6 +16,7 @@ class AccountsController < ApplicationController
 		@etc = Account.last.cash_buy
 		@point = 0
 
+
 		#오늘의 주문과 수입
 		orders = Detail.today_orders
 		@revenue = Account.today_revenue orders
@@ -127,6 +128,7 @@ class AccountsController < ApplicationController
 	def account_index
 		@accounts = Account.all
 		@menus = Menu.all
+		
 	end
 
 	def cashbuy_create

@@ -60,7 +60,11 @@
                             <td style="text-align: center;">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
                                 <%= link_to 'Edit', "edit/#{menu.id}", class: "btn btn-primary btn-xs" %>
-                                <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
+                                <% if menu.display %>
+                                    <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
+                                <% else %>
+                                    <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal" style="background-color:#5f5f5f; border-color:#5f5f5f">보이기</button>
+                                <% end %>
                                 <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
                                 <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
                                 
@@ -118,7 +122,11 @@
                             <td style="text-align: center;">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->
                                 <%= link_to 'Edit', "edit/#{menu.id}", class: "btn btn-primary btn-xs" %>
-                                <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
+                                <% if menu.display %>
+                                    <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal">숨기기</button>
+                                <% else %>
+                                    <button id="btn_delete" data-display="<%= menu.display  %>" data-menu= "<%= menu.id %>" class="btn btn-danger btn-xs delete_modal" style="background-color:#5f5f5f; border-color:#5f5f5f">보이기</button>
+                                <% end %>
                                 <!-- link_to 'Delete', "delete/#{menu.id}", class: "btn btn-danger btn-rounded btn-xs delete_modal"  -->
                                 <!-- <a class="btn btn-primary btn-rounded btn-xs" href="#">Edit</a> -->
                                 
@@ -183,7 +191,7 @@ $(function() {
     });
 
     // 숨기기 모달띄우기
-    $('.delete_modal').click(function () {
+    $('.dataTables-example').on('click', '.delete_modal', function(){
         var index = $('.delete_modal').index(this);
         swal({
             title: "메뉴출력 상태를 변경하시겠습니까?",
@@ -195,19 +203,38 @@ $(function() {
             closeOnConfirm: false
         }, function () {
             var n = $('.delete_modal')[index].getAttribute('data-menu');
+            console.log(n);
+            location.href='delete/' + n;
+            // swal("Deleted!", "Your imaginary file has been deleted.", "success");
+        });
+    });
+
+    $('.dataTables-example2').on('click', '.delete_modal', function(){
+        var index = $('.delete_modal').index(this);
+        swal({
+            title: "메뉴출력 상태를 변경하시겠습니까?",
+            type: "warning",
+            showCancelButton: true,
+            cancelButtonText: "취소",
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "확인",
+            closeOnConfirm: false
+        }, function () {
+            var n = $('.delete_modal')[index].getAttribute('data-menu');
+            console.log(n);
             location.href='delete/' + n;
             // swal("Deleted!", "Your imaginary file has been deleted.", "success");
         });
     });
 
     // 디스플레이 true, false 버튼표시
-    $('.delete_modal').each(function( index, value ) {
-        if (value.getAttribute('data-display') == 'false') {
-            $(value).css({'background-color':'#5f5f5f', 'border-color':'#5f5f5f'});
-            $(value).text('보이기');
+    // $('.delete_modal').each(function( index, value ) {
+    //     if (value.getAttribute('data-display') == 'false') {
+    //         $(value).css({'background-color':'#5f5f5f', 'border-color':'#5f5f5f'});
+    //         $(value).text('보이기');
 
-         }
-    });
+    //      }
+    // });
 });
 
 </script>
