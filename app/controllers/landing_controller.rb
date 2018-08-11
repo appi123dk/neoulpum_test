@@ -2,7 +2,8 @@ class LandingController < ApplicationController
   def index
   	unless session[:user_id].nil?
   		@user = User.find(session[:user_id])
-  		@visit_count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', @user.id).count
+      # @visit_count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', @user.id).count
+  		@visit_count = @user.count
   		order_menu_arr = []
   		@user.orders.each do |order|
   			order.details.each do |detail|

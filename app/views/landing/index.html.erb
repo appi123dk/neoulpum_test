@@ -151,21 +151,21 @@
                                     현재 등급 : <span style="color:#FFCE1F"><%= @user_level %></span>
                                     
                                 </h2>
-                                <small style="color:white; text-align: left">등급은 최근 1년간 방문 횟수로 산출됩니다</small>
+                                <small style="color:white; text-align: left">적립금 비율 | 주문 금액의 5%</small>
                                 <% if @user.user_rate == 0 %>
-                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 5</h4>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 10</h4>
                                     <div class="progress progress-mini">
-                                        <div style="width: <%= @visit_count * 100 / 5 %>%;" class="progress-bar progress-bar-warning"></div>
+                                        <div style="width: <%= @visit_count * 100 / 10 %>%;" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                 <% elsif @user.user_rate == 1 %>
-                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 15</h4>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 45</h4>
                                     <div class="progress progress-mini">
-                                        <div style="width: <%= (@visit_count - 5) * 100 / 10 %>%;" class="progress-bar progress-bar-warning"></div>
+                                        <div style="width: <%= (@visit_count - 10) * 100 / 35 %>%;" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                 <% elsif @user.user_rate == 2 %>
-                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 35</h4>
+                                    <h4 style="text-align:right">방문 횟수 : <%= @visit_count %> / 99</h4>
                                     <div class="progress progress-mini">
-                                        <div style="width: <%= (@visit_count - 15) * 100 / 20 %>%;" class="progress-bar progress-bar-warning"></div>
+                                        <div style="width: <%= (@visit_count - 45) * 100 / 54 %>%;" class="progress-bar progress-bar-warning"></div>
                                     </div>
                                 <% else %>
                                     <h4 style="text-align:right">방문 횟수 : <%= @visit_count %></h4>

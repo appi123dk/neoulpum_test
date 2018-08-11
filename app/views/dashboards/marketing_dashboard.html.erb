@@ -261,7 +261,7 @@
 									    <td style="text-align: center;"><%= @jobs[:"#{user.user_job}"] %></td>
 									    <td style="text-align: right;"><%= number_with_delimiter(user.user_money, delimiter: ',') %></td>
 									    <td style="text-align: right;"><%= number_with_delimiter(user.orders.sum("use_point"), delimiter: ',') %></td>
-									    <td style="text-align: center;"><%= user.orders.count %></td>
+									    <td style="text-align: center;"><%= user.count %></td>
 									    <td style="text-align: center;"><%= @grade[:"#{user.user_rate}"] %></td>
 									</tr>
 								<% end %>

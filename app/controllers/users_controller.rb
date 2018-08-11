@@ -37,13 +37,13 @@ class UsersController < ApplicationController
 			redirect_to '/'
 		else 
 			session[:user_id] = user.id
-			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', user.id).count
+			count = user.count
 			rate = 0
-			if count < 5
+			if count < 10
 				rate = 0
-			elsif count < 15
+			elsif count < 45
 				rate = 1
-			elsif count < 35
+			elsif count < 99
 				rate = 2
 			else
 				rate = 3
@@ -171,13 +171,13 @@ class UsersController < ApplicationController
 	def user_rate
 		users = User.all
 		users.each do |user|
-			count = OrdersUser.where(:created_at => 1.year.ago..Date.today()+1).where('user_id = ?', user.id).count
+			count = user.count
 			rate = 0
-			if count < 5
+			if count < 10
 				rate = 0
-			elsif count < 15
+			elsif count < 45
 				rate = 1
-			elsif count < 35
+			elsif count < 99
 				rate = 2
 			else
 				rate = 3

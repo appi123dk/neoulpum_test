@@ -106,15 +106,16 @@ class OrdersController < ApplicationController
 
 			#등급별 차등적용
 			if user.user_rate == 0
-				user.user_money += point/10
+				user.user_money += point * 0.105
 			elsif user.user_rate == 1
-				user.user_money += point/10 * 1.1
+				user.user_money += point * 0.11
 			elsif user.user_rate == 2
-				user.user_money += point/10 * 1.3
+				user.user_money += point * 0.13
 			else
-				user.user_money += point/10 * 1.5
+				user.user_money += point * 0.15
 			end
 			user.save
+
 		end
 
 		redirect_to '/orders/order_index'
@@ -140,6 +141,24 @@ class OrdersController < ApplicationController
 		order.order_confirm = true
 		order.save
 
+		unless order.users.empty?
+			user = order.users.last
+			user.count += 1
+			count = user.count
+			rate = user.user_rate
+			if count < 10
+				rate = 0
+			elsif count < 45
+				rate = 1
+			elsif count < 99
+				rate = 2
+			else
+				rate = 3
+			end
+			user.user_rate = rate
+			user.save
+		end
+
 		redirect_to '/orders/order_manage'
 	end
 
@@ -163,13 +182,13 @@ class OrdersController < ApplicationController
 
 		unless order_user.nil?
 			if order_user.user_rate == 0
-				order_user.user_money -= point/10
+				order_user.user_money -= point * 0.105
 			elsif order_user.user_rate == 1
-				order_user.user_money -= point/10 * 1.1
+				order_user.user_money -= point * 0.11
 			elsif order_user.user_rate == 2
-				order_user.user_money -= point/10 * 1.3
+				order_user.user_money -= point * 0.13
 			else
-				order_user.user_money -= point/10 * 1.5
+				order_user.user_money -= point * 0.15
 			end
 			order_user.save
 		end
