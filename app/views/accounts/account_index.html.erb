@@ -31,12 +31,14 @@
 							<tr>
 							    <th>날짜</th>
 							    <th>수입</th>
-							    <th>비용(메뉴)</th>
-							    <th>이익</th>
-							    <th>통장입금액</th>
-							    <th>손실액</th>
+							    <th>현금충전금액</th>
 							    <th>적립금사용액</th>
-							    <th>현금충전금액</th>	
+							    <th>기타 현금사용액</th>
+							    <th>통장입금액</th>
+							    <th>통장입금액(카카오)</th>
+							    <th>손실액</th>
+							    <th>비용(메뉴)</th>
+							    <th>이익</th>	
 							    <th>마감지기</th>	
 							</tr>
 						</thead>
@@ -45,12 +47,17 @@
 								<tr class="gradeC">
 								    <td><%= account.account_date %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.revenue, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.saving_point, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.use_point, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_buy, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.cash, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.kakao_money, delimiter: ',') %></td>
+								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_loss, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.menu_cost.round, delimiter: ',') %></td>
 								    <td style="text-align: right;"><%= number_with_delimiter(account.profit.round, delimiter: ',') %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(account.cash, delimiter: ',') %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(account.cash_loss, delimiter: ',') %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(account.use_point, delimiter: ',') %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(account.saving_point, delimiter: ',') %></td>
+								    
+								    
+								    
 								    <td style="text-align: center;"><%= account.employee_name %></td>
 								</tr>
 							<% end %>

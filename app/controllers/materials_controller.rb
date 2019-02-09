@@ -138,4 +138,16 @@ class MaterialsController < ApplicationController
 		@material_price = Material.find(params[:material_id])
 		render json: @material_price
 	end
+
+	def is_order
+		material = Material.find(params[:id])
+		if material.is_order
+			material.is_order = false
+		else 
+			material.is_order = true
+		end
+		material.save
+		redirect_to '/materials/check_index'
+	end
+
 end

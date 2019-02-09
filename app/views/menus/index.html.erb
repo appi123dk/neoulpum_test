@@ -48,12 +48,12 @@
                             <td style="text-align: center;"><%= menu.id %></td>
                             <td style="text-align: center;"><%= menu.menu_title %></td>
                             <td style="text-align: center;"><%= menu.menu_symbol %></td>
-                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %></td>
                             <td style="text-align: center;"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
                             <td style="text-align: center;">
                                 <%= menu.menu_degree == '1' ? "Hot" : "Ice" %>
                             </td>
-                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %></td>
                             <td style="text-align: center;">
                                 <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
                             </td>
@@ -110,12 +110,12 @@
                             <td style="text-align: center;"><%= menu.id %></td>
                             <td style="text-align: center;"><%= menu.menu_title %></td>
                             <td style="text-align: center;"><%= menu.menu_symbol %></td>
-                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %> 원</td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.menu_price.to_i, dilimiter:',') %></td>
                             <td style="text-align: center;"><%= MenuCategory.find(menu.menu_category_id).category_title %></td>
                             <td style="text-align: center;">
                                 <%= menu.menu_degree == '1' ? "Hot" : "Ice" %>
                             </td>
-                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %> 원</td>
+                            <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %></td>
                             <td style="text-align: center;">
                                 <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
                             </td>

@@ -15,6 +15,7 @@ class AccountsController < ApplicationController
 		@pre_money = Account.where('account_date=?',Date.today()).take
 		@etc = Account.last.cash_buy
 		@point = 0
+		@kakao_money = 0
 
 
 		#오늘의 주문과 수입
@@ -27,11 +28,19 @@ class AccountsController < ApplicationController
 			unless order.use_point.nil?
 				@point += order.use_point 
 			end
+
+			# 카카오페이 사용여부
+			if order.is_kakao
+				order.details.each do |detail|
+					menu = Menu.find(detail.menu_id)
+					@kakao_money += detail.order_unit * menu.menu_price
+				end
+			end
 		end
 
 		# 통장잔고
 		unless @pre_money.nil?
-			@saving = @revenue + @pre_money.pre_money.to_i - @etc - @point + @saving_point
+			@saving = @revenue + @pre_money.pre_money.to_i - @etc - @point - @kakao_money + @saving_point
 		end
 	end
 
@@ -45,12 +54,21 @@ class AccountsController < ApplicationController
 		@revenue = Account.today_revenue orders
 		@menu_cost = Account.today_cost orders
 		@point = 0
+		@kakao_money = 0
 
 		# 유저 포인트 사용내역
 		big_orders = Order.where(created_at: Time.now.midnight..(Time.now.midnight + 1.day))
 		big_orders.each do |order|
 			unless order.use_point.nil?
 				@point += order.use_point 
+			end
+
+			# 카카오페이 사용여부
+			if order.is_kakao
+				order.details.each do |detail|
+					menu = Menu.find(detail.menu_id)
+					@kakao_money += detail.order_unit * menu.menu_price
+				end
 			end
 		end
 
@@ -101,6 +119,7 @@ class AccountsController < ApplicationController
 		account.profit = @revenue - @menu_cost
 		account.use_point = @point
 		account.employee_name = params[:employee_name]
+		account.kakao_money = @kakao_money
 		account.save
 
 		# 유저등급 최신화

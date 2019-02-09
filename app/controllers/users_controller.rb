@@ -228,6 +228,18 @@ class UsersController < ApplicationController
 		redirect_to users_index_path
 	end
 
+	def admin_group
+		user = User.find(params[:id])
+		if user.is_group
+			user.is_group = false
+		else 
+			user.is_group = true
+		end
+		user.save
+
+		redirect_to users_index_path
+	end
+
 	def reset_password
 		user = User.find(params[:id])
 		user.password = "0000"
@@ -286,5 +298,7 @@ class UsersController < ApplicationController
 		
 		redirect_to '/users/total_coupons'
 	end
+
+
 
 end

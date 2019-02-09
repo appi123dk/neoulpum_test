@@ -34,6 +34,7 @@
                     <tr>
                         <th data-toggle="true">재료명</th>
                         <th data-toggle="true">담당지기</th>
+                        <th data-toggle="true">발주현황</th>
                         <th>구매시점</th>
                         <% 0.upto(6) do |n| %>
                             <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
@@ -54,6 +55,13 @@
                         <tr>
                             <td><%= material.material_name %></td>
                             <td><%= material.employee.nil? ? '미정' : material.employee.employee_name  %></td>
+                            <td data-order="<%= material.is_order %>">
+                                <% if material.is_order %>
+                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-primary">발주완료</a><small> ( 구매일 : <%= material.updated_at.to_date %> )</small>
+                                <% else %>
+                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-warning">배송확인</a><small> ( 도착일 : <%= material.updated_at.to_date %> )</small>
+                                <% end %>
+                            </td>
                             <td><%= material.material_limit %></td>
                             <% 0.upto(6) do |n| %>
                                 <% if (Date.today - n).saturday? || (Date.today - n).sunday? %>
@@ -108,10 +116,18 @@ $(function() {
     });
 
     $('tbody tr').each(function() {
-        var store_unit = parseFloat($(this).find("td").eq(2).html());
-        var limit = parseFloat($(this).find("td").eq(3).html());
-        if (store_unit >= limit) {
-            $(this).css('background-color', "rgba(255,0,0,0.2)")
+        var store_unit = parseFloat($(this).find("td").eq(3).html()),
+            limit = parseFloat($(this).find("td").eq(4).html()),
+            is_order = $(this).find("td").eq(2).attr('data-order');
+
+        if (limit == 0){
+            limit = parseFloat($(this).find("td").eq(5).html())
+        }
+
+        if (is_order == 'false'){
+            if (store_unit >= limit) {
+                $(this).css('background-color', "rgba(255,0,0,0.2)")
+            }
         }
     });  
 });

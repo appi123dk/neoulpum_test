@@ -43,7 +43,7 @@
                                     <td style="text-align: center;"><%= revenue.buy_date %></td>
                                     <td style="text-align: center;"><%= @category[:"#{revenue.category}"] %></td>
                                     <td style="text-align: center;"><%= revenue.buy_content %></td>
-                                    <td style="text-align: right;"><%= number_with_delimiter(revenue.price.to_i, dilimiter:',') %> 원</td>
+                                    <td style="text-align: right;"><%= number_with_delimiter(revenue.price.to_i, dilimiter:',') %></td>
                                     <td style="text-align: center;">
                                         <button type="button" class="btn btn-xs btn-primary btn-block payment-edit" data-pay=<%= revenue.id %>>수정</button>
                                     </td>
@@ -115,7 +115,7 @@
 								    <td style="text-align: center;"><%= payment.buy_date %></td>
 								    <td style="text-align: center;"><%= @category[:"#{payment.category}"] %></td>
 								    <td style="text-align: center;"><%= payment.buy_content %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(payment.price.to_i, dilimiter:',') %> 원</td>
+								    <td style="text-align: right;"><%= number_with_delimiter(payment.price.to_i, dilimiter:',') %></td>
 								    <td style="text-align: center;">
 								    	<button type="button" class="btn btn-xs btn-primary btn-block payment-edit2" data-pay=<%= payment.id %>>수정</button>
 								    </td>
@@ -195,7 +195,7 @@
 								    <td><%= request.buy_date %></td>
 								    <td style="text-align: right;"><%= request.employee.employee_name %></td>
 								    <td style="text-align: right;"><%= request.material.material_name %></td>
-								    <td style="text-align: right;"><%= number_with_delimiter(request.buy_price.to_i, dilimiter:',') %> 원</td>
+								    <td style="text-align: right;"><%= number_with_delimiter(request.buy_price.to_i, dilimiter:',') %></td>
 								</tr>
 							<% end %>
 								<!-- 끝 -->

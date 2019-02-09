@@ -50,9 +50,20 @@
 									    <td style="text-align: center;"><%= order.order_number %>번</td>
 									    <td style="text-align: center;"><%= order.users.take ? order.users.take.user_number : '없음' %></td>
 									    <td style="text-align: right;">
+									    	<% total_price = 0 %>
 									    	<% order.details.each do |detail| %>
-									    		<%= Menu.find(detail.menu_id).menu_title %> * <%= detail.order_unit %> <br>
+									    		<% menu = Menu.find(detail.menu_id) %>
+									    		<%= menu.menu_title %> (
+												<% if menu.menu_degree == '1' %>
+													Hot
+												<% else %>
+													Ice
+												<% end %>
+									    		) * <%= detail.order_unit %> <br>
+									    		<% total_price += menu.menu_price * detail.order_unit %>
 									    	<% end %>
+									    	<br/>
+									    	<strong>총 결제금액 : <%= number_with_delimiter(total_price) %>원</strong>
 									    </td>
 									    <td style="text-align: center;"><%= order.make_confirm %></td>
 									    <td style="text-align: center;"><%= order.order_confirm %></td>

@@ -2,10 +2,11 @@ class OrdersController < ApplicationController
 	before_action :require_user
 	def order_index
 		@promo_menus = Menu.where('display = ? AND menu_promo = ?', true, true).order("menu_order")
-		@etc_menus = Menu.where('display = ? AND menu_symbol = ?', true, '+').order("menu_order")
+		@etc_menus = Menu.where('display = ? AND menu_category_id = ?', true, 5).order("menu_order")
 		@coffee_menus = Menu.where('display = ? AND menu_category_id = ?',true, 1).order("menu_order")
 		@tea_menus = Menu.where('display = ? AND menu_category_id = ?',true, 2).order("menu_order")
 		@drink_menus = Menu.where('display = ? AND menu_category_id = ?',true, 3).order("menu_order")
+		@food_menus = Menu.where('display = ? AND menu_category_id = ?',true, 4).order("menu_order")
 		@pre_money = Account.where('account_date=?',Date.today()).take
 		@admin_user = User.where('user_email = ?', "admin@neoulpum.com").take
 	end
@@ -80,6 +81,11 @@ class OrdersController < ApplicationController
 		order = Order.new
 		order.order_number = params[:order_number]
 		order.use_point = params[:use_point]
+
+		# 카카오페이 여부
+		unless params[:is_kakao].nil?
+			order.is_kakao = true
+		end
 		order.save
 
 		last_order = Order.last.id
@@ -98,24 +104,24 @@ class OrdersController < ApplicationController
 		unless params[:user_id].nil?
 			OrdersUser.create(order_id: last_order, user_id: params[:user_id])
 			user = User.find(params[:user_id])
+			unless user.is_group
+				#텀블러 적용
+				# unless params[:tumbler].nil?
+				# 	user.user_money += 100
+				# end
 
-			#텀블러 적용
-			unless params[:tumbler].nil?
-				user.user_money += 100
+				#등급별 차등적용
+				if user.user_rate == 0
+					user.user_money += point * 0.105
+				elsif user.user_rate == 1
+					user.user_money += point * 0.11
+				elsif user.user_rate == 2
+					user.user_money += point * 0.13
+				else
+					user.user_money += point * 0.15
+				end
+				user.save
 			end
-
-			#등급별 차등적용
-			if user.user_rate == 0
-				user.user_money += point * 0.105
-			elsif user.user_rate == 1
-				user.user_money += point * 0.11
-			elsif user.user_rate == 2
-				user.user_money += point * 0.13
-			else
-				user.user_money += point * 0.15
-			end
-			user.save
-
 		end
 
 		redirect_to '/orders/order_index'

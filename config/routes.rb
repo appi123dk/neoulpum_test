@@ -64,6 +64,7 @@ Myapp::Application.routes.draw do
   get "materials/update/:id", to: 'materials#update'
   post "materials/create"
   get "materials/delete/:id", to: 'materials#delete'
+  get "materials/is_order/:id", to: 'materials#is_order'
    
     #재고체크관련
   get "materials/check"
@@ -102,6 +103,7 @@ Myapp::Application.routes.draw do
   get "users/create_mycoupon/:id", to: 'users#create_mycoupon'
   get "users/del_mycoupon/:id", to: 'users#del_mycoupon'
   get "users/rest_user/:id", to: 'users#rest_user'
+  get "users/admin_group/:id", to: 'users#admin_group'
   get "users/reset_password/:id", to: 'users#reset_password'
   post "users/update/:id", to: 'users#update'
 

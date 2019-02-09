@@ -114,8 +114,10 @@ class MenusController < ApplicationController
 		params[:start_date].nil? ? @start_date = Date.today - 1.month : @start_date = params[:start_date].to_date
 		params[:end_date].nil? ? @end_date = Date.today : @end_date = params[:end_date].to_date
 		details = Detail.where(:created_at => @start_date.beginning_of_day..@end_date.end_of_day)
+		not_target_category_ids = MenuCategory.where('category_code IN (?)', ['004','009']).pluck("id")
+		target_menus = Menu.where('menu_category_id NOT IN (?)', not_target_category_ids)
 		########## hot메뉴 메뉴엔지니어링 ###########
- 		@hot_menus = Menu.where('menu_degree = ? AND display = ?', "1", true)
+ 		@hot_menus = target_menus.where('menu_degree = ? AND display = ?', "1", true)
  		@hot_sales = []
  		@hot_menumix = []
  		@hot_margin = []
@@ -149,7 +151,7 @@ class MenusController < ApplicationController
 
 ############################################################################################
  		########## ice메뉴 메뉴엔지니어링 ###########
- 		@ice_menus = Menu.where('menu_degree = ? AND display = ?', "2", true)
+ 		@ice_menus = target_menus.where('menu_degree = ? AND display = ?', "2", true)
  		@ice_sales = []
  		@ice_menumix = []
  		@ice_margin = []
