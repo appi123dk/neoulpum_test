@@ -57,9 +57,9 @@
                             <td><%= material.employee.nil? ? '미정' : material.employee.employee_name  %></td>
                             <td data-order="<%= material.is_order %>">
                                 <% if material.is_order %>
-                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-primary">발주완료</a><small> ( 구매일 : <%= material.updated_at.to_date %> )</small>
+                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-primary">발주완료</a><small> ( 구매일 : <%= material.order_date %> )</small>
                                 <% else %>
-                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-warning">배송확인</a><small> ( 도착일 : <%= material.updated_at.to_date %> )</small>
+                                    <a href="/materials/is_order/<%= material.id %>" class="btn btn-xs btn-rounded btn-warning">배송확인</a><small> ( 도착일 : <%= material.order_date %> )</small>
                                 <% end %>
                             </td>
                             <td><%= material.material_limit %></td>

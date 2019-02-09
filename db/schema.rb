@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190209094253) do
+ActiveRecord::Schema.define(version: 20190209104354) do
 
   create_table "accounts", force: :cascade do |t|
     t.integer  "revenue",          default: 0
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20190209094253) do
     t.integer  "material_order",                            default: 999
     t.integer  "employee_id"
     t.boolean  "is_order",                                  default: false
+    t.date     "order_date"
   end
 
   add_index "materials", ["employee_id"], name: "index_materials_on_employee_id"

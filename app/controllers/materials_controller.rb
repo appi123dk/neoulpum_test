@@ -143,8 +143,10 @@ class MaterialsController < ApplicationController
 		material = Material.find(params[:id])
 		if material.is_order
 			material.is_order = false
+			material.order_date = Date.today()
 		else 
 			material.is_order = true
+			material.order_date = Date.today()
 		end
 		material.save
 		redirect_to '/materials/check_index'
