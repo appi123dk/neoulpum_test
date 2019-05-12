@@ -606,18 +606,24 @@ $(function(){
     });
 
     $(document).on('click', '.btn-point', function(){
+        var price = append_menu(menu_array);
         swal({  title: "적립금",
                 text: "사용할 적립금을 입력하세요 (1000원 이상부터, 500원 단위 사용 가능)",
                 type: "input",
                 showCancelButton: true,
                 closeOnConfirm: false,
                 animation: "slide-from-top",
-                inputPlaceholder: "사용할 적립금 입력" },
+                inputPlaceholder: "사용할 적립금 입력",
+            },
                 function(inputValue){
                     if (inputValue === false)
                         return false;
                     if (inputValue === "") {
                         swal.showInputError("사용할 금액을 입력해주세요!");
+                        return false
+                    }
+                    if (inputValue > price) {
+                        swal.showInputError("적립금 사용금액이 총 주문금액보다 큽니다");
                         return false
                     }
                     //AJAX 추가
