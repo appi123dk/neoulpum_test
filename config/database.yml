@@ -5,16 +5,16 @@
 #   Ensure the SQLite 3 gem is defined in your Gemfile
 #   gem 'sqlite3'
 development:
-  # adapter: sqlite3
-  # database: db/development.sqlite3
-  # pool: 5
-  # timeout: 5000
-  adapter: mysql2   #사용할 database
-  database: test_development  # 실제 mysql에 생성되는 database 이름
-  username: root    # mysql에 접속할 id와 password
-  password: dkemf33#
-  encoding: utf8
-  collation: utf8_general_ci
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+  # adapter: mysql2   #사용할 database
+  # database: test_development  # 실제 mysql에 생성되는 database 이름
+  # username: root    # mysql에 접속할 id와 password
+  # password: dkemf33#
+  # encoding: utf8
+  # collation: utf8_general_ci
   # 보통 mysql.sock은 tmp에 있다. (시스템에 따라..)
 
 # Warning: The database defined as "test" will be erased and

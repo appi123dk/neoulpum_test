@@ -338,12 +338,28 @@
                         </div>
                     </div>          
                     <div class="m-t-sm">
-                        <button class="btn btn-lg btn-primary btn-block btn-order"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
+                        <button id="printButton" class="btn btn-lg btn-primary btn-block btn-order"><i class="fa fa-shopping-cart" type="submit"></i> 주문완료</button>
                         <a href="#" class="btn btn-white btn-sm btn-block btn-cancel"> 취소</a>
                     </div>   
                 </div>
             </div>
         </form>
+        <div id="wrapper">
+            <div id="printersDiv">
+                <label for="printersComboBox">Printer:</label>
+                <select id="printersComboBox"><option value="DYMO LabelWriter 450">DYMO LabelWriter 450</option></select>
+            </div>
+
+            <div class="printerSettings">
+                <a href="javascript:void(0)" id="printerSettingsButton">Printer location (url)</a> 
+                <div id="printerSettingsDiv" style="display: none;">
+                    <label for="printerUriTextBox"></label>
+                  <input type="text" id="printerUriTextBox">
+                  <button id="addPrinterUriButton">Add</button>
+                  <button id="clearPrinterUriButton">Clear</button>
+                </div>    
+            </div>
+        </div>
         <form class="form-horizontal" id="cashbuy" action="/accounts/cashbuy_create" method="GET">
             <div class="ibox-title">
                     <h5>현금사용액</h5>
@@ -464,6 +480,7 @@ function add_new_price(){
         );
     $("#total_price").text(numberWithCommas(discount_price) + ' 원');
 };
+
 
 // function add_coupon_price(coupon_price){
 //     var price = append_menu(menu_array);
@@ -841,27 +858,28 @@ $(function(){
     //     $("#order").submit();
     // });
 
-    $(".btn-order").click(function(){
-        var button = $(this).ladda(),
-            order_number = $(".order-number").val(),
-            admin_id = <%= @admin_user.id %>;
-        button.ladda('start');
-        if (order_number == "") {
-            if ($(".user-point").length == 1){
-                if ($("#user_point").val() == admin_id){
-                    button.ladda('stop');
-                    alert("주문번호를 입력해주세요");
-                } else {
-                    $("#order").submit();        
-                }
-            } else {
-                button.ladda('stop');
-                alert("주문번호를 입력해주세요");
-            }
-        } else {
-            $("#order").submit();    
-        }
-    });
+    // $(".btn-order").click(function(){
+    //     var button = $(this).ladda(),
+    //         order_number = $(".order-number").val(),
+    //         admin_id = 1;
+    //     button.ladda('start');
+    //     if (order_number == "") {
+    //         if ($(".user-point").length == 1){
+    //             if ($("#user_point").val() == admin_id){
+    //                 button.ladda('stop');
+    //                 alert("주문번호를 입력해주세요");
+    //             } else {
+    //                 $("#order").submit();        
+    //             }
+    //         } else {
+    //             button.ladda('stop');
+    //             alert("주문번호를 입력해주세요");
+    //         }
+    //     } else {
+              
+    //         $("#order").submit();    
+    //     }
+    // });
 
 });
 

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+
+
 gem "hirb"
 gem "hirb-unicode"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -7,7 +9,7 @@ gem "mini_magick"
 gem 'carrierwave'
 # gem 'pg', group: :production
 # gem 'rails_12factor', group: :production
-gem 'mysql2', '~> 0.3.18'
+# gem 'mysql2', '~> 0.3.18'
 gem 'rails', '4.2.3'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'font-awesome-rails', '4.3.0.0'
