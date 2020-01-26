@@ -58,7 +58,7 @@ GEM
     crass (1.0.3)
     erubis (2.7.0)
     execjs (2.7.0)
-    ffi (1.9.18)
+    ffi (1.12.1)
     font-awesome-rails (4.3.0.0)
       railties (>= 3.2, < 5.0)
     globalid (0.4.1)
@@ -87,6 +87,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.2)
+    mysql2 (0.3.21)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
     rack (1.6.8)
@@ -174,6 +175,7 @@ DEPENDENCIES
   hirb-unicode
   jbuilder (~> 1.2)
   mini_magick
+  mysql2 (~> 0.3.18)
   rails (= 4.2.3)
   sass-rails (~> 5.0.4)
   sdoc
