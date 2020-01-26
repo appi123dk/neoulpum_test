@@ -11,7 +11,7 @@ gem 'carrierwave'
 # gem 'rails_12factor', group: :production
 gem 'mysql2', '~> 0.3.18'
 gem 'rails', '4.2.3'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails', '4.3.0.0'
 
 # Use Switchery
