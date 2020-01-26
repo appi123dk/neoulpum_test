@@ -88,6 +88,7 @@ class MenusController < ApplicationController
 	end
 
 	def recipe_edit
+		@menu = Menu.find(params[:id])
 		@recipes = Recipe.where('menu_id=?',params[:id])
 		@materials = Material.where('display = ?', true).all
 	end

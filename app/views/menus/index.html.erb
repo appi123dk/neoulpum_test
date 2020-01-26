@@ -55,7 +55,11 @@
                             </td>
                             <td style="text-align: center;"><%= number_with_delimiter(menu.unit_price.to_f.round(1), delimiter: ',') %></td>
                             <td style="text-align: center;">
-                                <a class="btn btn-xs btn-outline btn-warning" href="/menus/recipe_index/<%= menu.id %>">레시피</a>
+                                <% if Recipe.where('menu_id = ?',menu.id).take.nil? %>
+                                    <a class="btn btn-xs btn-outline btn-danger" href="/menus/recipe_edit/<%= menu.id %>">레시피 등록</a>
+                                <% else %>
+                                    <a class="btn btn-xs btn-outline btn-primary" href="/menus/recipe_index/<%= menu.id %>">레시피 수정</a>
+                                <% end %>
                             </td>
                             <td style="text-align: center;">
                                 <!-- <a class="btn btn-danger btn-rounded btn-xs" href="#">Delete</a> -->

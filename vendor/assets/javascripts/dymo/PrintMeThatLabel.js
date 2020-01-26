@@ -227,15 +227,51 @@
         }
 
         // load address label xml
+        // function getAddressLabelXml()
+        // {
+        //     var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
+        //                     <DieCutLabel Version="8.0" Units="twips">\
+        //                         <PaperOrientation>Landscape</PaperOrientation>\
+        //                         <Id>Address</Id>\
+        //                         <PaperName>30252 Address</PaperName>\
+        //                         <DrawCommands>\
+        //                             <RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270" />\
+        //                         </DrawCommands>\
+        //                         <ObjectInfo>\
+        //                             <AddressObject>\
+        //                                 <Name>Address</Name>\
+        //                                 <ForeColor Alpha="255" Red="0" Green="0" Blue="0" />\
+        //                                 <BackColor Alpha="0" Red="255" Green="255" Blue="255" />\
+        //                                 <LinkedObjectName></LinkedObjectName>\
+        //                                 <Rotation>Rotation0</Rotation>\
+        //                                 <IsMirrored>False</IsMirrored>\
+        //                                 <IsVariable>True</IsVariable>\
+        //                                 <HorizontalAlignment>Left</HorizontalAlignment>\
+        //                                 <VerticalAlignment>Middle</VerticalAlignment>\
+        //                                 <TextFitMode>ShrinkToFit</TextFitMode>\
+        //                                 <UseFullFontHeight>True</UseFullFontHeight>\
+        //                                 <Verticalized>False</Verticalized>\
+        //                                 <StyledText/>\
+        //                                 <ShowBarcodeFor9DigitZipOnly>False</ShowBarcodeFor9DigitZipOnly>\
+        //                                 <BarcodePosition>BelowAddress</BarcodePosition>\
+        //                                 <LineFonts/>\
+        //                             </AddressObject>\
+        //                             <Bounds X="332" Y="150" Width="4455" Height="1260" />\
+        //                         </ObjectInfo>\
+        //                     </DieCutLabel>';
+        //     return labelXml;
+        // }
+
+        // 라벨지 수저
         function getAddressLabelXml()
         {
             var labelXml = '<?xml version="1.0" encoding="utf-8"?>\
                             <DieCutLabel Version="8.0" Units="twips">\
-                                <PaperOrientation>Landscape</PaperOrientation>\
-                                <Id>Address</Id>\
-                                <PaperName>30252 Address</PaperName>\
+                                <PaperOrientation>Portrait</PaperOrientation>\
+                                <Id>Small30334</Id>\
+                                <PaperName>30334 2-1/4 in x 1-1/4 in</PaperName>\
                                 <DrawCommands>\
-                                    <RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270" />\
+                                    <RoundRectangle X="0" Y="0" Width="3240" Height="1800" Rx="270" Ry="270"/>\
                                 </DrawCommands>\
                                 <ObjectInfo>\
                                     <AddressObject>\

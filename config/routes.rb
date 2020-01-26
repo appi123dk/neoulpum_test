@@ -118,7 +118,7 @@ Myapp::Application.routes.draw do
   get "menus/engineering"
 
     #레시피관련
-  get "menus/recipe_new"
+  get "menus/recipe_new/:id", to: 'menus#recipe_new'
   get "menus/recipe_create"
   get "menus/recipe_index/:id", to: 'menus#recipe_index'
   get "menus/recipe_edit/:id", to: 'menus#recipe_edit'
